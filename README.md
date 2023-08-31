@@ -3,6 +3,7 @@
 MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation
 
 - Our demos are available at https://www.marssolution.io/
+- You can contact us at contact@marssolution.io if you're intrigued by AI-driven solutions for evaluating car damages.
 
 ## Reference:
 ```
