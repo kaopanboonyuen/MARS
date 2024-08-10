@@ -83,12 +83,13 @@ We trained our models on both public and private datasets:
 If you find our work useful in your research or development, please cite:
 
 ```bibtex
-@inproceedings{Panboonyuen2023MARS,
+@inproceedings{panboonyuen2023mars,
   title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation},
   author={Panboonyuen, Teerapong and Nithisopa, Naphat and Pienroj, Panin and Jirachuphun, Laphonchai and Watthanasirikrit, Chaiwasut and Pornwiriyakul, Naruepon},
-  booktitle={International Conference on Image Analysis and Processing (ICIAP 2023)},
+  booktitle={International Conference on Image Analysis and Processing},
+  pages={28--38},
   year={2023},
-  address={Udine, Italy}
+  organization={Springer}
 }
 ```
 
