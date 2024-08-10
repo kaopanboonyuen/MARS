@@ -102,7 +102,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any inquiries or collaboration opportunities, feel free to reach out to me:
 
 - **Author:** [Teerapong Panboonyuen (Kao Panboonyuen)](https://kaopanboonyuen.github.io)
-- **Email:** [panboonyuen.kao@gmail.com](panboonyuen.kao@gmail.com)
+- **Email:** [panboonyuen.kao@gmail.com](mailto:panboonyuen.kao@gmail.com)
 - **MARS (Motor AI Recognition Solution):** [https://www.marssolution.io](https://www.marssolution.io)
 
 ![](img/MARS01.png)
