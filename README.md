@@ -103,7 +103,7 @@ For any inquiries or collaboration opportunities, feel free to reach out to me:
 
 - **Author:** [Teerapong Panboonyuen (Kao Panboonyuen)](https://kaopanboonyuen.github.io)
 - **Email:** panboonyuen.kao@gmail.com
-- **MARS:** https://www.marssolution.io
+- **MARS (Motor AI Recognition Solution):** https://www.marssolution.io
 
 ![](img/MARS01.png)
 ![](img/MARS_001.png)
