@@ -16,6 +16,8 @@ Accurately assessing car damage is crucial for the insurance industry, yet tradi
 
 MARS was presented at the **International Conference on Image Analysis and Processing 2023 (ICIAP 2023)** in Udine, Italy.
 
+![](img/featured.png)
+
 ## Installation
 
 ### Requirements
