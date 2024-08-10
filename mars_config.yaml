@@ -1,0 +1,50 @@
+# Author: Teerapong Panboonyuen (Kao Panboonyuen)
+# Project: MARS - Mask Attention Refinement with Sequential Quadtree Nodes
+# Description: Configuration file for the MARS model. This YAML file contains settings for 
+#              training, evaluation, and model parameters, including paths to datasets 
+#              and hyperparameters like learning rate and batch size.
+# License: MIT License
+
+# Configuration for MARS model training and evaluation
+
+input_size: 256  # Input image size (256x256)
+batch_size: 16  # Batch size for training
+learning_rate: 0.0001  # Learning rate for optimizer
+epochs: 25  # Number of training epochs
+num_classes: 2  # Number of classes for segmentation (e.g., damaged vs. undamaged)
+
+# Paths
+train_data_path: "data/train"  # Path to training data
+val_data_path: "data/val"  # Path to validation data (if any)
+test_data_path: "data/test"  # Path to test data (for evaluation)
+checkpoint_path: "checkpoints/mars_best_model.pth"  # Path to save model checkpoints
+
+# Model parameters
+pretrained: true  # Whether to use a pretrained backbone
+
+# Data augmentation (optional)
+augmentation:
+  horizontal_flip: true
+  vertical_flip: false
+  rotation_range: 15
+  brightness_adjust: 0.1
+  contrast_adjust: 0.1
+
+# Optimizer settings
+optimizer: 
+  type: "Adam"  # Type of optimizer (Adam, SGD, etc.)
+  weight_decay: 0.0001  # Regularization
+
+# Scheduler (optional)
+scheduler:
+  type: "StepLR"
+  step_size: 7
+  gamma: 0.1
+
+# Logging
+log_interval: 10  # How often to log training status
+
+# Evaluation settings
+evaluation_metrics:
+  - accuracy
+  - IoU
