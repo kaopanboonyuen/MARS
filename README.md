@@ -1,91 +1,102 @@
-# MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation
+# 🚗 **MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation**
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Welcome to the official repository for **MARS**—a cutting-edge deep learning model designed for car damage instance segmentation. MARS leverages advanced self-attention mechanisms within sequential quadtree nodes to produce highly accurate segmentation masks, offering a significant improvement over state-of-the-art methods like Mask R-CNN, PointRend, and Mask Transfiner.
+Welcome to the official repository for **MARS**—an innovative deep learning model tailored for precise car damage instance segmentation. Leveraging advanced self-attention mechanisms with sequential quadtree nodes, MARS delivers superior segmentation masks, surpassing state-of-the-art methods like Mask R-CNN, PointRend, and Mask Transfiner.
 
-## Authors
-Teerapong Panboonyuen (also known as Kao Panboonyuen)
+![MARS in Action](img/featured.png)
 
-## Project Overview
+## 🛠️ **Project Overview**
 
-Accurately assessing car damage is crucial for the insurance industry, yet traditional deep learning models struggle with fine segmentation and image complexity. MARS (Mask Attention Refinement with Sequential Quadtree Nodes) introduces a novel approach, recalibrating channel weights using a quadtree transformer to enhance segmentation precision. Our model has been rigorously tested and has achieved notable performance gains:
+In the realm of car insurance, accurately assessing vehicle damage is crucial. Traditional models often struggle with complex images and fine segmentation tasks. **MARS** (Mask Attention Refinement with Sequential Quadtree Nodes) addresses these challenges by recalibrating channel weights using a quadtree transformer, enhancing segmentation accuracy.
 
-- **+1.3 maskAP** improvement using the R50-FPN backbone
-- **+2.3 maskAP** improvement with the R101-FPN backbone on the Thai car-damage dataset
+### **Key Achievements:**
+- **+1.3 maskAP** improvement with the R50-FPN backbone.
+- **+2.3 maskAP** improvement with the R101-FPN backbone on the Thai car-damage dataset.
 
-MARS was presented at the **International Conference on Image Analysis and Processing 2023 (ICIAP 2023)** in Udine, Italy.
+**MARS** was showcased at the **International Conference on Image Analysis and Processing 2023 (ICIAP 2023)** in Udine, Italy.
 
-![](img/featured.png)
+## 👥 **Author**
 
-## Installation
+- **Teerapong Panboonyuen (Kao Panboonyuen)**  
 
-### Requirements
+## 📄 **Publications**
 
+If you're interested in exploring the academic work behind MARS, please check out the following publication:
+
+- **MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation**
+  - **ACM:** [Link](https://dl.acm.org/doi/10.1007/978-3-031-51023-6_3)  
+  - **ArXiv:** [Link](https://arxiv.org/pdf/2305.04743)  
+  - **Springer (PDF):** [Link](https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3)  
+  - **Code:** [GitHub Repository](https://github.com/kaopanboonyuen/MARS)
+
+## 🚀 **Quick Start**
+
+### **Requirements**
 - Python 3.8+
 - PyTorch 1.8+
 - CUDA 11.1+
 - Other dependencies listed in `requirements.txt`
 
-### Step-by-Step Guide
+### **Installation**
 
-1. **Clone the repository**:
+1. **Clone the Repository:**
    ```bash
    git clone https://github.com/kaopanboonyuen/MARS.git
    cd MARS
    ```
 
-2. **Create and activate a virtual environment**:
+2. **Set Up a Virtual Environment:**
    ```bash
    python3 -m venv mars-env
-   source mars-env/bin/activate  # On Windows use `mars-env\Scripts\activate`
+   source mars-env/bin/activate  # For Windows: `mars-env\Scripts\activate`
    ```
 
-3. **Install the required packages**:
+3. **Install Dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Download the datasets**:
+4. **Download Datasets:**
    - **Public Dataset:** [Download here](https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view) and place it in the `data/` directory.
-   - **Private Dataset:** Access is restricted due to licensing agreements.
+   - **Private Dataset:** Access restricted due to licensing with **THAIVIVAT INSURANCE PCL.**
 
-## How to Run
+## 🎯 **How to Use**
 
-1. **Train the Model**:
+1. **Train the Model:**
    ```bash
    python train.py --config configs/mars_config.yaml
    ```
 
-2. **Evaluate the Model**:
+2. **Evaluate the Model:**
    ```bash
    python evaluate.py --checkpoint checkpoints/mars_best_model.pth --data data/test/
    ```
 
-3. **Run Inference**:
+3. **Run Inference:**
    ```bash
    python inference.py --image_path images/sample.jpg --output_dir results/
    ```
 
-## Demos
+## 🌐 **Live Demos**
 
-Explore our live demos and see MARS in action: [GitHub Pages](https://kaopanboonyuen.github.io/MARS)
+Experience MARS in action: [Visit GitHub Pages](https://kaopanboonyuen.github.io/MARS)
 
-## Datasets
+## 📂 **Datasets**
 
-We trained our models on both public and private datasets:
+Our models were trained on both public and private datasets:
 
-- **Public Dataset:** Download [here](https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view)
-- **Private Dataset:** Access to our private dataset is restricted due to licensing agreements with **THAIVIVAT INSURANCE PCL.**, a partner in our tech startup, MARS.
+- **Public Dataset:** [Download here](https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view)
+- **Private Dataset:** Access restricted due to licensing agreements with our partner **THAIVIVAT INSURANCE PCL.**
 
-## Citation
+## 🔍 **Citation**
 
-If you find our work useful in your research or development, please cite:
+If you find our work helpful, please consider citing it:
 
 ```bibtex
 @inproceedings{panboonyuen2023mars,
   title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation},
-  author={Panboonyuen, Teerapong and Nithisopa, Naphat and Pienroj, Panin and Jirachuphun, Laphonchai and Watthanasirikrit, Chaiwasut and Pornwiriyakul, Naruepon},
+  author={Panboonyuen, Teerapong and others},
   booktitle={International Conference on Image Analysis and Processing},
   pages={28--38},
   year={2023},
@@ -93,20 +104,20 @@ If you find our work useful in your research or development, please cite:
 }
 ```
 
-## License
+## 📜 **License**
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
 
-## Contact
+## 📧 **Contact**
 
-For any inquiries or collaboration opportunities, feel free to reach out to me:
+For inquiries or collaborations, feel free to reach out:
 
 - **Author:** [Teerapong Panboonyuen (Kao Panboonyuen)](https://kaopanboonyuen.github.io)
 - **Email:** [panboonyuen.kao@gmail.com](mailto:panboonyuen.kao@gmail.com)
 - **MARS (Motor AI Recognition Solution):** [https://www.marssolution.io](https://www.marssolution.io)
 
-![](img/MARS01.png)
-![](img/MARS_001.png)
-![](img/MARS_002.png)
-![](img/MARS_003.png)
-![](img/MARS_005.png)
+![MARS Demo 1](img/MARS01.png)
+![MARS Demo 2](img/MARS_001.png)
+![MARS Demo 3](img/MARS_002.png)
+![MARS Demo 4](img/MARS_003.png)
+![MARS Demo 5](img/MARS_005.png)
