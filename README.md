@@ -1,4 +1,4 @@
-# 🚗 **MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation**
+# 🚌 **MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
