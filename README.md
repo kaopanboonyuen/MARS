@@ -96,11 +96,26 @@ If you find our work helpful, please consider citing it:
 ```bibtex
 @inproceedings{panboonyuen2023mars,
   title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation},
-  author={Panboonyuen, Teerapong and others},
+  author={Panboonyuen, Teerapong and Nithisopa, Naphat and Pienroj, Panin and Jirachuphun, Laphonchai and Watthanasirikrit, Chaiwasut and Pornwiriyakul, Naruepon},
   booktitle={International Conference on Image Analysis and Processing},
   pages={28--38},
   year={2023},
   organization={Springer}
+}
+```
+
+If you're utilizing the public dataset **Car Damage Detection (CarDD)**, which includes 4,000 high-resolution images and over 9,000 well-annotated instances across six damage categories (dent, scratch, crack, glass shatter, lamp broken, and tire flat), please make sure to cite the following paper:
+
+```bibtex
+@article{wang2023cardd,
+  title={Cardd: A new dataset for vision-based car damage detection},
+  author={Wang, Xinkuang and Li, Wenjing and Wu, Zhongcheng},
+  journal={IEEE Transactions on Intelligent Transportation Systems},
+  volume={24},
+  number={7},
+  pages={7202--7214},
+  year={2023},
+  publisher={IEEE}
 }
 ```
 
