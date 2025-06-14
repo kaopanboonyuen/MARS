@@ -130,7 +130,9 @@ For inquiries or collaborations, feel free to reach out:
 - **Author:** [Teerapong Panboonyuen (Kao Panboonyuen)](https://kaopanboonyuen.github.io)
 - **Email:** [panboonyuen.kao@gmail.com](mailto:panboonyuen.kao@gmail.com)
 - **MARS (Motor AI Recognition Solution):** [https://www.marssolution.io](https://www.marssolution.io)
+- **MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory):** [MARSAIL](https://dl.acm.org/doi/10.1007/978-3-031-51023-6_3)
 
+![](https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png)
 ![MARS Demo 1](img/MARS01.png)
 ![MARS Demo 2](img/MARS_001.png)
 ![MARS Demo 3](img/MARS_002.png)
