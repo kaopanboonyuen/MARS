@@ -4,6 +4,7 @@
 
 Welcome to the official repository for **MARS**—an innovative deep learning model tailored for precise car damage instance segmentation. Leveraging advanced self-attention mechanisms with sequential quadtree nodes, MARS delivers superior segmentation masks, surpassing state-of-the-art methods like Mask R-CNN, PointRend, and Mask Transfiner.
 
+![MARSAIL](https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png)
 ![MARS in Action](img/featured.png)
 
 ## 🛠️ **Project Overview**
