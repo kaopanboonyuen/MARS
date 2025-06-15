@@ -166,7 +166,7 @@
         <div class="author">
             <p>Teerapong Panboonyuen</p>
             <p>MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory)</p>
-            <p><a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a></p>
+            <p><a href="LICENSE" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a></p>
         </div>
     </header>
 
@@ -174,6 +174,7 @@
         <section class="project-description">
             <div class="text">
                 <p>Welcome to the official repository for <strong>MARS</strong>—an innovative deep learning model for precise car damage instance segmentation. By leveraging advanced self-attention mechanisms with sequential quadtree nodes, MARS significantly improves segmentation accuracy compared to methods like Mask R-CNN, PointRend, and Mask Transfiner.</p>
+                <p>At MARSAIL, we built the MARS system with a clear mission in mind: to revolutionize the car insurance and automotive repair industries by automating the estimation of labor costs and spare parts. By leveraging cutting-edge AI technology, MARS can analyze vehicle damage with remarkable precision, providing insurance companies and garages with faster, more accurate assessments. Our goal is to empower the auto industry to lead in efficiency, innovation, and accuracy, setting a new standard for automation that drives cost savings, enhances customer satisfaction, and ultimately transforms how insurance and repair services operate.</p>
                 <h3>Key Achievements:</h3>
                 <ul>
                     <li>+1.3 maskAP improvement with the R50-FPN backbone</li>
@@ -195,19 +196,58 @@
             <div style="text-align:center;">
                 <img src="img/MARS_003.png" alt="MARS Segmentation Result" style="max-width: 100%; border-radius: 8px;">
             </div>
-                        <div style="text-align:center;">
+            <div style="text-align:center;">
                 <img src="img/featured.png" alt="MARS Segmentation Result" style="max-width: 100%; border-radius: 8px;">
             </div>
             <p>The image above showcases the precise damage segmentation, validating why MARS outperforms other models such as Mask R-CNN, PointRend, and Mask Transfiner.</p>
         </section>
 
         <section>
+    <h2>📚 MARSAIL 2025 Research Drop: Shaping the Future of Automotive AI</h2>
+    <p>We are excited to unveil <b>MARSAIL’s latest research breakthroughs</b> in automotive AI for 2025. Our team has been pushing the boundaries of AI to bring precision, automation, and efficiency to the car insurance and repair industries. Here’s a glimpse of our newest research:</p>
+
+    <h3>🌟 Vision Research (2025)</h3>
+    <ul>
+        <li><b>ALBERT</b>  
+            Advanced Localization and Bidirectional Encoder Representations from Transformers for Automotive Damage Evaluation  
+            <a href="http://arxiv.org/abs/2506.10524" target="_blank">Read on arXiv</a>  
+            A transformer-based model for more accurate and faster <b>car damage assessments</b>, improving the insurance claims process.
+        </li>
+        <li><b>SLICK</b>  
+            Selective Localization and Instance Calibration for Knowledge-Enhanced Car Damage Segmentation in Automotive Insurance  
+            <a href="http://arxiv.org/abs/2506.10528" target="_blank">Read on arXiv</a>  
+            A <b>precision-driven approach</b> to car damage segmentation, enhancing the performance of AI models in automotive insurance and repair.
+        </li>
+    </ul>
+
+    <h3>🧠 NLP Research</h3>
+    <ul>
+        <li><b>DOTA</b>  
+            Deformable Optimized Transformer Architecture for End-to-End Text Recognition with Retrieval-Augmented Generation  
+            <a href="https://arxiv.org/abs/2505.04175" target="_blank">Read on arXiv</a>  
+            Revolutionizing <b>document processing</b> and <b>OCR recognition</b> for automotive services, ensuring more efficient insurance claim handling.
+        </li>
+    </ul>
+
+    <h3>🌟 Throwback Highlight (2023)</h3>
+    <ul>
+        <li><b>MARS</b>  
+            Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation  
+            <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">Read on Springer</a>  
+            The <b>foundational model</b> that set the stage for all modern car damage segmentation solutions.
+        </li>
+    </ul>
+
+    <p>At <b>MARSAIL</b>, our mission is simple: To lead the way in AI-powered innovation for the <b>automotive insurance</b> and <b>repair</b> industries. These papers represent just the beginning of our journey to automate damage assessment, accelerate claims processing, and redefine the future of vehicle repair. Stay tuned for more groundbreaking advancements!</p>
+</section>
+
+        <section>
             <h2>Publications</h2>
             <p>If you're interested in the academic work behind MARS, please check out the following publication:</p>
             <ul>
-                <li><a href="https://dl.acm.org/doi/10.1007/978-3-031-51023-6_3">ACM Paper</a></li>
-                <li><a href="https://arxiv.org/pdf/2305.04743">ArXiv Paper</a></li>
-                <li><a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3">Springer Chapter (PDF)</a></li>
+                <li><a href="https://dl.acm.org/doi/10.1007/978-3-031-51023-6_3" target="_blank">ACM Paper</a></li>
+                <li><a href="https://arxiv.org/pdf/2305.04743" target="_blank">ArXiv Paper</a></li>
+                <li><a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">Springer Chapter (PDF)</a></li>
             </ul>
         </section>
 
@@ -222,14 +262,14 @@ python3 -m venv mars-env
 source mars-env/bin/activate
 pip install -r requirements.txt
             </pre>
-            <p><a href="https://github.com/kaopanboonyuen/MARS" class="button">Visit GitHub Repository</a></p>
+            <p><a href="https://github.com/kaopanboonyuen/MARS" class="button" target="_blank">Visit GitHub Repository</a></p>
         </section>
 
         <section>
             <h2>Datasets</h2>
             <p>Our models were trained on both public and private datasets:</p>
             <ul>
-                <li><a href="https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view">Public Dataset</a></li>
+                <li><a href="https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view" target="_blank">Public Dataset</a></li>
                 <li><strong>Private Dataset:</strong> Restricted access due to licensing agreements with THAIVIVAT INSURANCE PCL.</li>
             </ul>
         </section>
@@ -267,19 +307,17 @@ pip install -r requirements.txt
 
         <section>
             <h2>Live Demos</h2>
-            <p>Experience MARS in action: <a href="https://kaopanboonyuen.github.io/MARS" class="button">Visit Live Demo</a></p>
+            <p>Experience MARS in action: <a href="https://kaopanboonyuen.github.io/MARS" class="button" target="_blank">Visit Live Demo</a></p>
         </section>
     </div>
 
-<!-- MARSAIL Logo Section at the end -->
-<section style="text-align:center; margin-top: 30px; padding: 20px;">
-    <img src="https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png" alt="MARSAIL Lab Logo" style="max-width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-</section>
-
-    
+    <!-- MARSAIL Logo Section at the end -->
+    <section style="text-align:center; margin-top: 30px; padding: 20px;">
+        <img src="https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png" alt="MARSAIL Lab Logo" style="max-width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    </section>
 
     <footer>
-        <p>&copy; 2025 MARSAIL. <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a></p>
+        <p>&copy; 2025 MARSAIL. <a href="mailto:panboonyuen.kao@gmail.com" target="_blank">Kao Panboonyuen</a></p>
     </footer>
 
 </body>
