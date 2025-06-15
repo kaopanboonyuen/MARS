@@ -97,9 +97,8 @@ If you find our work helpful, please consider citing it:
 ```bibtex
 @inproceedings{panboonyuen2023mars,
   title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation},
-  author={Panboonyuen, Teerapong and Nithisopa, Naphat and Pienroj, Panin and Jirachuphun, Laphonchai and Watthanasirikrit, Chaiwasut and Pornwiriyakul, Naruepon},
+  author={Panboonyuen, Teerapong, et al.},
   booktitle={International Conference on Image Analysis and Processing},
-  pages={28--38},
   year={2023},
   organization={Springer}
 }
