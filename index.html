@@ -156,13 +156,45 @@
             margin: 20px 0;
         }
 
+        /* Target all images inside <figure> or all <img> elements */
+        figure img,
+        img {
+            opacity: 0;
+            transform: scale(0.95);
+            animation: figureFadeScale 1.8s ease forwards;
+            animation-delay: 0.3s; /* slight delay for smoothness */
+        }
+
+        /* Keyframes for fade + scale */
+        @keyframes figureFadeScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Base style for all images */
+        img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 8px; /* keep rounded corners consistent */
+        }
+
+        /* Hover effect: subtle scale and shadow */
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(29, 53, 87, 0.3); /* soft shadow with your header blue color */
+            cursor: pointer; /* indicates interactivity */
+        }
+
+
+
     </style>
 </head>
 
 <body>
 
     <header>
-        <h1>MARS: Mask Attention Refinement with Sequential Quadtree Nodes for Car Damage Instance Segmentation 🍑</h1>
+        <h1>MARS: Mask Attention Refinement with Sequential Quadtree Nodes 🍑</h1>
         <div class="author">
             <p>Teerapong Panboonyuen</p>
             <p>MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory)</p>
@@ -174,7 +206,7 @@
         <section class="project-description">
             <div class="text">
                 <p>Welcome to the official repository for <strong>MARS</strong>—an innovative deep learning model for precise car damage instance segmentation. By leveraging advanced self-attention mechanisms with sequential quadtree nodes, MARS significantly improves segmentation accuracy compared to methods like Mask R-CNN, PointRend, and Mask Transfiner.</p>
-                <p>At <strong>MARSAIL</strong>, we built the MARS system with a clear mission in mind: to revolutionize the car insurance and automotive repair industries by automating the estimation of labor costs and spare parts. By leveraging cutting-edge AI technology, MARS can analyze vehicle damage with remarkable precision, providing insurance companies and garages with faster, more accurate assessments. Our goal is to empower the auto industry to lead in efficiency, innovation, and accuracy, setting a new standard for automation that drives cost savings, enhances customer satisfaction, and ultimately transforms how insurance and repair services operate.</p>
+                <p>At <strong>MARSAIL</strong>, we built the AI with a clear mission in mind: to revolutionize the car insurance and automotive repair industries by automating the estimation of labor costs and spare parts. By leveraging cutting-edge AI technology, MARS can analyze vehicle damage with remarkable precision, providing insurance companies and garages with faster, more accurate assessments. Our goal is to empower the auto industry to lead in efficiency, innovation, and accuracy, setting a new standard for automation that drives cost savings, enhances customer satisfaction, and ultimately transforms how insurance and repair services operate.</p>
                 <h3>Key Achievements:</h3>
                 <ul>
                     <li>+1.3 maskAP improvement with the R50-FPN backbone</li>
