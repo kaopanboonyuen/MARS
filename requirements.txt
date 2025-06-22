@@ -17,5 +17,5 @@ Pillow==9.5.0
 matplotlib==3.7.1
 
 # Utilities
-PyYAML==6.0
+PyYAML==6.0.2
 tqdm==4.65.0
