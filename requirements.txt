@@ -1,12 +1,21 @@
-torch==2.0.1
+# PyTorch and related libraries
+torch==2.0.1+cu118    # Ensure CUDA 11.8 support (adjust this to match your CUDA version)
 torchvision==0.15.2
 pytorch-lightning==2.0.6
+
+# Instance segmentation dependencies
 detectron2==0.6
+
+# Scientific libraries
 numpy==1.24.3
 pandas==2.0.3
 scikit-learn==1.2.2
+
+# Image processing and visualization
 opencv-python==4.7.0.72
-PyYAML==6.0
-matplotlib==3.7.1
-tqdm==4.65.0
 Pillow==9.5.0
+matplotlib==3.7.1
+
+# Utilities
+PyYAML==6.0
+tqdm==4.65.0
