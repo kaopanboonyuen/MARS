@@ -181,19 +181,88 @@
     </div>
   </section>
 
-<!-- Research -->
-<section>
-  <h2>📚 MARSAIL Research Highlights (2023–2025)</h2>
-  <p>
-    At the forefront of automotive AI innovation, all pioneering research at MARSAIL is led by Dr. Kao (Teerapong Panboonyuen), our visionary Head of AI Laboratory. Under his leadership, these groundbreaking papers have pushed the boundaries of car damage evaluation, segmentation, and document understanding.
+
+  <!-- Research -->
+<section style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 2rem;">
+  <h2 style="font-size: 2rem; margin-bottom: 1rem;">📚 MARSAIL Research Highlights (2023–2025)</h2>
+  <p style="font-size: 1.1rem; line-height: 1.6;">
+    At the forefront of automotive AI innovation, all pioneering research at MARSAIL is led by 
+    <strong>Dr. Kao (Teerapong Panboonyuen)</strong>, our visionary Head of AI Laboratory. 
+    Under his guidance, these groundbreaking works have advanced the fields of car damage evaluation, segmentation, 
+    and document understanding in the automotive domain.
   </p>
-  <ul>
-    <li><b>ALBERT</b> – Advanced Transformers for Automotive Damage Evaluation (<a href="http://arxiv.org/abs/2506.10524" target="_blank" rel="noopener">arXiv</a>)</li>
-    <li><b>SLICK</b> – Knowledge-Enhanced Car Damage Segmentation (<a href="http://arxiv.org/abs/2506.10528" target="_blank" rel="noopener">arXiv</a>)</li>
-    <li><b>DOTA</b> – OCR with Retrieval-Augmented Generation for Automotive Services (<a href="https://arxiv.org/abs/2505.04175" target="_blank" rel="noopener">arXiv</a>)</li>
-    <li><b>MARS</b> – Foundational Mask Attention Refinement Model (<a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener">Springer</a>)</li>
-  </ul>
+
+  <!-- Paper 1: ALBERT -->
+  <div style="border: 1px solid #ccc; border-left: 5px solid #007acc; padding: 1rem; margin-top: 1.5rem; border-radius: 8px; background-color: #f9f9f9;">
+    <h3 style="margin-top: 0;">🚗 <strong>ALBERT</strong>: Advanced Transformers for Automotive Damage Evaluation <span style="font-size: 0.85em; color: #555;">(Teacher Model)</span></h3>
+    <p>
+      A pioneering transformer-based architecture designed to act as a teacher model for vehicle damage evaluation tasks. 
+      ALBERT provides rich contextual embeddings and accurate localization signals that guide downstream student models.
+      <a href="http://arxiv.org/abs/2506.10524" target="_blank" rel="noopener">[Read on arXiv]</a>
+    </p>
+    <pre style="background-color: #eee; padding: 1rem; overflow-x: auto; font-size: 0.9rem;">
+@article{panboonyuen2025albert,
+  title={ALBERT: Advanced Localization and Bidirectional Encoder Representations from Transformers for Automotive Damage Evaluation},
+  author={Panboonyuen, Teerapong},
+  journal={arXiv preprint arXiv:2506.10524},
+  year={2025}
+}</pre>
+  </div>
+
+  <!-- Paper 2: SLICK -->
+  <div style="border: 1px solid #ccc; border-left: 5px solid #28a745; padding: 1rem; margin-top: 1.5rem; border-radius: 8px; background-color: #f9f9f9;">
+    <h3 style="margin-top: 0;">🧠 <strong>SLICK</strong>: Knowledge-Enhanced Car Damage Segmentation <span style="font-size: 0.85em; color: #555;">(Student Model)</span></h3>
+    <p>
+      Trained under the supervision of ALBERT, SLICK leverages knowledge distillation and selective localization to excel in 
+      fine-grained car damage segmentation tasks — a student model optimized for real-world insurance workflows.
+      <a href="http://arxiv.org/abs/2506.10528" target="_blank" rel="noopener">[Read on arXiv]</a>
+    </p>
+    <pre style="background-color: #eee; padding: 1rem; overflow-x: auto; font-size: 0.9rem;">
+@article{panboonyuen2025slick,
+  title={SLICK: Selective Localization and Instance Calibration for Knowledge-Enhanced Car Damage Segmentation in Automotive Insurance},
+  author={Panboonyuen, Teerapong},
+  journal={arXiv preprint arXiv:2506.10528},
+  year={2025}
+}</pre>
+  </div>
+
+  <!-- Paper 3: DOTA -->
+  <div style="border: 1px solid #ccc; border-left: 5px solid #ff5733; padding: 1rem; margin-top: 1.5rem; border-radius: 8px; background-color: #f9f9f9;">
+    <h3 style="margin-top: 0;">🔍 <strong>DOTA</strong>: OCR with Retrieval-Augmented Generation for Automotive Services</h3>
+    <p>
+      Combines deformable attention mechanisms and Retrieval-Augmented Generation (RAG) for robust end-to-end document understanding in the automotive industry.
+      <a href="https://arxiv.org/abs/2505.04175" target="_blank" rel="noopener">[Read on arXiv]</a>
+    </p>
+    <pre style="background-color: #eee; padding: 1rem; overflow-x: auto; font-size: 0.9rem;">
+@inproceedings{marsail2025dota,
+  title={DOTA: Deformable Optimized Transformer Architecture for End-to-End Text Recognition with Retrieval-Augmented Generation},
+  author={Panboonyuen, Teerapong as co-author and lead researcher},
+  booktitle={2025 17th International Conference on Knowledge and Smart Technology (KST)},
+  pages={301--306},
+  year={2025},
+  organization={IEEE}
+}</pre>
+  </div>
+
+  <!-- Paper 4: MARS -->
+  <div style="border: 1px solid #ccc; border-left: 5px solid #6f42c1; padding: 1rem; margin-top: 1.5rem; border-radius: 8px; background-color: #f9f9f9;">
+    <h3 style="margin-top: 0;">🌌 <strong>MARS</strong>: Foundational Mask Attention Refinement Model</h3>
+    <p>
+      Introduces a sequential quadtree attention strategy to refine segmentation masks, enhancing instance-level car damage detection accuracy.
+      <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener">[Read on Springer]</a>
+    </p>
+    <pre style="background-color: #eee; padding: 1rem; overflow-x: auto; font-size: 0.9rem;">
+@inproceedings{panboonyuen2023mars,
+  title={Mars: Mask attention refinement with sequential quadtree nodes for car damage instance segmentation},
+  author={Panboonyuen, Teerapong},
+  booktitle={International Conference on Image Analysis and Processing},
+  pages={28--38},
+  year={2023},
+  organization={Springer}
+}</pre>
+  </div>
 </section>
+
 
 
   <!-- Publications -->
@@ -238,7 +307,7 @@ pip install -r requirements.txt
     <pre style="background: #f4f7fa; color: #333; padding: 20px; border-left: 5px solid #e63946; border-radius: 8px; overflow-x: auto; font-size: 1rem; line-height: 1.5;">
 @inproceedings{panboonyuen2023mars,
   title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes},
-  author={Panboonyuen, Teerapong, et al.},
+  author={Panboonyuen, Teerapong},
   booktitle={ICIAP},
   year={2023},
   publisher={Springer}
@@ -264,10 +333,47 @@ pip install -r requirements.txt
 </section>
 
 
+<!-- Sponsors & Partners -->
+<section style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 2rem; background-color: #f5f7fa;">
+  <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">🤝 Our Trusted Sponsors & Partners</h2>
+  <p style="text-align: center; font-size: 1.1rem; max-width: 800px; margin: 0 auto 2rem auto; line-height: 1.6;">
+    We are deeply grateful for the invaluable support of our sponsors, partners, and collaborators. 
+    Their investment and belief in our mission empower MARSAIL to push boundaries in automotive AI.
+  </p>
+
+  <!-- Highlighted Investor -->
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <h3 style="color: #007acc; font-size: 1.5rem;">🌟 Strategic Investor</h3>
+    <img src="img/logo/logo_01_tvi.png" alt="Thaivivat Insurance Logo" style="height: 80px; margin: 1rem 0; border-radius: 12px;">
+    <p style="font-size: 1.05rem; max-width: 700px; margin: 0 auto; line-height: 1.5;">
+      A special thank you to <strong>Thaivivat Insurance Public Company Limited (TVI)</strong> 
+      for their forward-thinking investment in AI-driven automotive solutions. 
+      Your strategic vision fuels our innovation and impact.
+    </p>
+  </div>
+
+  <!-- Partner Logos -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem;">
+    <div style="text-align: center;">
+      <img src="img/logo/logo_03_marsail.png" alt="MARSAIL Logo" style="height: 60px; border-radius: 12px;">
+      <p style="margin-top: 0.5rem; font-size: 0.95rem;">MARSAIL AI Lab</p>
+    </div>
+    <div style="text-align: center;">
+      <img src="img/logo/logo_04_myrida.png" alt="Myrida Logo" style="height: 60px; border-radius: 12px;">
+      <p style="margin-top: 0.5rem; font-size: 0.95rem;">MYRIDA AI Platform</p>
+    </div>
+    <div style="text-align: center;">
+      <img src="img/logo/logo_02_chula.png" alt="Chulalongkorn University Logo" style="height: 60px; border-radius: 12px;">
+      <p style="margin-top: 0.5rem; font-size: 0.95rem;">Chulalongkorn University</p>
+    </div>
+  </div>
+</section>
+
+
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 MARSAIL · Built with ❤️ by <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a></p>
+    <p>© 2025 MARSAIL · Built with 🤍 by <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a></p>
   </footer>
 </body>
 </html>
