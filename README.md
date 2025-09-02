@@ -4,7 +4,7 @@
 
 Welcome to the official repository for **MARS**—an innovative deep learning model tailored for precise car damage instance segmentation. Leveraging advanced self-attention mechanisms with sequential quadtree nodes, MARS delivers superior segmentation masks, surpassing state-of-the-art methods like Mask R-CNN, PointRend, and Mask Transfiner.
 
-This project is the result of cutting-edge **AI research** conducted by **Dr. Teerapong Panboonyuen (Kao Panboonyuen)** and his team at **MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory)**, a pioneering AI research lab specializing in automotive image analysis and deep learning solutions.
+This project is the result of cutting-edge **AI research** conducted by **Dr. Kao (Teerapong Panboonyuen)** and his team at **MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory)**, a pioneering AI research lab specializing in automotive image analysis and deep learning solutions.
 
 ![MARSAIL](https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png)
 ![MARS in Action](img/featured.png)
@@ -22,7 +22,7 @@ In the realm of car insurance, accurately assessing vehicle damage is crucial. T
 ## 👥 **Author & Research Lead**
 
 - **Teerapong Panboonyuen (Kao Panboonyuen)**, AI Research Lead at **MARSAIL**  
-- **MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory)**: A cutting-edge lab focusing on deep learning for automotive solutions, led by **Dr. Kao Panboonyuen**, dedicated to advancing AI-powered vehicle image analysis.
+- **MARSAIL (Motor AI Recognition Solution Artificial Intelligence Laboratory)**: A cutting-edge lab focusing on deep learning for automotive solutions, led by **Dr. Kao**, dedicated to advancing AI-powered vehicle image analysis.
 
 ## 📄 **Publications**
 
