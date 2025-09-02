@@ -9,8 +9,6 @@ This project is the result of cutting-edge **AI research** conducted by **Dr. Te
 ![MARSAIL](https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png)
 ![MARS in Action](img/featured.png)
 
----
-
 ## 🛠️ **Project Overview**
 
 In the realm of car insurance, accurately assessing vehicle damage is crucial. Traditional models often struggle with complex images and fine segmentation tasks. **MARS** (Mask Attention Refinement with Sequential Quadtree Nodes) addresses these challenges by recalibrating channel weights using a quadtree transformer, enhancing segmentation accuracy.
@@ -36,11 +34,7 @@ If you're interested in exploring the academic work behind MARS, please check ou
   - **Springer (PDF):** [Link](https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3)  
   - **Code:** [GitHub Repository](https://github.com/kaopanboonyuen/MARS)
 
----
-
 ## 🚀 **Quick Start**
-
----
 
 ### **Requirements**
 - Python 3.8+
@@ -48,15 +42,13 @@ If you're interested in exploring the academic work behind MARS, please check ou
 - CUDA 11.1+
 - Other dependencies listed in `requirements.txt`
 
----
-
 ### **Installation**
 
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/kaopanboonyuen/MARS.git
    cd MARS
-````
+     ```
 
 2. **Set Up a Virtual Environment:**
 
@@ -96,13 +88,9 @@ If you're interested in exploring the academic work behind MARS, please check ou
    python inference.py --image_path images/sample.jpg --output_dir results/
    ```
 
----
-
 ## 🌐 **Live Demos**
 
 Experience MARS in action: [Visit GitHub Pages](https://kaopanboonyuen.github.io/MARS)
-
----
 
 ## 📂 **Datasets**
 
@@ -110,8 +98,6 @@ Our models were trained on both public and private datasets:
 
 * **Public Dataset:** [Download here](https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view)
 * **Private Dataset:** Access restricted due to licensing agreements with our partner **THAIVIVAT INSURANCE PCL.**
-
----
 
 ## 🔍 **Citation**
 
@@ -141,13 +127,10 @@ If you're utilizing the public dataset **Car Damage Detection (CarDD)**, which i
   publisher={IEEE}
 }
 ```
----
 
 ## 📜 **License**
 
 This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
-
----
 
 ## 📧 **Contact**
 
@@ -159,5 +142,3 @@ For inquiries or collaborations, feel free to reach out:
 
 ![](https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png)
 ![MARS Demo 4](img/MARS_003.png)
-
----
