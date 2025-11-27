@@ -411,48 +411,6 @@
       </div>
     </section>
 
-    <!-- Showcase: MARSAIL Logo Download -->
-    <section>
-      <h2>🎨 MARSAIL Official Logo</h2>
-      <p>
-        The official <strong>MARSAIL</strong> logo is available for use in
-        academic papers, research posters, presentations, conference
-        submissions, and other professional materials.
-      </p>
-      <p>
-        Please use the logo below when representing the laboratory in
-        publications or collaborative work.
-      </p>
-
-      <!-- Logo Preview (Minimal + Professional Size) -->
-      <div class="img-grid" style="margin-top: 25px">
-        <a href="img/MARSAIL_LOGO.png" target="_blank" download>
-          <img
-            src="img/MARSAIL_LOGO.png"
-            alt="MARSAIL Lab Logo"
-            style="
-              width: 180px; /* Smaller minimal display */
-              height: auto;
-              margin: 0 auto;
-              display: block;
-              border-radius: 12px;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              transition: transform 0.3s ease, box-shadow 0.3s ease;
-            "
-            onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 18px rgba(0,0,0,0.15)';"
-            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';"
-          />
-        </a>
-      </div>
-
-      <!-- Download Button -->
-      <div style="text-align: center; margin-top: 25px">
-        <a href="img/MARSAIL_LOGO.png" download class="button">
-          ⬇️ Download Logo (PNG)
-        </a>
-      </div>
-    </section>
-
     <!-- Showcase -->
     <section>
       <h2>✨ Visual Results</h2>
@@ -507,43 +465,46 @@
       "
     >
       <h2 style="font-size: 2rem; margin-bottom: 1rem">
-        📚 MARSAIL Research Highlights (2023–2026)
+        🧠 MARSAIL Research Highlights (2023–2026)
       </h2>
-      <p style="font-size: 1.1rem; line-height: 1.6">
-        At the forefront of automotive AI innovation, all pioneering research at
-        MARSAIL is led by
-        <strong>Dr. Kao (Teerapong Panboonyuen)</strong>, our visionary Head of
-        AI Laboratory. Under his guidance, these groundbreaking works have
-        advanced the fields of car damage evaluation, segmentation, and document
-        understanding in the automotive domain.
+      <p style="font-size: 1.15rem; line-height: 1.65">
+        At the heart of MARSAIL lies a commitment to pushing the boundaries of
+        AI in automotive technology. All research initiatives are spearheaded by
+        <strong>Dr. Kao (Teerapong Panboonyuen)</strong>, whose leadership
+        drives our mission to advance computer vision, document intelligence,
+        and damage-centric transformer architectures. Below are our flagship
+        contributions that have shaped the future of automotive AI.
       </p>
 
       <!-- Paper 1: ALBERT -->
       <div
         style="
           border: 1px solid #ccc;
-          border-left: 5px solid #007acc;
-          padding: 1rem;
-          margin-top: 1.5rem;
-          border-radius: 8px;
-          background-color: #f9f9f9;
+          border-left: 6px solid #007acc;
+          padding: 1.2rem;
+          margin-top: 1.7rem;
+          border-radius: 10px;
+          background-color: #fafcff;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         "
       >
-        <h3 style="margin-top: 0">
-          🚗 <strong>ALBERT</strong>: Advanced Transformers for Automotive
-          Damage Evaluation
+        <h3 style="margin-top: 0; font-size: 1.35rem">
+          🚗 <strong>ALBERT</strong> — Advanced Transformers for Comprehensive
+          Automotive Damage Evaluation
           <span style="font-size: 0.85em; color: #555">(Teacher Model)</span>
         </h3>
-        <p>
-          A pioneering transformer-based architecture designed to act as a
-          teacher model for vehicle damage evaluation tasks. ALBERT provides
-          rich contextual embeddings and accurate localization signals that
-          guide downstream student models.
+        <p style="line-height: 1.6">
+          ALBERT introduces a next-generation transformer backbone designed for
+          holistic vehicle damage understanding. It delivers powerful contextual
+          embeddings, multi-level localization cues, and robust attention
+          representations that guide downstream segmentation and assessment
+          models. Its architecture establishes ALBERT as a foundational
+          <b>“teacher model”</b> for automotive AI systems.
           <a
             href="http://arxiv.org/abs/2506.10524"
             target="_blank"
             rel="noopener"
-            >[Read on arXiv]</a
+            >[arXiv]</a
           >
         </p>
         <pre
@@ -567,27 +528,33 @@
       <div
         style="
           border: 1px solid #ccc;
-          border-left: 5px solid #28a745;
-          padding: 1rem;
-          margin-top: 1.5rem;
-          border-radius: 8px;
-          background-color: #f9f9f9;
+          border-left: 6px solid #28a745;
+          padding: 1.2rem;
+          margin-top: 1.7rem;
+          border-radius: 10px;
+          background-color: #fafcf8;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         "
       >
-        <h3 style="margin-top: 0">
-          🧠 <strong>SLICK</strong>: Knowledge-Enhanced Car Damage Segmentation
+        <h3 style="margin-top: 0; font-size: 1.35rem">
+          🧩 <strong>SLICK</strong> — Knowledge-Enhanced Vehicle Damage
+          Segmentation
           <span style="font-size: 0.85em; color: #555">(Student Model)</span>
         </h3>
-        <p>
-          Trained under the supervision of ALBERT, SLICK leverages knowledge
-          distillation and selective localization to excel in fine-grained car
-          damage segmentation tasks — a student model optimized for real-world
-          insurance workflows.
+        <p style="line-height: 1.6">
+          Built upon ALBERT’s distilled knowledge, SLICK specializes in
+          fine-grained, automotive-specific segmentation. It employs selective
+          localization, hierarchical calibration, and optimized inference
+          pathways to deliver
+          <b
+            >real-time segmentation accuracy suited for insurance workflows and
+            repair automation.</b
+          >
           <a
             href="http://arxiv.org/abs/2506.10528"
             target="_blank"
             rel="noopener"
-            >[Read on arXiv]</a
+            >[arXiv]</a
           >
         </p>
         <pre
@@ -611,26 +578,29 @@
       <div
         style="
           border: 1px solid #ccc;
-          border-left: 5px solid #ff5733;
-          padding: 1rem;
-          margin-top: 1.5rem;
-          border-radius: 8px;
-          background-color: #f9f9f9;
+          border-left: 6px solid #ff5733;
+          padding: 1.2rem;
+          margin-top: 1.7rem;
+          border-radius: 10px;
+          background-color: #fff8f4;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         "
       >
-        <h3 style="margin-top: 0">
-          🔍 <strong>DOTA</strong>: OCR with Retrieval-Augmented Generation for
-          Automotive Services
+        <h3 style="margin-top: 0; font-size: 1.35rem">
+          🔍 <strong>DOTA</strong> — RAG-Enhanced OCR for Automotive Services
         </h3>
-        <p>
-          Combines deformable attention mechanisms and Retrieval-Augmented
-          Generation (RAG) for robust end-to-end document understanding in the
-          automotive industry.
+        <p style="line-height: 1.6">
+          DOTA combines deformable transformer attention with
+          retrieval-augmented generation to achieve
+          <b>human-level robustness in real-world document digitization</b>.
+          Designed specifically for automotive workflows, it excels in
+          extracting structured information from invoices, claims, inspection
+          sheets, and handwritten service notes.
           <a
             href="https://arxiv.org/abs/2505.04175"
             target="_blank"
             rel="noopener"
-            >[Read on arXiv]</a
+            >[arXiv]</a
           >
         </p>
         <pre
@@ -656,25 +626,30 @@
       <div
         style="
           border: 1px solid #ccc;
-          border-left: 5px solid #6f42c1;
-          padding: 1rem;
-          margin-top: 1.5rem;
-          border-radius: 8px;
-          background-color: #f9f9f9;
+          border-left: 6px solid #6f42c1;
+          padding: 1.2rem;
+          margin-top: 1.7rem;
+          border-radius: 10px;
+          background-color: #f9f6ff;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
         "
       >
-        <h3 style="margin-top: 0">
-          🌌 <strong>MARS</strong>: Foundational Mask Attention Refinement Model
+        <h3 style="margin-top: 0; font-size: 1.35rem">
+          🌌 <strong>MARS</strong> — Foundational Mask Attention Refinement
+          Model
         </h3>
-        <p>
-          Introduces a sequential quadtree attention strategy to refine
-          segmentation masks, enhancing instance-level car damage detection
-          accuracy.
+        <p style="line-height: 1.6">
+          MARS introduced the groundbreaking
+          <b>Sequential Quadtree Attention</b>
+          mechanism, enabling more accurate mask refinement for instance-level
+          damage detection. This work laid the foundation for MARSAIL’s broader
+          research direction, demonstrating significant performance gains over
+          Mask R-CNN, PointRend, and Mask Transfiner.
           <a
             href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
             target="_blank"
             rel="noopener"
-            >[Read on Springer]</a
+            >[Springer]</a
           >
         </p>
         <pre
@@ -695,25 +670,6 @@
 }</pre
         >
       </div>
-    </section>
-
-    <!-- Publications -->
-    <section>
-      <h2>📖 Publications</h2>
-      <ul>
-        <li>
-          <a href="https://dl.acm.org/doi/10.1007/978-3-031-51023-6_3"
-            >ACM Paper</a
-          >
-        </li>
-        <li><a href="https://arxiv.org/pdf/2305.04743">arXiv Preprint</a></li>
-        <li>
-          <a
-            href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
-            >Springer Chapter</a
-          >
-        </li>
-      </ul>
     </section>
 
     <!-- Quick Start -->
@@ -809,6 +765,48 @@ pip install -r requirements.txt
       >
         Read the Full Blog
       </a>
+    </section>
+
+    <!-- Showcase: MARSAIL Logo Download -->
+    <section>
+      <h2>🎨 MARSAIL Official Logo</h2>
+      <p>
+        The official <strong>MARSAIL</strong> logo is available for use in
+        academic papers, research posters, presentations, conference
+        submissions, and other professional materials.
+      </p>
+      <p>
+        Please use the logo below when representing the laboratory in
+        publications or collaborative work.
+      </p>
+
+      <!-- Logo Preview (Minimal + Professional Size) -->
+      <div class="img-grid" style="margin-top: 25px">
+        <a href="img/MARSAIL_LOGO.png" target="_blank" download>
+          <img
+            src="img/MARSAIL_LOGO.png"
+            alt="MARSAIL Lab Logo"
+            style="
+              width: 180px; /* Smaller minimal display */
+              height: auto;
+              margin: 0 auto;
+              display: block;
+              border-radius: 12px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+            "
+            onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 18px rgba(0,0,0,0.15)';"
+            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';"
+          />
+        </a>
+      </div>
+
+      <!-- Download Button -->
+      <div style="text-align: center; margin-top: 25px">
+        <a href="img/MARSAIL_LOGO.png" download class="button">
+          ⬇️ Download Logo (PNG)
+        </a>
+      </div>
     </section>
 
     <!-- Sponsors & Partners -->
@@ -916,6 +914,148 @@ pip install -r requirements.txt
             PBY Artificial Intelligence Laboratory
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- Fun Facts About MARSAIL (Re-rendered & Updated) -->
+    <section
+      style="
+        font-family: 'Poppins', sans-serif;
+        padding: 2.5rem;
+        background: #f7fbff;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        margin-top: 3rem;
+      "
+    >
+      <h2 style="font-size: 1.85rem; margin-bottom: 1.5rem">
+        🌟 Fun Facts About MARSAIL
+      </h2>
+
+      <!-- English Version -->
+      <div
+        style="
+          padding: 1.4rem;
+          border-left: 6px solid #1d3557;
+          background: #ffffff;
+          border-radius: 12px;
+          margin-bottom: 2rem;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        "
+      >
+        <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
+          🇺🇸 Fun Facts — English Version
+        </h3>
+
+        <p style="font-size: 1.02rem; line-height: 1.65">
+          MARSAIL is the dedicated Artificial Intelligence Laboratory under
+          <strong>MARS (Motor AI Recognition Solution)</strong>. While MARS was
+          founded earlier as a tech company, the AI-focused MARSAIL was later
+          established and shaped by
+          <strong>Dr. Teerapong Panboonyuen (Dr. Kao)</strong>, who leads the AI
+          Research & Development division.
+        </p>
+        <hr
+          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
+        />
+
+        <p style="font-size: 1.02rem; line-height: 1.65">
+          After completing his Ph.D. at Chulalongkorn University, Dr. Kao joined
+          MARS in <strong>January 2022</strong> to spearhead the next era of AI
+          innovation. Upon reviewing the existing “first-generation AI system”
+          from 2021, he made a decisive move —
+          <strong
+            >he removed the entire legacy system and rebuilt everything from the
+            ground up.</strong
+          >
+        </p>
+        <hr
+          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
+        />
+
+        <p style="font-size: 1.02rem; line-height: 1.65">
+          This total reboot resulted in the new
+          <strong>MARS model</strong> (Mask Attention Refinement with Sequential
+          Quadtree Nodes), inspired partly by the company name. It became
+          MARSAIL’s <strong>first official research publication</strong> and was
+          presented on the international stage at
+          <strong>ICIAP 2023 in Udine, Italy</strong>.
+        </p>
+        <hr
+          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
+        />
+
+        <p style="font-size: 1.02rem; line-height: 1.65">
+          From 2022–2026, under Dr. Kao’s leadership, MARSAIL evolved into a
+          next-generation AI research lab, producing advanced models including
+          the flagship transformer <strong>ALBERT</strong>. Today, MARSAIL
+          powers innovation across
+          <strong
+            >car insurance, damage analytics, intelligent document
+            understanding,</strong
+          >
+          and <strong>AI assistance for vehicle damage assessment</strong>.
+        </p>
+      </div>
+
+      <!-- Thai Version -->
+      <div
+        style="
+          padding: 1.4rem;
+          border-left: 6px solid #e63946;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+        "
+      >
+        <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
+          🇹🇭 เกร็ดน่ารู้ — เวอร์ชันภาษาไทย
+        </h3>
+
+        <p style="font-size: 1.02rem; line-height: 1.75">
+          MARSAIL คือห้องปฏิบัติการปัญญาประดิษฐ์ของบริษัท
+          <strong>MARS – Motor AI Recognition Solution</strong> โดยบริษัท MARS
+          มีการก่อตั้งมาก่อน แต่ห้องแลป
+          <strong>MARSAIL</strong> ถูกสร้างและพัฒนาโดย
+          <strong>ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)</strong> ในฐานะ Head of AI
+          Research เพื่อผลักดันการวิจัย AI ให้เติบโตระดับองค์กร
+        </p>
+        <hr
+          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
+        />
+
+        <p style="font-size: 1.02rem; line-height: 1.75">
+          หลังจบปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย ดร.เก้าเริ่มเข้ามาทำงานที่
+          MARS ในช่วง <strong>มกราคม 2022</strong> เพื่อสานต่องานพัฒนา AI
+          จากทีมรุ่นแรกในปี 2021 แต่แทนที่จะปรับแต่งแบบเดิม
+          เขากลับตัดสินใจครั้งใหญ่ —
+          <strong>ลบระบบ AI เดิมทั้งหมด และสร้างระบบใหม่ตั้งแต่ศูนย์</strong>
+          เพื่อให้ทันสมัย แข็งแรง และรองรับงานระดับอุตสาหกรรม
+        </p>
+        <hr
+          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
+        />
+
+        <p style="font-size: 1.02rem; line-height: 1.75">
+          โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ <strong>MARS</strong> (Mask
+          Attention Refinement with Sequential Quadtree Nodes)
+          ซึ่งสอดคล้องกับชื่อบริษัท และได้เป็นงานวิจัยลำดับแรกของห้องแลป MARSAIL
+          ที่ถูกนำเสนอในเวทีนานาชาติ <strong>ICIAP 2023 ณ ประเทศอิตาลี</strong>
+        </p>
+        <hr
+          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
+        />
+
+        <p style="font-size: 1.02rem; line-height: 1.75">
+          ตั้งแต่ปี 2022–2026 ดร.เก้า ได้พัฒนา MARSAIL ให้เติบโตเป็นห้องวิจัย AI
+          ระดับแนวหน้า สร้างโมเดลเด่น เช่น
+          <strong>ALBERT</strong> ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์
+          การประเมินรอยความเสียหาย การทำความเข้าใจเอกสารอัจฉริยะ และ
+          <strong
+            >AI assistance สำหรับงานประเมินราคาความเสียหายของรถยนต์</strong
+          >
+          <strong>ผลักดันอุตสาหกรรมยานยนต์ไทยให้ล้ำหน้าด้วยพลังของ AI</strong>
+        </p>
       </div>
     </section>
 
