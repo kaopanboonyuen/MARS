@@ -791,44 +791,126 @@ pip install -r requirements.txt
     </div>
   </section>
 
+  <!-- Put this <style> inside your <head> -->
+  <style>
+    /* Global Link Style */
+    .fancy-link {
+      color: #1d3557;
+      font-weight: 600;
+      position: relative;
+      text-decoration: none;
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .fancy-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #1d3557, #4cc9f0);
+      transition: width 0.35s ease;
+      border-radius: 2px;
+    }
+
+    .fancy-link:hover {
+      color: #4cc9f0;
+      text-shadow: 0 0 8px rgba(76, 201, 240, 0.5);
+    }
+
+    .fancy-link:hover::after {
+      width: 100%;
+    }
+
+    /* Thai link */
+    .fancy-link-th {
+      color: #e63946;
+      font-weight: 600;
+      position: relative;
+      text-decoration: none;
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+
+    .fancy-link-th::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #e63946, #ffb3b8);
+      transition: width 0.35s ease;
+      border-radius: 2px;
+    }
+
+    .fancy-link-th:hover {
+      color: #ff6b73;
+      text-shadow: 0 0 8px rgba(255, 107, 115, 0.5);
+    }
+
+    .fancy-link-th:hover::after {
+      width: 100%;
+    }
+
+    /* Optional: ensure anchors inside strong don't break layout */
+    strong>a {
+      display: inline;
+    }
+  </style>
+
   <!-- Fun Facts About MARSAIL (Re-rendered & Updated) -->
   <section style="
-        font-family: 'Poppins', sans-serif;
-        padding: 2.5rem;
-        background: #f7fbff;
-        border-radius: 18px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-        margin-top: 3rem;
-      ">
+      font-family: 'Poppins', sans-serif;
+      padding: 2.5rem;
+      background: #f7fbff;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      margin-top: 3rem;
+    ">
     <h2 style="font-size: 1.85rem; margin-bottom: 1.5rem">
       🌟 Fun Facts About MARSAIL
     </h2>
 
     <!-- English Version -->
     <div style="
-          padding: 1.4rem;
-          border-left: 6px solid #1d3557;
-          background: #ffffff;
-          border-radius: 12px;
-          margin-bottom: 2rem;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        ">
+        padding: 1.4rem;
+        border-left: 6px solid #1d3557;
+        background: #ffffff;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      ">
       <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
         🇺🇸 Fun Facts — English Version
       </h3>
 
       <p style="font-size: 1.02rem; line-height: 1.65">
         MARSAIL is the dedicated Artificial Intelligence Laboratory under
-        <strong>MARS (Motor AI Recognition Solution)</strong>. While MARS was
+        <strong>
+          <a href="https://www.marssolution.io/" target="_blank" rel="noopener" class="fancy-link-th">
+            MARS (Motor AI Recognition Solution)
+          </a>
+        </strong>. While MARS was
         founded earlier as a tech company, the AI-focused MARSAIL was later
         established and shaped by
-        <strong>Dr. Teerapong Panboonyuen (Dr. Kao)</strong>, who leads the AI
+        <strong>
+          <a href="https://kaopanboonyuen.github.io/" target="_blank" rel="noopener" class="fancy-link-th">
+            Dr. Teerapong Panboonyuen (Dr. Kao)
+          </a>
+        </strong>, who leads the AI
         Research & Development division.
       </p>
       <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
       <p style="font-size: 1.02rem; line-height: 1.65">
-        After completing his Ph.D. at Chulalongkorn University, Dr. Kao joined
+        After completing his
+        <strong>
+          <a href="https://kaopanboonyuen.github.io/talk/ph.d.-thesis-defense/" target="_blank" rel="noopener"
+            class="fancy-link-th">
+            Ph.D. at Chulalongkorn University
+          </a>
+        </strong>, Dr. Kao joined
         MARS in <strong>January 2022</strong> to spearhead the next era of AI
         innovation. Upon reviewing the existing “first-generation AI system”
         from 2021, he made a decisive move —
@@ -839,18 +921,31 @@ pip install -r requirements.txt
 
       <p style="font-size: 1.02rem; line-height: 1.65">
         This total reboot resulted in the new
-        <strong>MARS model</strong> (Mask Attention Refinement with Sequential
+        <strong>
+          <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener"
+            class="fancy-link-th">
+            MARS model
+          </a>
+        </strong> (Mask Attention Refinement with Sequential
         Quadtree Nodes), inspired partly by the company name. It became
         MARSAIL’s <strong>first official research publication</strong> and was
         presented on the international stage at
-        <strong>ICIAP 2023 in Udine, Italy</strong>.
+        <strong>
+          <a href="https://link.springer.com/conference/iciap" target="_blank" rel="noopener" class="fancy-link-th">
+            ICIAP 2023 in Udine, Italy
+          </a>
+        </strong>.
       </p>
       <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
       <p style="font-size: 1.02rem; line-height: 1.65">
         From 2022–2026, under Dr. Kao’s leadership, MARSAIL evolved into a
         next-generation AI research lab, producing advanced models including
-        the flagship transformer <strong>ALBERT</strong>. Today, MARSAIL
+        the flagship transformer <strong>
+          <a href="https://arxiv.org/pdf/2506.10524v1" target="_blank" rel="noopener" class="fancy-link-th">
+            ALBERT
+          </a>
+        </strong>. Today, MARSAIL
         powers innovation across
         <strong>car insurance, damage analytics, intelligent document
           understanding,</strong>
@@ -860,29 +955,43 @@ pip install -r requirements.txt
 
     <!-- Thai Version -->
     <div style="
-          padding: 1.4rem;
-          border-left: 6px solid #e63946;
-          background: #ffffff;
-          border-radius: 12px;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        ">
+        padding: 1.4rem;
+        border-left: 6px solid #e63946;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      ">
       <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
         🇹🇭 เกร็ดน่ารู้ — เวอร์ชันภาษาไทย
       </h3>
 
       <p style="font-size: 1.02rem; line-height: 1.75">
         MARSAIL คือห้องปฏิบัติการปัญญาประดิษฐ์ของบริษัท
-        <strong>MARS – Motor AI Recognition Solution (บริษัท มอเตอร์ เอไอ
-          เรคอกนิชั่น โซลูชั่น จำกัด)</strong>
+        <strong>
+          <a href="https://www.marssolution.io/" target="_blank" rel="noopener" class="fancy-link-th">
+            MARS – Motor AI Recognition Solution (บริษัท มอเตอร์ เอไอ
+            เรคอกนิชั่น โซลูชั่น จำกัด)
+          </a>
+        </strong>
         โดยบริษัท MARS มีการก่อตั้งมาก่อน แต่ห้องแลป
         <strong>MARSAIL</strong> ถูกสร้างและพัฒนาโดย
-        <strong>ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)</strong> ในฐานะ Head of AI
+        <strong>
+          <a href="https://kaopanboonyuen.github.io/" target="_blank" rel="noopener" class="fancy-link-th">
+            ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)
+          </a>
+        </strong> ในฐานะ Head of AI
         Research เพื่อผลักดันการวิจัย AI ให้เติบโตระดับองค์กร
       </p>
       <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
       <p style="font-size: 1.02rem; line-height: 1.75">
-        หลังจบปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย ดร.เก้าเริ่มเข้ามาทำงานที่
+        หลังจบ
+        <strong>
+          <a href="https://kaopanboonyuen.github.io/talk/ph.d.-thesis-defense/" target="_blank" rel="noopener"
+            class="fancy-link-th">
+            ปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย
+          </a>
+        </strong> ดร.เก้าเริ่มเข้ามาทำงานที่
         MARS ในช่วง <strong>มกราคม 2022</strong> เพื่อสานต่องานพัฒนา AI
         จากทีมรุ่นแรกในปี 2021 แต่แทนที่จะปรับแต่งแบบเดิม
         เขากลับตัดสินใจครั้งใหญ่ —
@@ -892,23 +1001,53 @@ pip install -r requirements.txt
       <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
       <p style="font-size: 1.02rem; line-height: 1.75">
-        โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ <strong>MARS</strong> (Mask
+        โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ <strong>
+          <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener"
+            class="fancy-link-th">
+            MARS
+          </a>
+        </strong> (Mask
         Attention Refinement with Sequential Quadtree Nodes)
         ซึ่งสอดคล้องกับชื่อบริษัท และได้เป็นงานวิจัยลำดับแรกของห้องแลป MARSAIL
-        ที่ถูกนำเสนอในเวทีนานาชาติ <strong>ICIAP 2023 ณ ประเทศอิตาลี</strong>
+        ที่ถูกนำเสนอในเวทีนานาชาติ <strong>
+          <a href="https://link.springer.com/conference/iciap" target="_blank" rel="noopener" class="fancy-link-th">
+            ICIAP 2023 ณ ประเทศอิตาลี
+          </a>
+        </strong>
       </p>
       <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
       <p style="font-size: 1.02rem; line-height: 1.75">
         ตั้งแต่ปี 2022–2026 ดร.เก้า ได้พัฒนา MARSAIL ให้เติบโตเป็นห้องวิจัย AI
         ระดับแนวหน้า สร้างโมเดลเด่น เช่น
-        <strong>ALBERT</strong> ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์
+        <strong>
+          <a href="https://arxiv.org/pdf/2506.10524v1" target="_blank" rel="noopener" class="fancy-link-th">
+            ALBERT
+          </a>
+        </strong> ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์
         การประเมินรอยความเสียหาย การทำความเข้าใจเอกสารอัจฉริยะ และ
         <strong>AI assistance สำหรับงานประเมินราคาความเสียหายของรถยนต์</strong>
         <strong>ผลักดันอุตสาหกรรมยานยนต์ไทยให้ล้ำหน้าด้วยพลังของ AI</strong>
       </p>
     </div>
   </section>
+
+  <!-- Add CSS for fancy-link effect -->
+  <style>
+    .fancy-link-th {
+      color: #e63946;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .fancy-link-th:hover {
+      text-decoration: underline;
+      color: #ff5c5c;
+      transform: scale(1.05);
+    }
+  </style>
+
 
   <!-- MARSAIL Floating Chatbot -->
   <div id="marsailChat" style="
