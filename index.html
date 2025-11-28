@@ -1,341 +1,326 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="google" content="notranslate" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MARSAIL (MARS AI Laboratory)</title>
 
-    <!-- Favicon -->
-    <!-- <link rel="icon" href="data:image/svg+xml,
+<head>
+  <meta charset="UTF-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MARSAIL (MARS AI Laboratory)</title>
+
+  <!-- Favicon -->
+  <!-- <link rel="icon" href="data:image/svg+xml,
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'>
       <text y='14' font-size='14'>🐤</text>
     </svg>"/> -->
 
-    <!-- Favicon (recommended full set) -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="img/MARSAIL_LOGO.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="64x64"
-      href="img/MARSAIL_LOGO.png"
-    />
-    <link rel="apple-touch-icon" href="img/MARSAIL_LOGO.png" />
-    <meta name="theme-color" content="#1d3557" />
+  <!-- Favicon (recommended full set) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="img/MARSAIL_LOGO.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="img/MARSAIL_LOGO.png" />
+  <link rel="apple-touch-icon" href="img/MARSAIL_LOGO.png" />
+  <meta name="theme-color" content="#1d3557" />
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
 
-    <style>
-      :root {
-        --bg-gradient: linear-gradient(135deg, #1d3557, #457b9d, #a8dadc);
-        --accent: #e63946;
-        --glass: rgba(255, 255, 255, 0.08);
-        --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Poppins", sans-serif;
-        color: #222;
-        background: #f9fafc;
-        overflow-x: hidden;
-      }
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-      h1,
-      h2,
-      h3 {
-        font-weight: 700;
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #1d3557, #457b9d, #a8dadc);
+      --accent: #e63946;
+      --glass: rgba(255, 255, 255, 0.08);
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #222;
+      background: #f9fafc;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 700;
+    }
+
+    /* Hero Section */
+    header {
+      background: var(--bg-gradient);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      line-height: 1.3;
+      animation: fadeUp 1.2s ease-out;
+    }
+
+    header p {
+      margin-top: 15px;
+      font-size: 1rem;
+      opacity: 0.9;
+      animation: fadeUp 1.6s ease-out;
+    }
+
+    /* Sections */
+    section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 30px;
+      background: var(--glass);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: #1d3557;
+      border-left: 5px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    section p,
+    section li {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    /* Images */
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .img-grid img {
+      width: 100%;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .img-grid img:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow);
+    }
+
+    /* Buttons */
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 22px;
+      border-radius: 30px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .button:hover {
+      background: #d62839;
+    }
+
+    /* Footer */
+    footer {
+      background: #1d3557;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      margin-top: 60px;
+    }
+
+    footer a {
+      color: #f1faee;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
       }
 
-      /* Hero Section */
-      header {
-        background: var(--bg-gradient);
-        color: white;
-        text-align: center;
-        padding: 80px 20px;
-        position: relative;
-        overflow: hidden;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      header h1 {
-        font-size: 2.2rem;
-        line-height: 1.3;
-        animation: fadeUp 1.2s ease-out;
-      }
-      header p {
-        margin-top: 15px;
-        font-size: 1rem;
-        opacity: 0.9;
-        animation: fadeUp 1.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.98);
       }
 
-      /* Sections */
-      section {
-        max-width: 1100px;
-        margin: 60px auto;
-        padding: 30px;
-        background: var(--glass);
-        border-radius: 16px;
-        backdrop-filter: blur(12px);
-        box-shadow: var(--shadow);
-        animation: fadeIn 1s ease-in-out;
+      to {
+        opacity: 1;
+        transform: scale(1);
       }
-      section h2 {
-        font-size: 1.6rem;
-        margin-bottom: 20px;
-        color: #1d3557;
-        border-left: 5px solid var(--accent);
-        padding-left: 12px;
-      }
-      section p,
-      section li {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 10px;
-      }
-      ul {
-        padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero / MARSAIL Lab -->
+  <header style="
+    background: radial-gradient(
+      circle at 30% 20%,
+      #e63946 0%,
+      #1d3557 40%,
+      #0b1b2b 100%
+    );
+    color: white;
+    text-align: center;
+    padding: 100px 20px 100px; /* balanced top/bottom for tablets */
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* perfect centering */
+  ">
+    <!-- Decorative glow -->
+    <div style="
+      position: absolute;
+      top: -60px;
+      left: -60px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: float1 12s ease-in-out infinite alternate;
+    "></div>
+
+    <div style="
+      position: absolute;
+      bottom: -80px;
+      right: -50px;
+      width: 260px;
+      height: 260px;
+      background: rgba(230, 57, 70, 0.15);
+      border-radius: 50%;
+      filter: blur(55px);
+      animation: float2 10s ease-in-out infinite alternate;
+    "></div>
+
+    <!-- Abbreviation -->
+    <h2 style="
+      font-size: 0.95rem;
+      letter-spacing: 8px;
+      font-weight: 300;
+      opacity: 0.8;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    ">
+      MARS Artificial Intelligence Laboratory
+    </h2>
+
+    <!-- Main title -->
+    <h1 style="
+      font-size: 3.1rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 18px;
+      animation: fadeUp 1.1s ease-out;
+    ">
+      MARSAIL <span style="color: #a8dadc">(Motor AI Recognition Solution AI Lab)</span>
+    </h1>
+
+    <!-- Mission -->
+    <p style="
+      font-size: 1.25rem;
+      max-width: 780px;
+      margin: 0 auto 20px auto;
+      opacity: 0.92;
+      font-weight: 300;
+      animation: fadeUp 1.5s ease-out;
+    ">
+      We build and train AI that truly understands the entire automotive
+      insurance ecosystem — from every scratch and component to every claim,
+      repair note, and document. Our models are designed to be ethical,
+      transparent, and fair, helping make car insurance smarter for everyone.
+    </p>
+
+    <!-- Author -->
+    <p style="margin-top: 8px; font-size: 1rem; opacity: 0.8; font-weight: 300">
+      Led by <b>Teerapong Panboonyuen</b>
+    </p>
+
+  </header>
+
+
+  <!-- Glow Animations -->
+  <style>
+    @keyframes float1 {
+      from {
+        transform: translate(0px, 0px) scale(1);
       }
 
-      /* Images */
-      .img-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
+      to {
+        transform: translate(40px, 30px) scale(1.15);
       }
-      .img-grid img {
-        width: 100%;
-        border-radius: 12px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .img-grid img:hover {
-        transform: scale(1.04);
-        box-shadow: var(--shadow);
+    }
+
+    @keyframes float2 {
+      from {
+        transform: translate(0px, 0px) scale(1);
       }
 
-      /* Buttons */
-      .button {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 22px;
-        border-radius: 30px;
-        background: var(--accent);
-        color: white;
-        font-weight: 600;
-        transition: background 0.3s ease;
+      to {
+        transform: translate(-35px, -25px) scale(1.1);
       }
-      .button:hover {
-        background: #d62839;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
       }
 
-      /* Footer */
-      footer {
-        background: #1d3557;
-        color: white;
-        text-align: center;
-        padding: 25px 10px;
-        margin-top: 60px;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      footer a {
-        color: #f1faee;
-      }
+    }
+  </style>
 
-      /* Animations */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(25px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: scale(0.98);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Hero / MARSAIL Lab -->
-    <header
-      style="
-        background: radial-gradient(
-          circle at 30% 20%,
-          #e63946 0%,
-          #1d3557 40%,
-          #0b1b2b 100%
-        );
-        color: white;
-        text-align: center;
-        padding: 110px 20px 120px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.4);
-      "
-    >
-      <!-- Soft glow circles -->
-      <div
-        style="
-          position: absolute;
-          top: -60px;
-          left: -60px;
-          width: 200px;
-          height: 200px;
-          background: rgba(255, 255, 255, 0.08);
-          border-radius: 50%;
-          filter: blur(40px);
-          animation: float1 12s ease-in-out infinite alternate;
-        "
-      ></div>
+  <!-- About -->
+  <section>
+    <h2>🚀 About MARS</h2>
+    <p>
+      <b>MARS</b> is a state-of-the-art deep learning model for car damage
+      instance segmentation.
+      <span style="font-weight: 600">It stands for:</span>
+    </p>
 
-      <div
-        style="
-          position: absolute;
-          bottom: -80px;
-          right: -50px;
-          width: 260px;
-          height: 260px;
-          background: rgba(230, 57, 70, 0.15);
-          border-radius: 50%;
-          filter: blur(55px);
-          animation: float2 10s ease-in-out infinite alternate;
-        "
-      ></div>
-
-      <!-- Lab Abbreviation -->
-      <h2
-        style="
-          font-size: 0.95rem;
-          letter-spacing: 8px;
-          font-weight: 300;
-          opacity: 0.8;
-          text-transform: uppercase;
-          margin-bottom: 10px;
-        "
-      >
-        MARS Artificial Intelligence Laboratory
-      </h2>
-
-      <!-- Main Lab Title -->
-      <h1
-        style="
-          font-size: 3.1rem;
-          font-weight: 700;
-          line-height: 1.25;
-          margin-bottom: 18px;
-          animation: fadeUp 1.1s ease-out;
-        "
-      >
-        MARSAIL
-        <span style="color: #a8dadc"
-          >(Motor AI Recognition Solution AI Lab)</span
-        >
-      </h1>
-
-      <!-- Mission Statement -->
-      <p
-        style="
-          font-size: 1.25rem;
-          max-width: 780px;
-          margin: 0 auto;
-          margin-bottom: 20px;
-          opacity: 0.92;
-          font-weight: 300;
-          animation: fadeUp 1.5s ease-out;
-        "
-      >
-        We build and train AI that truly understands the entire automotive
-        insurance ecosystem — from every scratch and component to every claim,
-        repair note, and document. Our models are designed to be ethical,
-        transparent, and fair, helping make car insurance smarter for everyone.
-      </p>
-
-      <!-- Author -->
-      <p
-        style="margin-top: 8px; font-size: 1rem; opacity: 0.8; font-weight: 300"
-      >
-        Led by <b>Teerapong Panboonyuen</b>
-      </p>
-
-      <!-- MIT License Badge -->
-      <div style="margin-top: 20px">
-        <a href="LICENSE" target="_blank">
-          <img
-            src="https://img.shields.io/badge/license-MIT-blue.svg"
-            alt="MIT License"
-            style="height: 28px; transition: transform 0.3s ease"
-            onmouseover="this.style.transform='scale(1.12)'"
-            onmouseout="this.style.transform='scale(1)'"
-          />
-        </a>
-      </div>
-    </header>
-
-    <!-- Glow Animations -->
-    <style>
-      @keyframes float1 {
-        from {
-          transform: translate(0px, 0px) scale(1);
-        }
-        to {
-          transform: translate(40px, 30px) scale(1.15);
-        }
-      }
-      @keyframes float2 {
-        from {
-          transform: translate(0px, 0px) scale(1);
-        }
-        to {
-          transform: translate(-35px, -25px) scale(1.1);
-        }
-      }
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(25px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
-
-    <!-- About -->
-    <section>
-      <h2>🚀 About MARS</h2>
-      <p>
-        <b>MARS</b> is a state-of-the-art deep learning model for car damage
-        instance segmentation.
-        <span style="font-weight: 600">It stands for:</span>
-      </p>
-
-      <!-- Acronym Row Centered with Stylish Border -->
-      <div
-        style="
+    <!-- Acronym Row Centered with Stylish Border -->
+    <div style="
           display: flex;
           justify-content: center; /* center items */
           flex-wrap: wrap;
@@ -346,140 +331,115 @@
           border-radius: 12px; /* rounded corners */
           box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* subtle shadow for depth */
           background-color: #f1f7fa; /* soft background for readability */
-        "
-      >
-        <div style="font-size: 1rem; text-align: center">
-          <span style="font-weight: 700; color: #1d3557">M = Mask</span>
-        </div>
-        <div style="font-size: 1rem; text-align: center">
-          <span style="font-weight: 700; color: #e63946">A = Attention</span>
-        </div>
-        <div style="font-size: 1rem; text-align: center">
-          <span style="font-weight: 700; color: #457b9d">R = Refinement</span>
-        </div>
-        <div style="font-size: 1rem; text-align: center">
-          <span style="font-weight: 700; color: #6a4c93"
-            >S = Sequential Quadtree Nodes</span
-          >
-        </div>
+        ">
+      <div style="font-size: 1rem; text-align: center">
+        <span style="font-weight: 700; color: #1d3557">M = Mask</span>
       </div>
+      <div style="font-size: 1rem; text-align: center">
+        <span style="font-weight: 700; color: #e63946">A = Attention</span>
+      </div>
+      <div style="font-size: 1rem; text-align: center">
+        <span style="font-weight: 700; color: #457b9d">R = Refinement</span>
+      </div>
+      <div style="font-size: 1rem; text-align: center">
+        <span style="font-weight: 700; color: #6a4c93">S = Sequential Quadtree Nodes</span>
+      </div>
+    </div>
 
-      <p>
-        By leveraging sequential quadtree attention, <b>MARS</b> refines
-        segmentation masks at an instance level, surpassing existing methods
-        (Mask R-CNN, PointRend, Mask Transfiner) with notable maskAP gains.
-      </p>
+    <p>
+      By leveraging sequential quadtree attention, <b>MARS</b> refines
+      segmentation masks at an instance level, surpassing existing methods
+      (Mask R-CNN, PointRend, Mask Transfiner) with notable maskAP gains.
+    </p>
 
-      <ul>
-        <li>+1.3 maskAP improvement (R50-FPN)</li>
-        <li>+2.3 maskAP improvement (R101-FPN) on Thai car-damage dataset</li>
-      </ul>
+    <ul>
+      <li>+1.3 maskAP improvement (R50-FPN)</li>
+      <li>+2.3 maskAP improvement (R101-FPN) on Thai car-damage dataset</li>
+    </ul>
 
-      <p>Presented at <i>ICIAP 2023</i>, Udine, Italy 🇮🇹</p>
-    </section>
+    <p>Presented at <i>ICIAP 2023</i>, Udine, Italy 🇮🇹</p>
+  </section>
 
-    <!-- Showcase -->
-    <section>
-      <h2>🏁 About MARSAIL Lab</h2>
-      <p>
-        <strong>MARSAIL</strong> (Motor AI Recognition Solution Artificial
-        Intelligence Laboratory) is dedicated to pioneering research at the
-        intersection of computer vision, transformers, and automotive AI.
-      </p>
-      <p>
-        Our mission is to revolutionize the automotive insurance and repair
-        industries through AI-driven automation, delivering breakthroughs in
-        segmentation, localization, and decision intelligence.
-      </p>
-      <div class="img-grid">
-        <!-- Clickable logo that opens in a new tab -->
-        <a
-          href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/"
-          target="_blank"
-        >
-          <img
-            src="https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png"
-            alt="MARSAIL Lab Logo"
-            style="
+  <!-- Showcase -->
+  <section>
+    <h2>🏁 About MARSAIL Lab</h2>
+    <p>
+      <strong>MARSAIL</strong> (Motor AI Recognition Solution Artificial
+      Intelligence Laboratory) is dedicated to pioneering research at the
+      intersection of computer vision, transformers, and automotive AI.
+    </p>
+    <p>
+      Our mission is to revolutionize the automotive insurance and repair
+      industries through AI-driven automation, delivering breakthroughs in
+      segmentation, localization, and decision intelligence.
+    </p>
+    <div class="img-grid">
+      <!-- Clickable logo that opens in a new tab -->
+      <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/"
+        target="_blank">
+        <img src="https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png"
+          alt="MARSAIL Lab Logo" style="
               width: 100%;
               max-width: 100%;
               height: auto;
               border-radius: 12px;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            "
-          />
-        </a>
-      </div>
-    </section>
+            " />
+      </a>
+    </div>
+  </section>
 
-    <!-- Showcase -->
-    <section>
-      <h2>✨ Visual Results</h2>
-      <p>MARS delivers superior segmentation accuracy:</p>
-      <div class="img-grid">
-        <!-- Clickable image that opens the link in a new tab -->
-        <a
-          href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
-          target="_blank"
-        >
-          <img
-            src="img/featured.png"
-            alt="Architecture"
-            style="
+  <!-- Showcase -->
+  <section>
+    <h2>✨ Visual Results</h2>
+    <p>MARS delivers superior segmentation accuracy:</p>
+    <div class="img-grid">
+      <!-- Clickable image that opens the link in a new tab -->
+      <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">
+        <img src="img/featured.png" alt="Architecture" style="
               width: 100%;
               height: auto;
               border-radius: 12px;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            "
-          />
-        </a>
-      </div>
-    </section>
+            " />
+      </a>
+    </div>
+  </section>
 
-    <!-- Showcase -->
-    <section>
-      <div class="img-grid">
-        <!-- Clickable image that opens the link in a new tab -->
-        <a
-          href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
-          target="_blank"
-        >
-          <img
-            src="img/MARS_003.png"
-            alt="MARS Segmentation"
-            style="
+  <!-- Showcase -->
+  <section>
+    <div class="img-grid">
+      <!-- Clickable image that opens the link in a new tab -->
+      <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">
+        <img src="img/MARS_003.png" alt="MARS Segmentation" style="
               width: 100%;
               height: auto;
               border-radius: 12px;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            "
-          />
-        </a>
-      </div>
-    </section>
+            " />
+      </a>
+    </div>
+  </section>
 
-    <!-- Research -->
-    <section
-      style="
+  <!-- Research -->
+  <section style="
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         padding: 2rem;
-      "
-    >
-      <h2 style="font-size: 2rem; margin-bottom: 1rem">
-        🧠 MARSAIL Research Highlights (2023–2026)
-      </h2>
-      <p style="font-size: 1.15rem; line-height: 1.65">
-        At the heart of MARSAIL lies a commitment to pushing the boundaries of
-        AI in automotive technology. All research initiatives are spearheaded by
-        <strong>Dr. Kao (Teerapong Panboonyuen)</strong>, whose leadership
-        drives our mission to advance computer vision, document intelligence,
-        and damage-centric transformer architectures. Below are our flagship
-        contributions that have shaped the future of automotive AI.
-      </p>
+      ">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem">
+      🧠 MARSAIL Research Highlights (2023–2026)
+    </h2>
+    <p style="font-size: 1.15rem; line-height: 1.65">
+      At the heart of MARSAIL lies a commitment to pushing the boundaries of
+      AI in automotive technology. All research initiatives are spearheaded by
+      <strong>Dr. Kao (Teerapong Panboonyuen)</strong>, whose leadership
+      drives our mission to advance computer vision, document intelligence,
+      and damage-centric transformer architectures. Below are our flagship
+      contributions that have shaped the future of automotive AI.
+    </p>
 
-      <!-- Paper 1: ALBERT -->
-      <div
-        style="
+    <!-- Paper 1: ALBERT -->
+    <div style="
           border: 1px solid #ccc;
           border-left: 6px solid #007acc;
           padding: 1.2rem;
@@ -487,47 +447,37 @@
           border-radius: 10px;
           background-color: #fafcff;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        "
-      >
-        <h3 style="margin-top: 0; font-size: 1.35rem">
-          🚗 <strong>ALBERT</strong> — Advanced Transformers for Comprehensive
-          Automotive Damage Evaluation
-          <span style="font-size: 0.85em; color: #555">(Teacher Model)</span>
-        </h3>
-        <p style="line-height: 1.6">
-          ALBERT introduces a next-generation transformer backbone designed for
-          holistic vehicle damage understanding. It delivers powerful contextual
-          embeddings, multi-level localization cues, and robust attention
-          representations that guide downstream segmentation and assessment
-          models. Its architecture establishes ALBERT as a foundational
-          <b>“teacher model”</b> for automotive AI systems.
-          <a
-            href="http://arxiv.org/abs/2506.10524"
-            target="_blank"
-            rel="noopener"
-            >[arXiv]</a
-          >
-        </p>
-        <pre
-          style="
+        ">
+      <h3 style="margin-top: 0; font-size: 1.35rem">
+        🚗 <strong>ALBERT</strong> — Advanced Transformers for Comprehensive
+        Automotive Damage Evaluation
+        <span style="font-size: 0.85em; color: #555">(Teacher Model)</span>
+      </h3>
+      <p style="line-height: 1.6">
+        ALBERT introduces a next-generation transformer backbone designed for
+        holistic vehicle damage understanding. It delivers powerful contextual
+        embeddings, multi-level localization cues, and robust attention
+        representations that guide downstream segmentation and assessment
+        models. Its architecture establishes ALBERT as a foundational
+        <b>“teacher model”</b> for automotive AI systems.
+        <a href="http://arxiv.org/abs/2506.10524" target="_blank" rel="noopener">[arXiv]</a>
+      </p>
+      <pre style="
             background-color: #eee;
             padding: 1rem;
             overflow-x: auto;
             font-size: 0.9rem;
-          "
-        >
+          ">
 @article{panboonyuen2025albert,
   title={ALBERT: Advanced Localization and Bidirectional Encoder Representations from Transformers for Automotive Damage Evaluation},
   author={Panboonyuen, Teerapong},
   journal={arXiv preprint arXiv:2506.10524},
   year={2025}
-}</pre
-        >
-      </div>
+}</pre>
+    </div>
 
-      <!-- Paper 2: SLICK -->
-      <div
-        style="
+    <!-- Paper 2: SLICK -->
+    <div style="
           border: 1px solid #ccc;
           border-left: 6px solid #28a745;
           padding: 1.2rem;
@@ -535,49 +485,37 @@
           border-radius: 10px;
           background-color: #fafcf8;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        "
-      >
-        <h3 style="margin-top: 0; font-size: 1.35rem">
-          🧩 <strong>SLICK</strong> — Knowledge-Enhanced Vehicle Damage
-          Segmentation
-          <span style="font-size: 0.85em; color: #555">(Student Model)</span>
-        </h3>
-        <p style="line-height: 1.6">
-          Built upon ALBERT’s distilled knowledge, SLICK specializes in
-          fine-grained, automotive-specific segmentation. It employs selective
-          localization, hierarchical calibration, and optimized inference
-          pathways to deliver
-          <b
-            >real-time segmentation accuracy suited for insurance workflows and
-            repair automation.</b
-          >
-          <a
-            href="http://arxiv.org/abs/2506.10528"
-            target="_blank"
-            rel="noopener"
-            >[arXiv]</a
-          >
-        </p>
-        <pre
-          style="
+        ">
+      <h3 style="margin-top: 0; font-size: 1.35rem">
+        🧩 <strong>SLICK</strong> — Knowledge-Enhanced Vehicle Damage
+        Segmentation
+        <span style="font-size: 0.85em; color: #555">(Student Model)</span>
+      </h3>
+      <p style="line-height: 1.6">
+        Built upon ALBERT’s distilled knowledge, SLICK specializes in
+        fine-grained, automotive-specific segmentation. It employs selective
+        localization, hierarchical calibration, and optimized inference
+        pathways to deliver
+        <b>real-time segmentation accuracy suited for insurance workflows and
+          repair automation.</b>
+        <a href="http://arxiv.org/abs/2506.10528" target="_blank" rel="noopener">[arXiv]</a>
+      </p>
+      <pre style="
             background-color: #eee;
             padding: 1rem;
             overflow-x: auto;
             font-size: 0.9rem;
-          "
-        >
+          ">
 @article{panboonyuen2025slick,
   title={SLICK: Selective Localization and Instance Calibration for Knowledge-Enhanced Car Damage Segmentation in Automotive Insurance},
   author={Panboonyuen, Teerapong},
   journal={arXiv preprint arXiv:2506.10528},
   year={2025}
-}</pre
-        >
-      </div>
+}</pre>
+    </div>
 
-      <!-- Paper 3: DOTA -->
-      <div
-        style="
+    <!-- Paper 3: DOTA -->
+    <div style="
           border: 1px solid #ccc;
           border-left: 6px solid #ff5733;
           padding: 1.2rem;
@@ -585,33 +523,25 @@
           border-radius: 10px;
           background-color: #fff8f4;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        "
-      >
-        <h3 style="margin-top: 0; font-size: 1.35rem">
-          🔍 <strong>DOTA</strong> — RAG-Enhanced OCR for Automotive Services
-        </h3>
-        <p style="line-height: 1.6">
-          DOTA combines deformable transformer attention with
-          retrieval-augmented generation to achieve
-          <b>human-level robustness in real-world document digitization</b>.
-          Designed specifically for automotive workflows, it excels in
-          extracting structured information from invoices, claims, inspection
-          sheets, and handwritten service notes.
-          <a
-            href="https://arxiv.org/abs/2505.04175"
-            target="_blank"
-            rel="noopener"
-            >[arXiv]</a
-          >
-        </p>
-        <pre
-          style="
+        ">
+      <h3 style="margin-top: 0; font-size: 1.35rem">
+        🔍 <strong>DOTA</strong> — RAG-Enhanced OCR for Automotive Services
+      </h3>
+      <p style="line-height: 1.6">
+        DOTA combines deformable transformer attention with
+        retrieval-augmented generation to achieve
+        <b>human-level robustness in real-world document digitization</b>.
+        Designed specifically for automotive workflows, it excels in
+        extracting structured information from invoices, claims, inspection
+        sheets, and handwritten service notes.
+        <a href="https://arxiv.org/abs/2505.04175" target="_blank" rel="noopener">[arXiv]</a>
+      </p>
+      <pre style="
             background-color: #eee;
             padding: 1rem;
             overflow-x: auto;
             font-size: 0.9rem;
-          "
-        >
+          ">
 @inproceedings{marsail2025dota,
   title={DOTA: Deformable Optimized Transformer Architecture for End-to-End Text Recognition with Retrieval-Augmented Generation},
   author={Panboonyuen, Teerapong as co-author and lead researcher},
@@ -619,13 +549,11 @@
   pages={301--306},
   year={2025},
   organization={IEEE}
-}</pre
-        >
-      </div>
+}</pre>
+    </div>
 
-      <!-- Paper 4: MARS -->
-      <div
-        style="
+    <!-- Paper 4: MARS -->
+    <div style="
           border: 1px solid #ccc;
           border-left: 6px solid #6f42c1;
           padding: 1.2rem;
@@ -633,34 +561,27 @@
           border-radius: 10px;
           background-color: #f9f6ff;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        "
-      >
-        <h3 style="margin-top: 0; font-size: 1.35rem">
-          🌌 <strong>MARS</strong> — Foundational Mask Attention Refinement
-          Model
-        </h3>
-        <p style="line-height: 1.6">
-          MARS introduced the groundbreaking
-          <b>Sequential Quadtree Attention</b>
-          mechanism, enabling more accurate mask refinement for instance-level
-          damage detection. This work laid the foundation for MARSAIL’s broader
-          research direction, demonstrating significant performance gains over
-          Mask R-CNN, PointRend, and Mask Transfiner.
-          <a
-            href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
-            target="_blank"
-            rel="noopener"
-            >[Springer]</a
-          >
-        </p>
-        <pre
-          style="
+        ">
+      <h3 style="margin-top: 0; font-size: 1.35rem">
+        🌌 <strong>MARS</strong> — Foundational Mask Attention Refinement
+        Model
+      </h3>
+      <p style="line-height: 1.6">
+        MARS introduced the groundbreaking
+        <b>Sequential Quadtree Attention</b>
+        mechanism, enabling more accurate mask refinement for instance-level
+        damage detection. This work laid the foundation for MARSAIL’s broader
+        research direction, demonstrating significant performance gains over
+        Mask R-CNN, PointRend, and Mask Transfiner.
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank"
+          rel="noopener">[Springer]</a>
+      </p>
+      <pre style="
             background-color: #eee;
             padding: 1rem;
             overflow-x: auto;
             font-size: 0.9rem;
-          "
-        >
+          ">
 @inproceedings{panboonyuen2023mars,
   title={Mars: Mask attention refinement with sequential quadtree nodes for car damage instance segmentation},
   author={Panboonyuen, Teerapong},
@@ -668,16 +589,14 @@
   pages={28--38},
   year={2023},
   organization={Springer}
-}</pre
-        >
-      </div>
-    </section>
+}</pre>
+    </div>
+  </section>
 
-    <!-- Quick Start -->
-    <section>
-      <h2>⚡ Quick Start</h2>
-      <pre
-        style="
+  <!-- Quick Start -->
+  <section>
+    <h2>⚡ Quick Start</h2>
+    <pre style="
           background: #1d3557;
           color: #f1faee;
           padding: 20px;
@@ -685,45 +604,34 @@
           overflow-x: auto;
           font-size: 1rem;
           line-height: 1.5;
-        "
-      >
+        ">
 git clone https://github.com/kaopanboonyuen/MARS.git
 cd MARS
 python3 -m venv mars-env
 source mars-env/bin/activate
 pip install -r requirements.txt
-  </pre
-      >
-      <div style="margin-top: 20px">
-        <a
-          href="https://github.com/kaopanboonyuen/MARS"
-          class="button"
-          target="_blank"
-          >GitHub Repository</a
-        >
-      </div>
-    </section>
+  </pre>
+    <div style="margin-top: 20px">
+      <a href="https://github.com/kaopanboonyuen/MARS" class="button" target="_blank">GitHub Repository</a>
+    </div>
+  </section>
 
-    <!-- Datasets -->
-    <section>
-      <h2>📂 Datasets</h2>
-      <ul>
-        <li>
-          <a
-            href="https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view"
-            target="_blank"
-            >Public Dataset</a
-          >
-        </li>
-        <li><b>Private Dataset</b>: Restricted (THAIVIVAT Insurance PCL)</li>
-      </ul>
-    </section>
+  <!-- Datasets -->
+  <section>
+    <h2>📂 Datasets</h2>
+    <ul>
+      <li>
+        <a href="https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view" target="_blank">Public
+          Dataset</a>
+      </li>
+      <li><b>Private Dataset</b>: Restricted (THAIVIVAT Insurance PCL)</li>
+    </ul>
+  </section>
 
-    <!-- Citation -->
-    <section style="margin-top: 40px">
-      <h2>✍️ Citation</h2>
-      <pre
-        style="
+  <!-- Citation -->
+  <section style="margin-top: 40px">
+    <h2>✍️ Citation</h2>
+    <pre style="
           background: #f4f7fa;
           color: #333;
           padding: 20px;
@@ -732,8 +640,7 @@ pip install -r requirements.txt
           overflow-x: auto;
           font-size: 1rem;
           line-height: 1.5;
-        "
-      >
+        ">
 @inproceedings{panboonyuen2023mars,
   title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes},
   author={Panboonyuen, Teerapong},
@@ -741,53 +648,45 @@ pip install -r requirements.txt
   year={2023},
   publisher={Springer}
 }
-    </pre
-      >
-    </section>
+    </pre>
+  </section>
 
-    <!-- <section style="text-align:center;">
+  <!-- <section style="text-align:center;">
     <h2>🎬 Live Demo</h2>
     <a href="https://kaopanboonyuen.github.io/MARS" class="button" target="_blank">Try MARS Online</a>
   </section> -->
 
-    <section style="text-align: center">
-      <h2>🧠 Want to Know More About MARSAIL?</h2>
-      <p style="max-width: 800px; margin: 0 auto; font-size: 1.1em">
-        Explore how our lab is shaping the future of automotive AI, blending
-        deep vision models with smart insurance tech. Get the full story,
-        insights, and breakthroughs from the MARSAIL team in our feature blog
-        post.
-      </p>
-      <a
-        href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/"
-        class="button"
-        target="_blank"
-        style="margin-top: 20px"
-      >
-        Read the Full Blog
-      </a>
-    </section>
+  <section style="text-align: center">
+    <h2>🧠 Want to Know More About MARSAIL?</h2>
+    <p style="max-width: 800px; margin: 0 auto; font-size: 1.1em">
+      Explore how our lab is shaping the future of automotive AI, blending
+      deep vision models with smart insurance tech. Get the full story,
+      insights, and breakthroughs from the MARSAIL team in our feature blog
+      post.
+    </p>
+    <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/"
+      class="button" target="_blank" style="margin-top: 20px">
+      Read the Full Blog
+    </a>
+  </section>
 
-    <!-- Showcase: MARSAIL Logo Download -->
-    <section>
-      <h2>🎨 MARSAIL Official Logo</h2>
-      <p>
-        The official <strong>MARSAIL</strong> logo is available for use in
-        academic papers, research posters, presentations, conference
-        submissions, and other professional materials.
-      </p>
-      <p>
-        Please use the logo below when representing the laboratory in
-        publications or collaborative work.
-      </p>
+  <!-- Showcase: MARSAIL Logo Download -->
+  <section>
+    <h2>🎨 MARSAIL Official Logo</h2>
+    <p>
+      The official <strong>MARSAIL</strong> logo is available for use in
+      academic papers, research posters, presentations, conference
+      submissions, and other professional materials.
+    </p>
+    <p>
+      Please use the logo below when representing the laboratory in
+      publications or collaborative work.
+    </p>
 
-      <!-- Logo Preview (Minimal + Professional Size) -->
-      <div class="img-grid" style="margin-top: 25px">
-        <a href="img/MARSAIL_LOGO.png" target="_blank" download>
-          <img
-            src="img/MARSAIL_LOGO.png"
-            alt="MARSAIL Lab Logo"
-            style="
+    <!-- Logo Preview (Minimal + Professional Size) -->
+    <div class="img-grid" style="margin-top: 25px">
+      <a href="img/MARSAIL_LOGO.png" target="_blank" download>
+        <img src="img/MARSAIL_LOGO.png" alt="MARSAIL Lab Logo" style="
               width: 180px; /* Smaller minimal display */
               height: auto;
               margin: 0 auto;
@@ -795,278 +694,224 @@ pip install -r requirements.txt
               border-radius: 12px;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
               transition: transform 0.3s ease, box-shadow 0.3s ease;
-            "
-            onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 18px rgba(0,0,0,0.15)';"
-            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';"
-          />
-        </a>
-      </div>
+            " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 18px rgba(0,0,0,0.15)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';" />
+      </a>
+    </div>
 
-      <!-- Download Button -->
-      <div style="text-align: center; margin-top: 25px">
-        <a href="img/MARSAIL_LOGO.png" download class="button">
-          ⬇️ Download Logo (PNG)
-        </a>
-      </div>
-    </section>
+    <!-- Download Button -->
+    <div style="text-align: center; margin-top: 25px">
+      <a href="img/MARSAIL_LOGO.png" download class="button">
+        ⬇️ Download Logo (PNG)
+      </a>
+    </div>
+  </section>
 
-    <!-- Sponsors & Partners -->
-    <section
-      style="
+  <!-- Sponsors & Partners -->
+  <section style="
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         padding: 2rem;
         background-color: #f5f7fa;
-      "
-    >
-      <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center">
-        🤝 Our Trusted Sponsors & Partners
-      </h2>
-      <p
-        style="
+      ">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center">
+      🤝 Our Trusted Sponsors & Partners
+    </h2>
+    <p style="
           text-align: center;
           font-size: 1.1rem;
           max-width: 800px;
           margin: 0 auto 2rem auto;
           line-height: 1.6;
-        "
-      >
-        We are deeply grateful for the invaluable support of our sponsors,
-        partners, and collaborators. Their investment and belief in our mission
-        empower MARSAIL to push boundaries in automotive AI.
-      </p>
+        ">
+      We are deeply grateful for the invaluable support of our sponsors,
+      partners, and collaborators. Their investment and belief in our mission
+      empower MARSAIL to push boundaries in automotive AI.
+    </p>
 
-      <!-- Highlighted Investor -->
-      <div style="text-align: center; margin-bottom: 2rem">
-        <h3 style="color: #007acc; font-size: 1.5rem">🌟 Strategic Investor</h3>
-        <a href="https://thaivivat.co.th/en/index.php" target="_blank">
-          <img
-            src="img/logo/logo_01_tvi.png"
-            alt="Thaivivat Insurance Logo"
-            style="height: 120px; margin: 1rem 0; border-radius: 12px"
-          />
-        </a>
-        <p
-          style="
+    <!-- Highlighted Investor -->
+    <div style="text-align: center; margin-bottom: 2rem">
+      <h3 style="color: #007acc; font-size: 1.5rem">🌟 Strategic Investor</h3>
+      <a href="https://thaivivat.co.th/en/index.php" target="_blank">
+        <img src="img/logo/logo_01_tvi.png" alt="Thaivivat Insurance Logo"
+          style="height: 120px; margin: 1rem 0; border-radius: 12px" />
+      </a>
+      <p style="
             font-size: 1.05rem;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.5;
-          "
-        >
-          A special thank you to
-          <strong>Thaivivat Insurance Public Company Limited (TVI)</strong>
-          for their forward-thinking investment in AI-driven automotive
-          solutions.
-        </p>
-      </div>
+          ">
+        A special thank you to
+        <strong>Thaivivat Insurance Public Company Limited (TVI)</strong>
+        for their forward-thinking investment in AI-driven automotive
+        solutions.
+      </p>
+    </div>
 
-      <!-- Partner Logos -->
-      <div
-        style="
+    <!-- Partner Logos -->
+    <div style="
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
           gap: 2rem;
-        "
-      >
-        <div style="text-align: center">
-          <a
-            href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/"
-            target="_blank"
-          >
-            <img
-              src="img/logo/logo_03_marsail.png"
-              alt="MARSAIL Logo"
-              style="height: 60px; border-radius: 12px"
-            />
-          </a>
-          <p style="margin-top: 0.5rem; font-size: 0.95rem">
-            MARSAIL (MARS AI Lab)
-          </p>
-        </div>
-        <!-- <div style="text-align: center;">
+        ">
+      <div style="text-align: center">
+        <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/"
+          target="_blank">
+          <img src="img/logo/logo_03_marsail.png" alt="MARSAIL Logo" style="height: 60px; border-radius: 12px" />
+        </a>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem">
+          MARSAIL (MARS AI Lab)
+        </p>
+      </div>
+      <!-- <div style="text-align: center;">
       <a href="https://myridatech.github.io/" target="_blank">
         <img src="img/logo/logo_04_myrida.png" alt="Myrida Logo" style="height: 60px; border-radius: 12px;">
       </a>
       <p style="margin-top: 0.5rem; font-size: 0.95rem;">MYRIDA AI Platform</p>
     </div> -->
-        <div style="text-align: center">
-          <a href="https://www.chula.ac.th/en/" target="_blank">
-            <img
-              src="img/logo/logo_02_chula.png"
-              alt="Chulalongkorn University Logo"
-              style="height: 60px; border-radius: 12px"
-            />
-          </a>
-          <p style="margin-top: 0.5rem; font-size: 0.95rem">
-            Chulalongkorn University
-          </p>
-        </div>
-        <!-- New Partner: PBY.LAB -->
-        <div style="text-align: center">
-          <a href="https://pbylab.github.io/" target="_blank">
-            <img
-              src="img/logo/pby_logo_01.png"
-              alt="PBY.LAB Logo"
-              style="height: 60px; border-radius: 12px"
-            />
-          </a>
-          <p style="margin-top: 0.5rem; font-size: 0.95rem">
-            PBY Artificial Intelligence Laboratory
-          </p>
-        </div>
+      <div style="text-align: center">
+        <a href="https://www.chula.ac.th/en/" target="_blank">
+          <img src="img/logo/logo_02_chula.png" alt="Chulalongkorn University Logo"
+            style="height: 60px; border-radius: 12px" />
+        </a>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem">
+          Chulalongkorn University
+        </p>
       </div>
-    </section>
+      <!-- New Partner: PBY.LAB -->
+      <div style="text-align: center">
+        <a href="https://pbylab.github.io/" target="_blank">
+          <img src="img/logo/pby_logo_01.png" alt="PBY.LAB Logo" style="height: 60px; border-radius: 12px" />
+        </a>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem">
+          PBY Artificial Intelligence Laboratory
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Fun Facts About MARSAIL (Re-rendered & Updated) -->
-    <section
-      style="
+  <!-- Fun Facts About MARSAIL (Re-rendered & Updated) -->
+  <section style="
         font-family: 'Poppins', sans-serif;
         padding: 2.5rem;
         background: #f7fbff;
         border-radius: 18px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         margin-top: 3rem;
-      "
-    >
-      <h2 style="font-size: 1.85rem; margin-bottom: 1.5rem">
-        🌟 Fun Facts About MARSAIL
-      </h2>
+      ">
+    <h2 style="font-size: 1.85rem; margin-bottom: 1.5rem">
+      🌟 Fun Facts About MARSAIL
+    </h2>
 
-      <!-- English Version -->
-      <div
-        style="
+    <!-- English Version -->
+    <div style="
           padding: 1.4rem;
           border-left: 6px solid #1d3557;
           background: #ffffff;
           border-radius: 12px;
           margin-bottom: 2rem;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        "
-      >
-        <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
-          🇺🇸 Fun Facts — English Version
-        </h3>
+        ">
+      <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
+        🇺🇸 Fun Facts — English Version
+      </h3>
 
-        <p style="font-size: 1.02rem; line-height: 1.65">
-          MARSAIL is the dedicated Artificial Intelligence Laboratory under
-          <strong>MARS (Motor AI Recognition Solution)</strong>. While MARS was
-          founded earlier as a tech company, the AI-focused MARSAIL was later
-          established and shaped by
-          <strong>Dr. Teerapong Panboonyuen (Dr. Kao)</strong>, who leads the AI
-          Research & Development division.
-        </p>
-        <hr
-          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
-        />
+      <p style="font-size: 1.02rem; line-height: 1.65">
+        MARSAIL is the dedicated Artificial Intelligence Laboratory under
+        <strong>MARS (Motor AI Recognition Solution)</strong>. While MARS was
+        founded earlier as a tech company, the AI-focused MARSAIL was later
+        established and shaped by
+        <strong>Dr. Teerapong Panboonyuen (Dr. Kao)</strong>, who leads the AI
+        Research & Development division.
+      </p>
+      <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
-        <p style="font-size: 1.02rem; line-height: 1.65">
-          After completing his Ph.D. at Chulalongkorn University, Dr. Kao joined
-          MARS in <strong>January 2022</strong> to spearhead the next era of AI
-          innovation. Upon reviewing the existing “first-generation AI system”
-          from 2021, he made a decisive move —
-          <strong
-            >he removed the entire legacy system and rebuilt everything from the
-            ground up.</strong
-          >
-        </p>
-        <hr
-          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
-        />
+      <p style="font-size: 1.02rem; line-height: 1.65">
+        After completing his Ph.D. at Chulalongkorn University, Dr. Kao joined
+        MARS in <strong>January 2022</strong> to spearhead the next era of AI
+        innovation. Upon reviewing the existing “first-generation AI system”
+        from 2021, he made a decisive move —
+        <strong>he removed the entire legacy system and rebuilt everything from the
+          ground up.</strong>
+      </p>
+      <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
-        <p style="font-size: 1.02rem; line-height: 1.65">
-          This total reboot resulted in the new
-          <strong>MARS model</strong> (Mask Attention Refinement with Sequential
-          Quadtree Nodes), inspired partly by the company name. It became
-          MARSAIL’s <strong>first official research publication</strong> and was
-          presented on the international stage at
-          <strong>ICIAP 2023 in Udine, Italy</strong>.
-        </p>
-        <hr
-          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
-        />
+      <p style="font-size: 1.02rem; line-height: 1.65">
+        This total reboot resulted in the new
+        <strong>MARS model</strong> (Mask Attention Refinement with Sequential
+        Quadtree Nodes), inspired partly by the company name. It became
+        MARSAIL’s <strong>first official research publication</strong> and was
+        presented on the international stage at
+        <strong>ICIAP 2023 in Udine, Italy</strong>.
+      </p>
+      <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
-        <p style="font-size: 1.02rem; line-height: 1.65">
-          From 2022–2026, under Dr. Kao’s leadership, MARSAIL evolved into a
-          next-generation AI research lab, producing advanced models including
-          the flagship transformer <strong>ALBERT</strong>. Today, MARSAIL
-          powers innovation across
-          <strong
-            >car insurance, damage analytics, intelligent document
-            understanding,</strong
-          >
-          and <strong>AI assistance for vehicle damage assessment</strong>.
-        </p>
-      </div>
+      <p style="font-size: 1.02rem; line-height: 1.65">
+        From 2022–2026, under Dr. Kao’s leadership, MARSAIL evolved into a
+        next-generation AI research lab, producing advanced models including
+        the flagship transformer <strong>ALBERT</strong>. Today, MARSAIL
+        powers innovation across
+        <strong>car insurance, damage analytics, intelligent document
+          understanding,</strong>
+        and <strong>AI assistance for vehicle damage assessment</strong>.
+      </p>
+    </div>
 
-      <!-- Thai Version -->
-      <div
-        style="
+    <!-- Thai Version -->
+    <div style="
           padding: 1.4rem;
           border-left: 6px solid #e63946;
           background: #ffffff;
           border-radius: 12px;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        "
-      >
-        <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
-          🇹🇭 เกร็ดน่ารู้ — เวอร์ชันภาษาไทย
-        </h3>
+        ">
+      <h3 style="font-size: 1.35rem; margin-bottom: 1rem">
+        🇹🇭 เกร็ดน่ารู้ — เวอร์ชันภาษาไทย
+      </h3>
 
-        <p style="font-size: 1.02rem; line-height: 1.75">
-          MARSAIL คือห้องปฏิบัติการปัญญาประดิษฐ์ของบริษัท
-          <strong
-            >MARS – Motor AI Recognition Solution (บริษัท มอเตอร์ เอไอ
-            เรคอกนิชั่น โซลูชั่น จำกัด)</strong
-          >
-          โดยบริษัท MARS มีการก่อตั้งมาก่อน แต่ห้องแลป
-          <strong>MARSAIL</strong> ถูกสร้างและพัฒนาโดย
-          <strong>ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)</strong> ในฐานะ Head of AI
-          Research เพื่อผลักดันการวิจัย AI ให้เติบโตระดับองค์กร
-        </p>
-        <hr
-          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
-        />
+      <p style="font-size: 1.02rem; line-height: 1.75">
+        MARSAIL คือห้องปฏิบัติการปัญญาประดิษฐ์ของบริษัท
+        <strong>MARS – Motor AI Recognition Solution (บริษัท มอเตอร์ เอไอ
+          เรคอกนิชั่น โซลูชั่น จำกัด)</strong>
+        โดยบริษัท MARS มีการก่อตั้งมาก่อน แต่ห้องแลป
+        <strong>MARSAIL</strong> ถูกสร้างและพัฒนาโดย
+        <strong>ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)</strong> ในฐานะ Head of AI
+        Research เพื่อผลักดันการวิจัย AI ให้เติบโตระดับองค์กร
+      </p>
+      <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
-        <p style="font-size: 1.02rem; line-height: 1.75">
-          หลังจบปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย ดร.เก้าเริ่มเข้ามาทำงานที่
-          MARS ในช่วง <strong>มกราคม 2022</strong> เพื่อสานต่องานพัฒนา AI
-          จากทีมรุ่นแรกในปี 2021 แต่แทนที่จะปรับแต่งแบบเดิม
-          เขากลับตัดสินใจครั้งใหญ่ —
-          <strong>ลบระบบ AI เดิมทั้งหมด และสร้างระบบใหม่ตั้งแต่ศูนย์</strong>
-          เพื่อให้ทันสมัย แข็งแรง และรองรับงานระดับอุตสาหกรรม
-        </p>
-        <hr
-          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
-        />
+      <p style="font-size: 1.02rem; line-height: 1.75">
+        หลังจบปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย ดร.เก้าเริ่มเข้ามาทำงานที่
+        MARS ในช่วง <strong>มกราคม 2022</strong> เพื่อสานต่องานพัฒนา AI
+        จากทีมรุ่นแรกในปี 2021 แต่แทนที่จะปรับแต่งแบบเดิม
+        เขากลับตัดสินใจครั้งใหญ่ —
+        <strong>ลบระบบ AI เดิมทั้งหมด และสร้างระบบใหม่ตั้งแต่ศูนย์</strong>
+        เพื่อให้ทันสมัย แข็งแรง และรองรับงานระดับอุตสาหกรรม
+      </p>
+      <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
-        <p style="font-size: 1.02rem; line-height: 1.75">
-          โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ <strong>MARS</strong> (Mask
-          Attention Refinement with Sequential Quadtree Nodes)
-          ซึ่งสอดคล้องกับชื่อบริษัท และได้เป็นงานวิจัยลำดับแรกของห้องแลป MARSAIL
-          ที่ถูกนำเสนอในเวทีนานาชาติ <strong>ICIAP 2023 ณ ประเทศอิตาลี</strong>
-        </p>
-        <hr
-          style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0"
-        />
+      <p style="font-size: 1.02rem; line-height: 1.75">
+        โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ <strong>MARS</strong> (Mask
+        Attention Refinement with Sequential Quadtree Nodes)
+        ซึ่งสอดคล้องกับชื่อบริษัท และได้เป็นงานวิจัยลำดับแรกของห้องแลป MARSAIL
+        ที่ถูกนำเสนอในเวทีนานาชาติ <strong>ICIAP 2023 ณ ประเทศอิตาลี</strong>
+      </p>
+      <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 1rem 0" />
 
-        <p style="font-size: 1.02rem; line-height: 1.75">
-          ตั้งแต่ปี 2022–2026 ดร.เก้า ได้พัฒนา MARSAIL ให้เติบโตเป็นห้องวิจัย AI
-          ระดับแนวหน้า สร้างโมเดลเด่น เช่น
-          <strong>ALBERT</strong> ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์
-          การประเมินรอยความเสียหาย การทำความเข้าใจเอกสารอัจฉริยะ และ
-          <strong
-            >AI assistance สำหรับงานประเมินราคาความเสียหายของรถยนต์</strong
-          >
-          <strong>ผลักดันอุตสาหกรรมยานยนต์ไทยให้ล้ำหน้าด้วยพลังของ AI</strong>
-        </p>
-      </div>
-    </section>
+      <p style="font-size: 1.02rem; line-height: 1.75">
+        ตั้งแต่ปี 2022–2026 ดร.เก้า ได้พัฒนา MARSAIL ให้เติบโตเป็นห้องวิจัย AI
+        ระดับแนวหน้า สร้างโมเดลเด่น เช่น
+        <strong>ALBERT</strong> ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์
+        การประเมินรอยความเสียหาย การทำความเข้าใจเอกสารอัจฉริยะ และ
+        <strong>AI assistance สำหรับงานประเมินราคาความเสียหายของรถยนต์</strong>
+        <strong>ผลักดันอุตสาหกรรมยานยนต์ไทยให้ล้ำหน้าด้วยพลังของ AI</strong>
+      </p>
+    </div>
+  </section>
 
-    <!-- MARSAIL Floating Chatbot -->
-    <div
-      id="marsailChat"
-      style="
+  <!-- MARSAIL Floating Chatbot -->
+  <div id="marsailChat" style="
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -1081,79 +926,74 @@ pip install -r requirements.txt
         cursor: pointer;
         font-family: 'Poppins', sans-serif;
         transition: all 0.5s ease;
-      "
-    >
-      <div
-        style="
+      ">
+    <div style="
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 10px;
-        "
-      >
-        <strong style="font-size: 1rem">🤖 MARSAIL AI</strong>
-        <button
-          id="marsailClose"
-          style="
+        ">
+      <strong style="font-size: 1rem">🤖 MARSAIL AI</strong>
+      <button id="marsailClose" style="
             background: none;
             border: none;
             font-size: 16px;
             color: #f1faee;
             cursor: pointer;
-          "
-        >
-          ✕
-        </button>
-      </div>
-      <div id="marsailMsg" style="font-size: 0.95rem; line-height: 1.4">
-        Welcome to MARSAIL AI! Scroll and I’ll tell you more.
-      </div>
+          ">
+        ✕
+      </button>
     </div>
+    <div id="marsailMsg" style="font-size: 0.95rem; line-height: 1.4">
+      Welcome to MARSAIL AI! Scroll and I’ll tell you more.
+    </div>
+  </div>
 
-    <script>
-      const chat = document.getElementById("marsailChat");
-      const closeBtn = document.getElementById("marsailClose");
-      const msgDiv = document.getElementById("marsailMsg");
+  <script>
+    const chat = document.getElementById("marsailChat");
+    const closeBtn = document.getElementById("marsailClose");
+    const msgDiv = document.getElementById("marsailMsg");
 
-      // Messages loop
-      const messages = [
-        "We build AI that understands the entire automotive insurance ecosystem.",
-        "MARSAIL's MARS model leads in car damage segmentation accuracy.",
-        "SLICK student model optimizes real-world insurance workflows.",
-        "Explore ALBERT transformer for precise vehicle damage evaluation.",
-        "DOTA combines OCR + RAG for robust automotive document understanding.",
-      ];
-      let msgIndex = 0;
+    // Messages loop
+    const messages = [
+      "We build AI that understands the entire automotive insurance ecosystem.",
+      "MARSAIL's MARS model leads in car damage segmentation accuracy.",
+      "SLICK student model optimizes real-world insurance workflows.",
+      "Explore ALBERT transformer for precise vehicle damage evaluation.",
+      "DOTA combines OCR + RAG for robust automotive document understanding.",
+    ];
+    let msgIndex = 0;
 
-      function showNextMessage() {
-        msgDiv.innerText = messages[msgIndex];
-        msgIndex = (msgIndex + 1) % messages.length;
+    function showNextMessage() {
+      msgDiv.innerText = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+    }
+
+    // Rotate messages every 4 seconds
+    setInterval(showNextMessage, 4000);
+
+    // Close button
+    closeBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevent scroll-top
+      chat.style.display = "none";
+    });
+
+    // Click chatbot → scroll to top smoothly
+    chat.addEventListener("click", (e) => {
+      if (e.target !== closeBtn) {
+        // avoid triggering when clicking close
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
+    });
+  </script>
 
-      // Rotate messages every 4 seconds
-      setInterval(showNextMessage, 4000);
+  <!-- Footer -->
+  <footer>
+    <p>
+      © 2026 MARSAIL · Built with 🤍 by
+      <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a>
+    </p>
+  </footer>
+</body>
 
-      // Close button
-      closeBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // prevent scroll-top
-        chat.style.display = "none";
-      });
-
-      // Click chatbot → scroll to top smoothly
-      chat.addEventListener("click", (e) => {
-        if (e.target !== closeBtn) {
-          // avoid triggering when clicking close
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      });
-    </script>
-
-    <!-- Footer -->
-    <footer>
-      <p>
-        © 2026 MARSAIL · Built with 🤍 by
-        <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a>
-      </p>
-    </footer>
-  </body>
 </html>
