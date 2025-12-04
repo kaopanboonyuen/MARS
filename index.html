@@ -184,6 +184,75 @@
 </head>
 
 <body>
+
+  <!-- Floating MARSAIL Top Tab -->
+<div id="marsTab">
+  MARSAIL
+</div>
+
+<style>
+  /* Floating Tab Style */
+  #marsTab {
+    position: fixed;
+    top: 18px; /* ⭐ เพิ่มระยะห่างขอบบน (ปรับได้) */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    padding: 12px 26px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(14px);
+    border-radius: 50px;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+    cursor: pointer;
+
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+    transition: all 0.35s ease;
+  }
+
+  /* Hover glow */
+  #marsTab:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #e63946;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Shrink on scroll */
+  .shrink {
+    padding: 6px 18px !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 3px !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+
+    top: 10px !important; /* ⭐ เลื่อนให้ใกล้ขึ้นตอนหด ดู smooth มาก */
+  }
+</style>
+
+<script>
+  const tab = document.getElementById("marsTab");
+
+  /* Click → go root + scroll top */
+  tab.addEventListener("click", () => {
+    window.location.href = "/";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* Shrink when scroll */
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      tab.classList.add("shrink");
+    } else {
+      tab.classList.remove("shrink");
+    }
+  });
+</script>
+
   <!-- Hero / MARSAIL Lab -->
   <header style="
     background: radial-gradient(
