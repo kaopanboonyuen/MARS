@@ -176,6 +176,28 @@
         animation: scrollFade 2.5s ease-in-out infinite;
       }
 
+      .hero-subtitle {
+        display: block;
+        font-size: clamp(1.3rem, 2.6vw, 2.1rem);
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        margin-top: 18px;
+        color: #333;
+      }
+
+      /* Prevent ugly line breaks like "AI" / "Lab" */
+      .hero-nowrap {
+        white-space: nowrap;
+      }
+
+      /* Mobile fine-tuning */
+      @media (max-width: 480px) {
+        .hero-subtitle {
+          font-size: 1.15rem;
+          line-height: 1.35;
+        }
+      }
+
       @keyframes scrollFade {
         0%,
         100% {
@@ -488,7 +510,10 @@
 
       <h1>
         MARSAIL
-        <span>Motor AI Recognition Solution AI Lab</span>
+        <span class="hero-subtitle">
+          <span>Motor AI Recognition Solution</span>
+          <span class="hero-nowrap">AI Lab</span>
+        </span>
       </h1>
 
       <p class="hero-mission">
