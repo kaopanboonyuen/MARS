@@ -708,175 +708,177 @@
 
   <!-- Research -->
   <section style="
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        padding: 2rem;
-      ">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem">
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2.5rem;
+">
+    <h2 style="font-size: 2.1rem; margin-bottom: 1rem">
       🧠 MARSAIL Research Highlights (2023–2026)
     </h2>
-    <p style="font-size: 1.15rem; line-height: 1.65">
-      At the heart of MARSAIL lies a commitment to pushing the boundaries of
-      AI in automotive technology. All research initiatives are spearheaded by
-      <strong>Dr. Kao (Teerapong Panboonyuen)</strong>, whose leadership
-      drives our mission to advance computer vision, document intelligence,
-      and damage-centric transformer architectures. Below are our flagship
-      contributions that have shaped the future of automotive AI.
+
+    <p style="font-size: 1.18rem; line-height: 1.75; max-width: 980px;">
+      MARSAIL drives the next generation of automotive AI and intelligent mobility
+      through foundational transformer research led by
+      <strong>Dr. Kao (Teerapong Panboonyuen)</strong>.
+      Our work unifies <em>damage-centric computer vision</em>,
+      <em>knowledge distillation at scale</em>, and
+      <em>document intelligence</em> into deployable systems—seamlessly translating
+      cutting-edge research into <strong>production-ready impact</strong> for
+      real-world automotive and insurance applications.
     </p>
 
+
+    <!-- Paper Card Template -->
     <!-- Paper 1: ALBERT -->
     <div style="
-          border: 1px solid #ccc;
-          border-left: 6px solid #007acc;
-          padding: 1.2rem;
-          margin-top: 1.7rem;
-          border-radius: 10px;
-          background-color: #fafcff;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        ">
-      <h3 style="margin-top: 0; font-size: 1.35rem">
-        🚗 <strong>ALBERT</strong> — Advanced Transformers for Comprehensive
-        Automotive Damage Evaluation
-        <span style="font-size: 0.85em; color: #555">(Teacher Model)</span>
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 14px;
+  border-left: 6px solid #0d6efd;
+  background: linear-gradient(180deg, #fbfdff, #f3f7ff);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+">
+      <h3 style="margin: 0 0 0.6rem; font-size: 1.4rem;">
+        🚗 <strong>ALBERT</strong> — Advanced Transformers for Automotive Damage Evaluation
+        <span style="font-size: 0.85em; color: #555;">(Teacher Model)</span>
       </h3>
-      <p style="line-height: 1.6">
-        ALBERT introduces a next-generation transformer backbone designed for
-        holistic vehicle damage understanding. It delivers powerful contextual
-        embeddings, multi-level localization cues, and robust attention
-        representations that guide downstream segmentation and assessment
-        models. Its architecture establishes ALBERT as a foundational
-        <b>“teacher model”</b> for automotive AI systems.
-        <a href="http://arxiv.org/abs/2506.10524" target="_blank" rel="noopener">[arXiv]</a>
+
+      <p style="line-height: 1.65; margin-bottom: 1.1rem;">
+        ALBERT is a large-scale transformer backbone for holistic vehicle damage understanding.
+        It delivers rich contextual embeddings, multi-level localization, and robust attention
+        signals—serving as a <strong>foundational teacher model</strong> for downstream
+        automotive AI systems.
       </p>
-      <pre style="
-            background-color: #eee;
-            padding: 1rem;
-            overflow-x: auto;
-            font-size: 0.9rem;
-          ">
-@article{panboonyuen2025albert,
-  title={ALBERT: Advanced Localization and Bidirectional Encoder Representations from Transformers for Automotive Damage Evaluation},
-  author={Panboonyuen, Teerapong},
-  journal={arXiv preprint arXiv:2506.10524},
-  year={2025}
-}</pre>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="http://arxiv.org/abs/2506.10524" target="_blank" rel="noopener" class="button"
+          style="background:#0d6efd;">
+          📄 Abstract (arXiv)
+        </a>
+        <a href="http://arxiv.org/pdf/2506.10524" target="_blank" rel="noopener" class="button"
+          style="background:#f4b6b6; color:#4a1c1c;">
+          ⬇️ PDF
+        </a>
+      </div>
     </div>
 
     <!-- Paper 2: SLICK -->
     <div style="
-          border: 1px solid #ccc;
-          border-left: 6px solid #28a745;
-          padding: 1.2rem;
-          margin-top: 1.7rem;
-          border-radius: 10px;
-          background-color: #fafcf8;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        ">
-      <h3 style="margin-top: 0; font-size: 1.35rem">
-        🧩 <strong>SLICK</strong> — Knowledge-Enhanced Vehicle Damage
-        Segmentation
-        <span style="font-size: 0.85em; color: #555">(Student Model)</span>
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 14px;
+  border-left: 6px solid #198754;
+  background: linear-gradient(180deg, #fbfff9, #f1f8f4);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+">
+      <h3 style="margin: 0 0 0.6rem; font-size: 1.4rem;">
+        🧩 <strong>SLICK</strong> — Knowledge-Enhanced Vehicle Damage Segmentation
+        <span style="font-size: 0.85em; color: #555;">(Student Model)</span>
       </h3>
-      <p style="line-height: 1.6">
-        Built upon ALBERT’s distilled knowledge, SLICK specializes in
-        fine-grained, automotive-specific segmentation. It employs selective
-        localization, hierarchical calibration, and optimized inference
-        pathways to deliver
-        <b>real-time segmentation accuracy suited for insurance workflows and
-          repair automation.</b>
-        <a href="http://arxiv.org/abs/2506.10528" target="_blank" rel="noopener">[arXiv]</a>
+
+      <p style="line-height: 1.65; margin-bottom: 1.1rem;">
+        SLICK distills ALBERT’s knowledge into a lightweight, production-ready model.
+        It delivers <strong>real-time, fine-grained damage segmentation</strong> optimized
+        for insurance workflows and automated repair pipelines.
       </p>
-      <pre style="
-            background-color: #eee;
-            padding: 1rem;
-            overflow-x: auto;
-            font-size: 0.9rem;
-          ">
-@article{panboonyuen2025slick,
-  title={SLICK: Selective Localization and Instance Calibration for Knowledge-Enhanced Car Damage Segmentation in Automotive Insurance},
-  author={Panboonyuen, Teerapong},
-  journal={arXiv preprint arXiv:2506.10528},
-  year={2025}
-}</pre>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="http://arxiv.org/abs/2506.10528" target="_blank" rel="noopener" class="button"
+          style="background:#198754;">
+          📄 Abstract (arXiv)
+        </a>
+        <a href="http://arxiv.org/pdf/2506.10528" target="_blank" rel="noopener" class="button"
+          style="background:#f4b6b6; color:#4a1c1c;">
+          ⬇️ PDF
+        </a>
+      </div>
     </div>
 
     <!-- Paper 3: DOTA -->
     <div style="
-          border: 1px solid #ccc;
-          border-left: 6px solid #ff5733;
-          padding: 1.2rem;
-          margin-top: 1.7rem;
-          border-radius: 10px;
-          background-color: #fff8f4;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        ">
-      <h3 style="margin-top: 0; font-size: 1.35rem">
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 14px;
+  border-left: 6px solid #fd7e14;
+  background: linear-gradient(180deg, #fffaf5, #fff2e8);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+">
+      <h3 style="margin: 0 0 0.6rem; font-size: 1.4rem;">
         🔍 <strong>DOTA</strong> — RAG-Enhanced OCR for Automotive Services
       </h3>
-      <p style="line-height: 1.6">
-        DOTA combines deformable transformer attention with
-        retrieval-augmented generation to achieve
-        <b>human-level robustness in real-world document digitization</b>.
-        Designed specifically for automotive workflows, it excels in
-        extracting structured information from invoices, claims, inspection
-        sheets, and handwritten service notes.
-        <a href="https://arxiv.org/abs/2505.04175" target="_blank" rel="noopener">[arXiv]</a>
+
+      <p style="line-height: 1.65; margin-bottom: 1.1rem;">
+        DOTA integrates deformable attention with retrieval-augmented generation to achieve
+        <strong>human-level robustness</strong> in real-world automotive documents, including
+        claims, invoices, and inspection reports.
       </p>
-      <pre style="
-            background-color: #eee;
-            padding: 1rem;
-            overflow-x: auto;
-            font-size: 0.9rem;
-          ">
-@inproceedings{marsail2025dota,
-  title={DOTA: Deformable Optimized Transformer Architecture for End-to-End Text Recognition with Retrieval-Augmented Generation},
-  author={Panboonyuen, Teerapong as co-author and lead researcher},
-  booktitle={2025 17th International Conference on Knowledge and Smart Technology (KST)},
-  pages={301--306},
-  year={2025},
-  organization={IEEE}
-}</pre>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="https://arxiv.org/abs/2505.04175" target="_blank" rel="noopener" class="button"
+          style="background:#fd7e14;">
+          📄 Abstract (arXiv)
+        </a>
+        <a href="https://arxiv.org/pdf/2505.04175" target="_blank" rel="noopener" class="button"
+          style="background:#f4b6b6; color:#4a1c1c;">
+          ⬇️ PDF
+        </a>
+      </div>
     </div>
 
-    <!-- Paper 4: MARS -->
+
+    <!-- Paper 4: MARS (updated with arXiv + pastel red PDF) -->
     <div style="
-          border: 1px solid #ccc;
-          border-left: 6px solid #6f42c1;
-          padding: 1.2rem;
-          margin-top: 1.7rem;
-          border-radius: 10px;
-          background-color: #f9f6ff;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-        ">
-      <h3 style="margin-top: 0; font-size: 1.35rem">
-        🌌 <strong>MARS</strong> — Foundational Mask Attention Refinement
-        Model
+  margin-top: 2rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 14px;
+  border-left: 6px solid #6f42c1;
+  background: linear-gradient(180deg, #fbf9ff, #f1ecff);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+">
+      <h3 style="margin: 0 0 0.6rem; font-size: 1.4rem;">
+        🌌 <strong>MARS</strong> — Mask Attention Refinement with Sequential Quadtree Nodes
       </h3>
-      <p style="line-height: 1.6">
-        MARS introduced the groundbreaking
-        <b>Sequential Quadtree Attention</b>
-        mechanism, enabling more accurate mask refinement for instance-level
-        damage detection. This work laid the foundation for MARSAIL’s broader
-        research direction, demonstrating significant performance gains over
-        Mask R-CNN, PointRend, and Mask Transfiner.
-        <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank"
-          rel="noopener">[Springer]</a>
+
+      <p style="line-height: 1.65; margin-bottom: 1.1rem;">
+        MARS introduced the <strong>Sequential Quadtree Attention</strong> mechanism,
+        enabling precise instance-level damage mask refinement. This work demonstrated
+        clear performance gains over Mask R-CNN, PointRend, and Mask Transfiner, and
+        established the early research foundation of <strong>MARSAIL</strong>.
       </p>
-      <pre style="
-            background-color: #eee;
-            padding: 1rem;
-            overflow-x: auto;
-            font-size: 0.9rem;
-          ">
-@inproceedings{panboonyuen2023mars,
-  title={Mars: Mask attention refinement with sequential quadtree nodes for car damage instance segmentation},
-  author={Panboonyuen, Teerapong},
-  booktitle={International Conference on Image Analysis and Processing},
-  pages={28--38},
-  year={2023},
-  organization={Springer}
-}</pre>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <!-- arXiv -->
+        <a href="https://arxiv.org/abs/2305.04743" target="_blank" rel="noopener" class="button"
+          style="background:#6f42c1;">
+          📄 Abstract (arXiv)
+        </a>
+
+        <!-- arXiv PDF (pastel red) -->
+        <a href="https://arxiv.org/pdf/2305.04743" target="_blank" rel="noopener" class="button" style="
+         background:#f4b6b6;
+         color:#4a1c1c;
+       ">
+          ⬇️ PDF (arXiv)
+        </a>
+
+        <!-- Springer -->
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener"
+          class="button" style="background:#5a3ea6;">
+          📘 Springer
+        </a>
+
+        <!-- Springer PDF (pastel red) -->
+        <a href="https://link.springer.com/content/pdf/10.1007/978-3-031-51023-6_3.pdf" target="_blank" rel="noopener"
+          class="button" style="
+         background:#f2a7a7;
+         color:#4a1c1c;
+       ">
+          ⬇️ PDF (Springer)
+        </a>
+      </div>
     </div>
+
   </section>
+
 
   <!-- Quick Start -->
   <section>
@@ -916,24 +918,67 @@ pip install -r requirements.txt
   <!-- Citation -->
   <section style="margin-top: 40px">
     <h2>✍️ Citation</h2>
+
+    <!-- Citation 1: MARS (ICIAP – Udine, Italy) -->
     <pre style="
-          background: #f4f7fa;
-          color: #333;
-          padding: 20px;
-          border-left: 5px solid #e63946;
-          border-radius: 8px;
-          overflow-x: auto;
-          font-size: 1rem;
-          line-height: 1.5;
-        ">
+        background: #f4f7fa;
+        color: #333;
+        padding: 20px;
+        border-left: 5px solid #6f42c1;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      ">
 @inproceedings{panboonyuen2023mars,
-  title={MARS: Mask Attention Refinement with Sequential Quadtree Nodes},
-  author={Panboonyuen, Teerapong},
-  booktitle={ICIAP},
-  year={2023},
-  publisher={Springer}
+  title     = {MARS: Mask Attention Refinement with Sequential Quadtree Nodes},
+  author    = {Panboonyuen, Teerapong},
+  booktitle = {International Conference on Image Analysis and Processing (ICIAP)},
+  address   = {Università degli Studi di Udine, Udine, Italy},
+  year      = {2023},
+  publisher = {Springer Nature Switzerlands}
 }
-    </pre>
+  </pre>
+
+    <!-- Citation 2: ALBERT -->
+    <pre style="
+        background: #f4f7fa;
+        color: #333;
+        padding: 20px;
+        border-left: 5px solid #0d6efd;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      ">
+@article{panboonyuen2025albert,
+  title   = {ALBERT: Advanced Localization and Bidirectional Encoder Representations from Transformers for Automotive Damage Evaluation},
+  author  = {Panboonyuen, Teerapong},
+  journal = {arXiv preprint arXiv:2506.10524},
+  year    = {2025}
+}
+  </pre>
+
+    <!-- Citation 3: SLICK -->
+    <pre style="
+        background: #f4f7fa;
+        color: #333;
+        padding: 20px;
+        border-left: 5px solid #198754;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-size: 1rem;
+        line-height: 1.5;
+      ">
+@article{panboonyuen2025slick,
+  title   = {SLICK: Selective Localization and Instance Calibration for Knowledge-Enhanced Car Damage Segmentation in Automotive Insurance},
+  author  = {Panboonyuen, Teerapong},
+  journal = {arXiv preprint arXiv:2506.10528},
+  year    = {2025}
+}
+  </pre>
   </section>
 
   <!-- <section style="text-align:center;">
