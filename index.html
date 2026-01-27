@@ -898,27 +898,27 @@
       </p>
     </section>
 
-    <!-- Press & Media Coverage (Logo-First XL Edition) -->
+    <!-- Press & Media Coverage (Responsive Edition) -->
     <section
       style="
         font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
-        padding: 3.6rem 2.5rem;
+        padding: 3.6rem 1.6rem;
         background: #ffffff;
         color: #0f172a;
         margin-top: 3.8rem;
       "
     >
-      <h2 style="font-size: 2.3rem; margin-bottom: 0.9rem">
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.9rem">
         📰 Press & Media Coverage
       </h2>
 
       <p
         style="
-          font-size: 1.15rem;
+          font-size: 1.1rem;
           line-height: 1.7;
           max-width: 900px;
           color: #334155;
-          margin-bottom: 3rem;
+          margin-bottom: 2.6rem;
         "
       >
         Our work has been featured by leading technology, finance, and business
@@ -927,29 +927,13 @@
       </p>
 
       <!-- Logo Grid -->
-      <div
-        style="
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 3.2rem;
-          align-items: center;
-          justify-items: center;
-          background: #fafafa;
-          border: 1px solid #e5e7eb;
-          border-radius: 24px;
-          padding: 3.4rem 2.8rem;
-        "
-      >
+      <div class="press-grid">
         <a
           href="https://today.line.me/th/v2/article/RBJPMlY"
           target="_blank"
           rel="noopener"
         >
-          <img
-            src="img/line_today_logo.jpeg"
-            alt="LINE TODAY"
-            style="max-height: 99px; opacity: 0.97"
-          />
+          <img src="img/line_today_logo.jpeg" alt="LINE TODAY" />
         </a>
 
         <a
@@ -957,11 +941,7 @@
           target="_blank"
           rel="noopener"
         >
-          <img
-            src="img/money_chat_logo.jpg"
-            alt="Money Chat"
-            style="max-height: 92px; opacity: 0.97"
-          />
+          <img src="img/money_chat_logo.jpg" alt="Money Chat" />
         </a>
 
         <a
@@ -969,11 +949,7 @@
           target="_blank"
           rel="noopener"
         >
-          <img
-            src="img/kaohoon_logo_2023.png"
-            alt="Kaohoon"
-            style="max-height: 94px; opacity: 0.97"
-          />
+          <img src="img/kaohoon_logo_2023.png" alt="Kaohoon" />
         </a>
 
         <a
@@ -981,11 +957,7 @@
           target="_blank"
           rel="noopener"
         >
-          <img
-            src="img/logo-mitihoon-01.png"
-            alt="Mitihoon"
-            style="max-height: 94px; opacity: 0.97"
-          />
+          <img src="img/logo-mitihoon-01.png" alt="Mitihoon" />
         </a>
 
         <a
@@ -993,11 +965,7 @@
           target="_blank"
           rel="noopener"
         >
-          <img
-            src="img/techsauce_logo.png"
-            alt="Techsauce"
-            style="max-height: 97px; opacity: 0.97"
-          />
+          <img src="img/techsauce_logo.png" alt="Techsauce" />
         </a>
 
         <a
@@ -1005,17 +973,13 @@
           target="_blank"
           rel="noopener"
         >
-          <img
-            src="img/wealthplustoday_logo.jpg"
-            alt="Wealth Plus Today"
-            style="max-height: 94px; opacity: 0.97"
-          />
+          <img src="img/wealthplustoday_logo.jpg" alt="Wealth Plus Today" />
         </a>
       </div>
 
       <p
         style="
-          margin-top: 2.4rem;
+          margin-top: 2.2rem;
           font-size: 0.95rem;
           color: #64748b;
           max-width: 860px;
@@ -1025,6 +989,57 @@
         research quality, technical rigor, and industry relevance.
       </p>
     </section>
+
+    <style>
+      .press-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.8rem;
+        align-items: center;
+        justify-items: center;
+        background: #fafafa;
+        border: 1px solid #e5e7eb;
+        border-radius: 22px;
+        padding: 3rem 2.2rem;
+      }
+
+      .press-grid img {
+        max-width: 100%;
+        max-height: 90px;
+        height: auto;
+        opacity: 0.96;
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
+      }
+
+      .press-grid a:hover img {
+        transform: scale(1.06);
+        opacity: 1;
+      }
+
+      /* Tablet */
+      @media (max-width: 900px) {
+        .press-grid {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 2.4rem 1.8rem;
+          gap: 2.2rem;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 520px) {
+        .press-grid {
+          grid-template-columns: 1fr;
+          padding: 2rem 1.4rem;
+          gap: 1.8rem;
+        }
+
+        .press-grid img {
+          max-height: 72px;
+        }
+      }
+    </style>
 
     <!-- Invited Talks & Academic Outreach -->
     <section
@@ -2231,11 +2246,56 @@ pip install -r requirements.txt
     </script>
 
     <!-- Footer -->
-    <footer>
+    <footer class="site-footer">
       <p>
-        © 2026 MARSAIL · Built with 🤍 by
-        <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a>
+        <span class="footer-brand">© 2026 MARSAIL</span>
+        <span class="footer-built">
+          Built with 🤍 by
+          <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a>
+        </span>
       </p>
     </footer>
+
+    <style>
+      .site-footer {
+        background: #000000;
+        padding: 2.6rem 1.4rem;
+        text-align: center;
+        font-size: 0.92rem;
+      }
+
+      .site-footer p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.75);
+        letter-spacing: 0.03em;
+        font-weight: 300;
+      }
+
+      .footer-brand {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .footer-built {
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      .site-footer a {
+        color: rgba(255, 255, 255, 0.95);
+        text-decoration: none;
+        font-weight: 400;
+      }
+
+      .site-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Mobile: move "Built with" to new line */
+      @media (max-width: 520px) {
+        .footer-built {
+          display: block;
+          margin-top: 0.4rem;
+        }
+      }
+    </style>
   </body>
 </html>
