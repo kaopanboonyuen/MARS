@@ -853,6 +853,7 @@
       </div>
     </section>
 
+
     <!-- Press & Media Coverage (Minimal White Edition) -->
     <section
       style="
@@ -990,6 +991,452 @@
         and industrial standards.
       </p>
     </section>
+
+<!-- Responsive MARSAIL Conference Highlight -->
+<section class="marsail-autotech-section">
+  <style>
+    .marsail-autotech-section {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      padding: 3.5rem 2rem;
+      background: #ffffff;
+    }
+
+    .marsail-container {
+      max-width: 1180px;
+      margin: auto;
+    }
+
+    .marsail-badge {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .marsail-title {
+      font-size: 2.5rem;
+      line-height: 1.15;
+      color: #0f172a;
+      margin-bottom: 1rem;
+      max-width: 900px;
+    }
+
+    .marsail-desc {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #475569;
+      max-width: 880px;
+      margin: 0;
+    }
+
+    .marsail-grid {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .marsail-card {
+      background: #fafafa;
+      border: 1px solid #e5e7eb;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.05);
+    }
+
+    .marsail-cover {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .marsail-content {
+      padding: 2rem;
+    }
+
+    .marsail-meta-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-bottom: 0.7rem;
+    }
+
+    .marsail-session-title {
+      font-size: 1.65rem;
+      line-height: 1.35;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .marsail-highlight {
+      color: #2563eb;
+    }
+
+    .marsail-text {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #475569;
+      margin-bottom: 1.6rem;
+    }
+
+    .marsail-meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .marsail-meta-box {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 0.9rem 1.1rem;
+      min-width: 180px;
+    }
+
+    .marsail-meta-small {
+      color: #94a3b8;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+
+    .marsail-meta-value {
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .marsail-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .marsail-speaker-card {
+      background: linear-gradient(145deg, #0f172a, #111827);
+      border-radius: 26px;
+      padding: 2rem;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marsail-speaker-glow {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(37, 99, 235, 0.18);
+      border-radius: 999px;
+      top: -60px;
+      right: -60px;
+    }
+
+    .marsail-speaker-img {
+      width: 180px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .marsail-speaker-name {
+      font-size: 1.3rem;
+      margin-bottom: 0.45rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .marsail-speaker-role {
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.7;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .marsail-topic-content {
+      padding: 1.6rem 1.8rem;
+    }
+
+    .marsail-topic-title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .marsail-topic-list {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #475569;
+      line-height: 1.9;
+      font-size: 0.98rem;
+    }
+
+    .marsail-footer {
+      max-width: 1100px;
+      margin: 2rem auto 0 auto;
+      text-align: center;
+    }
+
+    .marsail-footer p {
+      color: #64748b;
+      line-height: 1.8;
+      font-size: 0.95rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .marsail-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .marsail-btn-primary,
+    .marsail-btn-secondary {
+      padding: 0.9rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      transition: all 0.25s ease;
+    }
+
+    .marsail-btn-primary {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .marsail-btn-secondary {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #dbe3ee;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .marsail-btn-primary:hover,
+    .marsail-btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       MOBILE RESPONSIVE
+    ========================== */
+    @media (max-width: 900px) {
+      .marsail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .marsail-title {
+        font-size: 2rem;
+      }
+
+      .marsail-content {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .marsail-autotech-section {
+        padding: 2rem 1rem;
+      }
+
+      .marsail-title {
+        font-size: 1.7rem;
+        line-height: 1.25;
+      }
+
+      .marsail-desc {
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .marsail-session-title {
+        font-size: 1.35rem;
+      }
+
+      .marsail-text {
+        font-size: 0.96rem;
+      }
+
+      .marsail-speaker-img {
+        width: 150px;
+        height: 190px;
+      }
+
+      .marsail-content,
+      .marsail-topic-content,
+      .marsail-speaker-card {
+        padding: 1.4rem;
+      }
+
+      .marsail-meta-grid {
+        flex-direction: column;
+      }
+
+      .marsail-meta-box {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .marsail-links {
+        flex-direction: column;
+      }
+
+      .marsail-btn-primary,
+      .marsail-btn-secondary {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+
+  <!-- Header -->
+  <div class="marsail-container">
+    <div class="marsail-badge">
+      INVITED SPEAKER · AUTOTECH 2026
+    </div>
+
+    <h2 class="marsail-title">
+      AutoTech Aftermarket Summit 2026
+    </h2>
+
+    <p class="marsail-desc">
+      Dr. Teerapong Panboonyuen, Head of AI at
+      <strong>MARSAIL</strong>, was invited as a panel speaker to discuss
+      AI-driven transformation, intelligent automotive ecosystems, and future
+      mobility technologies at one of the region’s leading automotive innovation
+      summits.
+    </p>
+
+    <!-- Grid -->
+    <div class="marsail-grid">
+      <!-- Left -->
+      <div class="marsail-card">
+        <img
+          src="img/Autotech-Aftermarket-Summit-2026-01.png"
+          alt="AutoTech Aftermarket Summit 2026"
+          class="marsail-cover"
+        />
+
+        <div class="marsail-content">
+          <p class="marsail-meta-label">
+            PANEL SESSION · 15 MAY 2026 · 11:30 AM
+          </p>
+
+          <h3 class="marsail-session-title">
+            AutoTech in Transition:
+            <span class="marsail-highlight">
+              Current Trends & Future Trajectories
+            </span>
+          </h3>
+
+          <p class="marsail-text">
+            Exploring how innovation is reshaping the automotive aftermarket —
+            from AI-powered services and predictive systems to scalable
+            industrial intelligence and future-ready mobility ecosystems.
+          </p>
+
+          <div class="marsail-meta-grid">
+            <div class="marsail-meta-box">
+              <div class="marsail-meta-small">VENUE</div>
+              <div class="marsail-meta-value">BITEC Bangkok</div>
+            </div>
+
+            <div class="marsail-meta-box">
+              <div class="marsail-meta-small">ORGANIZER</div>
+              <div class="marsail-meta-value">Informa Markets</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="marsail-side">
+        <!-- Speaker -->
+        <div class="marsail-speaker-card">
+          <div class="marsail-speaker-glow"></div>
+
+          <img
+            src="img/Dr.-Teerapong-Panboonyuen-768x1024.png"
+            alt="Dr. Teerapong Panboonyuen"
+            class="marsail-speaker-img"
+          />
+
+          <h3 class="marsail-speaker-name">
+            Dr. Teerapong Panboonyuen
+          </h3>
+
+          <p class="marsail-speaker-role">
+            Senior Research Scientist <br />
+            Head of AI · MARSAIL
+          </p>
+        </div>
+
+        <!-- Topics -->
+        <div class="marsail-card">
+          <img
+            src="img/Autotech-Aftermarket-Summit-2026-02.png"
+            alt="Conference Topics"
+            class="marsail-cover"
+          />
+
+          <div class="marsail-topic-content">
+            <h3 class="marsail-topic-title">
+              Discussion Highlights
+            </h3>
+
+            <ul class="marsail-topic-list">
+              <li>AI-driven automotive transformation</li>
+              <li>Future-ready aftermarket ecosystems</li>
+              <li>Intelligent service technologies</li>
+              <li>Innovation across mobility platforms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="marsail-footer">
+      <p>
+        This invited participation reflects MARSAIL’s growing role in advancing
+        <strong>AI-powered automotive technologies</strong> and bridging
+        research innovation with real-world industrial deployment.
+      </p>
+
+      <div class="marsail-links">
+        <a
+          href="https://www.automrotive.com/conference-agenda-2026/"
+          target="_blank"
+          rel="noopener"
+          class="marsail-btn-primary"
+        >
+          View Official Agenda →
+        </a>
+
+        <a
+          href="https://www.automrotive.com/conference-speakers/"
+          target="_blank"
+          rel="noopener"
+          class="marsail-btn-secondary"
+        >
+          Explore Speaker Lineup
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- Press & Media Coverage (Responsive Edition) -->
     <section
