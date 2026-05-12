@@ -30,7 +30,7 @@
 
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -380,6 +380,560 @@
         to {
           opacity: 1;
           transform: scale(1);
+        }
+      }
+    </style>
+    <!-- ============================================================
+         MOBILE-FIRST RESPONSIVE OVERRIDES — iPhone / Android Polish
+         ============================================================ -->
+    <style>
+      /* ── Safe-area support for notched iPhones ── */
+      body {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
+
+      /* ── Prevent text from overflowing on narrow screens ── */
+      * {
+        -webkit-text-size-adjust: 100%;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+
+      /* ── Smoother scrolling site-wide ── */
+      html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* ══════════════════════════════════
+         HERO — iPhone-tuned
+      ══════════════════════════════════ */
+      @media (max-width: 480px) {
+        .hero-white {
+          min-height: 100svh;   /* use small viewport height on mobile */
+          padding: 90px 22px 70px;
+          text-align: center;
+        }
+
+        .hero-white h1 {
+          font-size: clamp(3rem, 14vw, 4.5rem);
+          letter-spacing: -0.03em;
+          line-height: 1.05;
+        }
+
+        .hero-white h2 {
+          font-size: 0.68rem;
+          letter-spacing: 0.3em;
+          margin-bottom: 14px;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem !important;
+          letter-spacing: 0.03em;
+          margin-top: 12px;
+          line-height: 1.4;
+        }
+
+        .hero-mission {
+          font-size: 0.95rem !important;
+          line-height: 1.65;
+          padding: 0 4px;
+          max-width: 100%;
+        }
+
+        .hero-scroll {
+          font-size: 0.65rem;
+          letter-spacing: 0.25em;
+          bottom: 20px;
+        }
+      }
+
+      /* ══════════════════════════════════
+         FLOATING TOP TAB
+      ══════════════════════════════════ */
+      @media (max-width: 480px) {
+        #marsTab {
+          top: 12px;
+          padding: 9px 18px;
+          font-size: 0.75rem;
+          letter-spacing: 3px;
+          max-width: 160px;
+        }
+
+        #marsTab.shrink {
+          top: 8px !important;
+          padding: 5px 14px !important;
+          font-size: 0.65rem !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         SECTIONS — mobile padding & spacing
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        section {
+          margin: 28px 12px;
+          padding: 20px 16px;
+          border-radius: 14px;
+        }
+
+        section h2 {
+          font-size: 1.25rem;
+          padding-left: 10px;
+          line-height: 1.35;
+        }
+
+        section p,
+        section li {
+          font-size: 0.92rem;
+          line-height: 1.65;
+        }
+
+        ul {
+          padding-left: 16px;
+        }
+      }
+
+      /* ══════════════════════════════════
+         IMAGE GRIDS
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        .img-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+      }
+
+      /* ══════════════════════════════════
+         BUTTONS — tap-friendly on iPhone
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        .button {
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding: 14px 18px;
+          font-size: 0.9rem;
+          border-radius: 14px;
+          margin-top: 10px;
+        }
+
+        /* Flex button groups → column */
+        div[style*="display: flex"][style*="gap: 12px"] {
+          flex-direction: column;
+        }
+      }
+
+      /* ══════════════════════════════════
+         PRESS & MEDIA — cards
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        /* "Press & Media Coverage" flex cards */
+        div[style*="flex: 1 1 320px"],
+        div[style*="flex: 1 1 420px"],
+        div[style*="flex: 1 1 460px"],
+        div[style*="flex: 1 1 450px"] {
+          flex: 1 1 100% !important;
+          min-width: 0 !important;
+        }
+
+        /* All inline flex rows that should stack */
+        div[style*="display: flex"][style*="flex-wrap: wrap"] {
+          flex-direction: column;
+        }
+      }
+
+      /* ══════════════════════════════════
+         MARSAIL TIMELINE BOX
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="max-width: 900px"][style*="border-radius: 18px"] {
+          padding: 20px 16px !important;
+          margin: 24px 0 !important;
+        }
+
+        div[style*="max-width: 900px"] h3 {
+          font-size: 1.2rem !important;
+        }
+
+        div[style*="max-width: 900px"] p {
+          font-size: 0.93rem !important;
+          line-height: 1.7 !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         PRESS / SECTION HEADINGS
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        h2[style*="font-size: 2"] {
+          font-size: 1.45rem !important;
+          line-height: 1.3;
+        }
+
+        h2[style*="font-size: 2.3rem"],
+        h2[style*="font-size: 2.5rem"] {
+          font-size: 1.45rem !important;
+        }
+
+        p[style*="font-size: 1.15rem"],
+        p[style*="font-size: 1.1rem"],
+        p[style*="font-size: 1.18rem"] {
+          font-size: 0.95rem !important;
+          line-height: 1.7 !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         CONFERENCE SECTION inner cards
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        .marsail-autotech-section {
+          padding: 1.6rem 1rem !important;
+        }
+
+        .marsail-title {
+          font-size: 1.45rem !important;
+          line-height: 1.25 !important;
+        }
+
+        .marsail-desc {
+          font-size: 0.93rem !important;
+        }
+
+        .marsail-grid {
+          grid-template-columns: 1fr !important;
+        }
+
+        .marsail-speaker-card,
+        .marsail-content,
+        .marsail-topic-content {
+          padding: 1.2rem !important;
+        }
+
+        .marsail-speaker-img {
+          width: 120px !important;
+          height: 150px !important;
+        }
+
+        .marsail-session-title {
+          font-size: 1.15rem !important;
+        }
+
+        .marsail-meta-grid {
+          flex-direction: column !important;
+        }
+
+        .marsail-meta-box {
+          width: 100% !important;
+          min-width: unset !important;
+        }
+
+        .marsail-btn-primary,
+        .marsail-btn-secondary {
+          width: 100% !important;
+          text-align: center !important;
+          display: block !important;
+        }
+
+        .marsail-links {
+          flex-direction: column !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         TEAM SECTION
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        .team-row {
+          gap: 22px !important;
+          justify-content: center;
+        }
+
+        .team-card img {
+          width: 100px !important;
+          height: 100px !important;
+        }
+
+        .team-card.head img {
+          width: 130px !important;
+          height: 130px !important;
+        }
+
+        .team-card h3 {
+          font-size: 0.88rem !important;
+        }
+
+        .team-card .role {
+          font-size: 0.78rem !important;
+        }
+
+        .thai-name {
+          font-size: 0.78rem !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         RESEARCH PAPER CARDS
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="border-left: 6px solid"] {
+          padding: 1rem 1rem !important;
+        }
+
+        div[style*="border-left: 6px solid"] h3 {
+          font-size: 1.05rem !important;
+          line-height: 1.35 !important;
+        }
+
+        div[style*="border-left: 6px solid"] p {
+          font-size: 0.9rem !important;
+        }
+
+        /* Button groups inside paper cards */
+        div[style*="border-left: 6px solid"] div[style*="display: flex"] {
+          flex-direction: column !important;
+          gap: 8px !important;
+        }
+
+        div[style*="border-left: 6px solid"] .button {
+          display: block;
+          width: 100%;
+          text-align: center;
+          margin-top: 0;
+        }
+      }
+
+      /* ══════════════════════════════════
+         QUICK START / CODE BLOCKS
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        pre {
+          font-size: 0.78rem !important;
+          padding: 14px !important;
+          border-radius: 10px !important;
+          line-height: 1.55 !important;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+      }
+
+      /* ══════════════════════════════════
+         SPONSORS / LOGOS
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="display: flex"][style*="justify-content: center"][style*="flex-wrap: wrap"][style*="gap: 2rem"] {
+          gap: 1.2rem !important;
+        }
+
+        img[style*="height: 120px"] {
+          height: 80px !important;
+        }
+
+        img[style*="height: 60px"] {
+          height: 44px !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         MOTOR AI HANDBOOK CARD
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="flex: 1 1 320px; text-align: center"] img[style*="max-width: 100%"][style*="border-radius: 14px"] {
+          max-width: 85% !important;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+
+      /* ══════════════════════════════════
+         KEY CONTRIBUTION GRID (handbook)
+      ══════════════════════════════════ */
+      @media (max-width: 480px) {
+        div[style*="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"] {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         FUN FACTS SECTION
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        section[style*="padding: 2.5rem"][style*="background: #f7fbff"] {
+          padding: 1.4rem 1rem !important;
+          margin: 12px 12px !important;
+        }
+
+        div[style*="padding: 1.4rem"][style*="border-left: 6px solid #1d3557"],
+        div[style*="padding: 1.4rem"][style*="border-left: 6px solid #e63946"] {
+          padding: 1rem !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         GRATITUDE BOX
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="padding: 30px 34px"] {
+          padding: 20px 16px !important;
+        }
+
+        div[style*="padding: 30px 34px"] h3 {
+          font-size: 1.15rem !important;
+        }
+
+        div[style*="padding: 30px 34px"] p {
+          font-size: 0.91rem !important;
+          line-height: 1.8 !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         FLOATING CHATBOT — mobile-sized
+      ══════════════════════════════════ */
+      @media (max-width: 480px) {
+        #marsailChat {
+          bottom: 12px !important;
+          right: 10px !important;
+          left: 10px !important;
+          width: auto !important;
+          max-width: 100% !important;
+          border-radius: 18px !important;
+          padding: 12px 16px !important;
+        }
+
+        #marsailMsg {
+          font-size: 0.85rem !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         FOOTER
+      ══════════════════════════════════ */
+      @media (max-width: 480px) {
+        .site-footer {
+          padding: 1.8rem 1rem !important;
+          font-size: 0.82rem !important;
+        }
+
+        .footer-built {
+          display: block !important;
+          margin-top: 0.35rem !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         PRESS GRID logos — mobile
+      ══════════════════════════════════ */
+      @media (max-width: 480px) {
+        .press-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+          padding: 1.4rem 1rem !important;
+          gap: 1.4rem !important;
+        }
+
+        .press-grid img {
+          max-height: 52px !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         INVITED TALK EVENT CARD buttons
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="display: flex; gap: 12px; flex-wrap: wrap"] {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        div[style*="display: flex; gap: 12px; flex-wrap: wrap"] a.button {
+          display: block;
+          width: 100%;
+          text-align: center;
+          box-sizing: border-box;
+        }
+      }
+
+      /* ══════════════════════════════════
+         FINAL RESEARCH BOX dashed border
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="border: 2px dashed #adb5bd"] {
+          font-size: 0.88rem !important;
+          padding: 0.8rem 1rem !important;
+          text-align: left !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         GLOBAL tap target minimum size
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        a, button {
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* But keep inline text links natural */
+        p a, li a, span a {
+          min-height: unset;
+          display: inline;
+        }
+      }
+
+      /* ══════════════════════════════════
+         ABOUT / SHOWCASE sections wide
+         padding reduction
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        section[style*="padding: 3rem 2.5rem"],
+        section[style*="padding: 3.2rem 2.5rem"],
+        section[style*="padding: 3.6rem 1.6rem"],
+        section[style*="padding: 2.5rem"],
+        section[style*="padding: 3rem 2rem"],
+        section[style*="padding: 2rem"] {
+          padding: 1.4rem 1rem !important;
+          margin-top: 1.5rem !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         SPEAKER CARD full-width on mobile
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        .marsail-side {
+          width: 100%;
+        }
+
+        .marsail-card {
+          border-radius: 18px !important;
+        }
+      }
+
+      /* ══════════════════════════════════
+         LOGO DOWNLOAD button
+      ══════════════════════════════════ */
+      @media (max-width: 600px) {
+        div[style*="text-align: center; margin-top: 25px"] a.button {
+          display: inline-flex !important;
+          width: auto !important;
+          padding: 13px 24px !important;
+        }
+      }
+
+      /* Prevent horizontal scroll from any element */
+      @media (max-width: 600px) {
+        body, html {
+          max-width: 100vw;
+          overflow-x: hidden;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
         }
       }
     </style>
