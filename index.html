@@ -379,6 +379,61 @@
     .at-btn-p:hover, .at-btn-s:hover { transform:translateY(-2px); }
 
     /* ══════════════════════════════════════
+      AUTOTECH MOMENTS
+    ══════════════════════════════════════ */
+
+    .atm-section{position:relative;overflow:hidden;text-align:center;padding:clamp(22px,4vw,56px) 0;background:radial-gradient(circle at top left,rgba(37,99,235,.07),transparent 28%),linear-gradient(to bottom,#fff 0%,#f8fafc 100%)}
+
+    .atm-title{border:none!important;padding:0!important;margin:0 0 .55rem;font-size:clamp(1.35rem,4vw,2.3rem);line-height:1;letter-spacing:-.045em;color:var(--ink)}
+
+    .atm-sub{margin:0 auto 1.2rem;font-size:clamp(.82rem,1.7vw,.95rem);color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
+
+    /* loop area */
+    .atm-loop{position:relative;overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
+
+    /* moving row */
+    .atm-track{display:flex;align-items:center;gap:14px;width:max-content;animation:atmMove 68s linear infinite;will-change:transform;transform:translateZ(0)}
+
+    .atm-loop:hover .atm-track{animation-play-state:paused}
+
+    @keyframes atmMove{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    /* card */
+    .atm-card{position:relative;overflow:hidden;flex-shrink:0;width:260px;height:165px;border-radius:24px;background:#e2e8f0;border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 24px rgba(15,23,42,.08),inset 0 1px rgba(255,255,255,.4);transition:transform .45s ease,box-shadow .45s ease;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+
+    .atm-card.wide{width:360px;height:190px}
+    .atm-card.tall{width:190px;height:280px}
+
+    .atm-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(37,99,235,.14),0 10px 22px rgba(15,23,42,.10)}
+
+    .atm-card img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 1s ease}
+
+    .atm-card:hover img{transform:scale(1.04)}
+
+    /* cinematic overlay */
+    .atm-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,.22),transparent 55%);pointer-events:none}
+
+    /* footer */
+    .atm-mini-note{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.6rem;margin-top:1rem;color:#7c8798;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+
+    .atm-mini-note i{width:4px;height:4px;border-radius:50%;background:#3b82f6;box-shadow:0 0 10px #3b82f6}
+
+    /* touch device */
+    @media (hover:none){.atm-card:hover,.atm-card:hover img{transform:none}}
+
+    /* ══════════════ TABLET ══════════════ */
+    @media(max-width:900px){.atm-track{gap:12px;animation-duration:58s}.atm-card{width:220px;height:145px;border-radius:20px}.atm-card.wide{width:300px;height:165px}.atm-card.tall{width:160px;height:235px}}
+
+    /* ══════════════ MOBILE ══════════════ */
+    @media(max-width:640px){.atm-section{padding:18px 0 24px}.atm-title{font-size:1.45rem;line-height:1.02}.atm-sub{font-size:.72rem;margin-bottom:.95rem}.atm-track{gap:9px;animation-duration:42s}.atm-card{width:180px;height:118px;border-radius:18px}.atm-card.wide{width:245px;height:132px}.atm-card.tall{width:132px;height:190px}.atm-mini-note{margin-top:.8rem;font-size:.54rem;gap:.4rem;letter-spacing:.12em;padding:0 10px}.atm-mini-note i{width:3px;height:3px}}
+
+    /* small iphone */
+    @media(max-width:390px){.atm-card{width:160px;height:105px}.atm-card.wide{width:220px;height:118px}.atm-card.tall{width:120px;height:175px}.atm-track{gap:8px}}
+
+    /* ══════════════════════════════════════
        PRESS LOGOS
     ══════════════════════════════════════ */
     .press-grid {
@@ -682,6 +737,133 @@
       <a href="https://www.automrotive.com/conference-speakers/" target="_blank" class="at-btn-s">Speaker Profile →</a>
     </div>
   </div>
+</section>
+
+<!-- ══════════════ MARSAIL × AUTOTECH MOMENTS ══════════════ -->
+<section class="atm-section">
+
+  <h2 class="atm-title">
+    MARSAIL × AutoTech 2026
+  </h2>
+
+  <p class="atm-sub">
+    Final stage moments from the AI journey.
+  </p>
+
+  <!-- cinematic loop -->
+  <div class="atm-loop">
+
+    <div class="atm-track">
+
+      <!-- set 1 -->
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_001.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_002.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_003.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_005.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_006.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_007.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_009.jpg" alt="">
+      </div>
+
+      <div class="atm-card">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_011.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_014.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_021.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_027.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_030.jpg" alt="">
+      </div>
+
+      <!-- duplicate -->
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_001.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_002.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_003.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_005.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_006.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_007.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_009.jpg" alt="">
+      </div>
+
+      <div class="atm-card">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_011.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_014.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_021.jpg" alt="">
+      </div>
+
+      <div class="atm-card wide">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_027.jpg" alt="">
+      </div>
+
+      <div class="atm-card tall">
+        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_030.jpg" alt="">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="atm-mini-note">
+    <span>AutoTech Aftermarket Summit 2026</span>
+    <i></i>
+    <span>BITEC Bangkok</span>
+    <i></i>
+    <span>MARSAIL AI LAB</span>
+  </div>
+
 </section>
 
 <!-- ══════════════ PRESS LOGOS ══════════════ -->
