@@ -111,25 +111,131 @@
     ul { padding-left:20px; }
 
     /* ══════════════════════════════════════
-       FLOATING NAV
+       STATIC NAVBAR
     ══════════════════════════════════════ */
-    #marsTab {
-      position:fixed; top:18px; left:50%; transform:translateX(-50%);
-      z-index:9999;
-      padding:10px 26px;
-      background:rgba(15,15,15,.78);
-      backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-      border-radius:100px;
-      font-family:'DM Sans',sans-serif;
-      font-size:.82rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
-      color:#fff; cursor:pointer;
-      border:1px solid rgba(255,255,255,.1);
-      box-shadow:0 4px 20px rgba(0,0,0,.22);
-      transition:all .35s ease;
-      white-space:nowrap;
+    #site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      background: rgba(250,248,243,0.72);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      transition: background .3s ease, box-shadow .3s ease;
     }
-    #marsTab:hover { background:rgba(15,15,15,.92); letter-spacing:.36em; }
-    #marsTab.shrink { padding:6px 18px!important; font-size:.7rem!important; top:10px!important; letter-spacing:.22em!important; }
+    #site-nav.scrolled {
+      background: rgba(250,248,243,0.94);
+      box-shadow: 0 1px 24px rgba(0,0,0,0.07);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(16px,5vw,48px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: opacity .2s;
+    }
+    .nav-logo:hover { opacity: .6; color: var(--ink); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px,3vw,36px);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      text-decoration: none;
+      transition: color .2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-pub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: transparent;
+      transition: background .2s, border-color .2s, color .2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-pub:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+    .nav-pub svg { flex-shrink:0; }
+
+    /* hamburger for mobile */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4.5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    @media(max-width:720px) {
+      .nav-links, .nav-pub { display:none; }
+      .nav-toggle { display:flex; }
+      #site-nav.nav-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        position: absolute;
+        top: 58px; left: 0; right: 0;
+        background: rgba(250,248,243,0.98);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border2);
+        padding: 12px 0 18px;
+      }
+      #site-nav.nav-open .nav-links li { width: 100%; }
+      #site-nav.nav-open .nav-links a {
+        display: block;
+        padding: 11px clamp(16px,5vw,48px);
+        font-size: .78rem;
+      }
+    }
 
     /* ══════════════════════════════════════
        HERO
@@ -140,7 +246,7 @@
       justify-content:center; align-items:center;
       text-align:center;
       position:relative; overflow:hidden;
-      padding: clamp(90px,14vw,150px) clamp(20px,6vw,64px) clamp(70px,12vw,110px);
+      padding: calc(58px + clamp(60px,10vw,100px)) clamp(20px,6vw,64px) clamp(70px,12vw,110px);
     }
     /* animated paper lines overlay */
     .hero-white::before {
@@ -591,16 +697,50 @@
 
 <body>
 
-<!-- ══════════════ FLOATING NAV ══════════════ -->
-<div id="marsTab">MARSAIL</div>
+<!-- ══════════════ STATIC NAVBAR ══════════════ -->
+<nav id="site-nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">MARSAIL</a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#team">People</a></li>
+      <li><a href="#funfacts">Story</a></li>
+    </ul>
+
+    <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
+       target="_blank" rel="noopener" class="nav-pub">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      PUBLICATION
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 <script>
-  const _tab = document.getElementById('marsTab');
-  _tab.addEventListener('click', () => window.location.href = 'https://kaopanboonyuen.github.io/MARS/');
-  window.addEventListener('scroll', () => _tab.classList.toggle('shrink', window.scrollY > 50));
+  /* scroll class */
+  const _nav = document.getElementById('site-nav');
+  window.addEventListener('scroll', () => _nav.classList.toggle('scrolled', window.scrollY > 10));
+
+  /* smooth scroll for all nav links */
+  document.querySelectorAll('#site-nav a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); _nav.classList.remove('nav-open'); }
+    });
+  });
+
+  /* mobile toggle */
+  document.getElementById('navToggle').addEventListener('click', () => _nav.classList.toggle('nav-open'));
 </script>
 
 <!-- ══════════════ HERO ══════════════ -->
-<header class="hero-white">
+<header id="hero" class="hero-white">
   <p class="hero-label">MARS Artificial Intelligence Laboratory</p>
 
   <h1 class="hero-h1">
@@ -629,7 +769,7 @@
 </header>
 
 <!-- ══════════════ ABOUT ══════════════ -->
-<section>
+<section id="about">
   <h2>🚀 About MARS</h2>
   <p><b>MARS</b> is a state-of-the-art deep learning model for car damage instance segmentation. <span style="font-weight:600">It stands for:</span></p>
 
@@ -949,7 +1089,7 @@
 </section>
 
 <!-- ══════════════ RESEARCH ══════════════ -->
-<section>
+<section id="research">
   <h2>🧠 MARSAIL Research Highlights (2023–2026)</h2>
   <p style="max-width:920px;line-height:1.82;">MARSAIL drives the next generation of automotive AI through foundational transformer research led by <strong>Dr. Kao (Teerapong Panboonyuen)</strong>. Our work unifies <em>damage-centric computer vision</em>, <em>knowledge distillation at scale</em>, and <em>document intelligence</em> into deployable systems.</p>
 
@@ -1147,7 +1287,7 @@ pip install -r requirements.txt</pre>
 </section>
 
 <!-- ══════════════ TEAM ══════════════ -->
-<section class="team-section">
+<section id="team" class="team-section">
 
   <h2 style="border:none;padding:0;font-size:clamp(1.15rem,3vw,1.55rem);text-align:center;">
     MARSAIL People
@@ -1310,7 +1450,7 @@ pip install -r requirements.txt</pre>
 </section>
 
 <!-- ══════════════ FUN FACTS ══════════════ -->
-<section style="background:#f7fbff;">
+<section id="funfacts" style="background:#f7fbff;">
   <h2>🌟 Fun Facts About MARSAIL</h2>
 
   <!-- English Version -->
