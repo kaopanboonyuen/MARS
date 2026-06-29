@@ -272,40 +272,104 @@
     }
     .hero-white > * { position:relative; z-index:1; }
 
-    .hero-label {
-      font-size:clamp(.6rem,.85vw,.75rem);
-      letter-spacing:.42em; text-transform:uppercase;
-      font-weight:500; color:var(--ink3);
-      margin-bottom:clamp(12px,2.5vw,20px);
-      font-family:'DM Mono',monospace;
+    /* constellation network canvas — sits above orbs, below content */
+    #hero-net {
+      position:absolute; inset:0; z-index:0;
+      pointer-events:none;
+      opacity:.9;
+      animation: netDrift 30s ease-in-out infinite alternate;
     }
+    @keyframes netDrift {
+      from { transform:translate(0,0) scale(1); }
+      to   { transform:translate(16px,-12px) scale(1.015); }
+    }
+
+    .hero-eyebrow {
+      display:flex; align-items:flex-start; justify-content:center;
+      flex-wrap:wrap; row-gap:6px; column-gap:10px;
+      font-size:clamp(.62rem,.95vw,.78rem);
+      letter-spacing:.32em; text-transform:uppercase;
+      font-weight:500; color:var(--ink3);
+      margin-bottom:clamp(20px,4vw,34px);
+      font-family:'DM Mono',monospace;
+      text-align:center;
+    }
+    .hero-eyebrow .label-group {
+      display:inline-flex; align-items:baseline; gap:9px;
+      max-width:100%;
+    }
+    .hero-eyebrow .dot {
+      width:7px; height:7px; border-radius:50%;
+      background:var(--green); flex-shrink:0;
+      box-shadow:0 0 0 3px rgba(34,197,94,.18);
+      animation:pulse 2s ease-in-out infinite;
+      position:relative; top:1px;
+    }
+    .hero-eyebrow .label-text { white-space:normal; }
+
     .hero-h1 {
       font-size:clamp(4rem,10.5vw,8.5rem);
       font-weight:900; letter-spacing:-.04em; line-height:1;
-      margin-bottom:clamp(10px,2vw,20px); color:var(--ink);
+      margin-bottom:clamp(16px,3vw,26px); color:var(--ink);
+      position:relative; display:inline-block;
     }
+    /* subtle red accent glow along the left edge, echoing the brand mark */
+    .hero-h1::before {
+      content:''; position:absolute;
+      left:clamp(-10px,-1.4vw,-6px); top:6%; bottom:6%;
+      width:clamp(36px,7vw,64px);
+      background:linear-gradient(90deg, rgba(230,57,70,.16), rgba(230,57,70,0) 78%);
+      filter:blur(2px);
+      z-index:-1; pointer-events:none;
+    }
+    .hero-subtitle-row {
+      display:flex; align-items:center; justify-content:center; gap:clamp(14px,3vw,28px);
+      margin-bottom:clamp(18px,3.5vw,30px);
+    }
+    .hero-subtitle-row .ln {
+      height:1px; width:clamp(28px,6vw,64px);
+      background:linear-gradient(90deg, transparent, var(--border));
+      flex-shrink:0;
+    }
+    .hero-subtitle-row .ln.r { background:linear-gradient(90deg, var(--border), transparent); }
     .hero-subtitle {
-      display:block;
-      font-size:clamp(.95rem,2.2vw,1.75rem);
-      font-weight:400; letter-spacing:.05em;
-      margin-top:12px; color:var(--ink2); line-height:1.4;
+      font-size:clamp(.85rem,1.7vw,1.18rem);
+      font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--ink2); line-height:1.4;
+      white-space:nowrap;
     }
     .hero-mission {
       font-size:clamp(.92rem,1.7vw,1.3rem);
       max-width:780px; font-weight:300;
       color:var(--ink2); line-height:1.85;
-      margin-top:clamp(14px,3vw,26px);
+      margin-top:0;
+    }
+
+    .hero-actions {
+      display:flex; align-items:center; justify-content:center;
+      flex-wrap:wrap; gap:clamp(10px,2vw,14px);
+      margin-top:clamp(22px,4vw,34px);
+    }
+
+    @media(max-width:560px){
+      .hero-eyebrow { letter-spacing:.18em; column-gap:8px; }
+      .hero-subtitle { white-space:normal; }
+      .hero-subtitle-row .ln { width:clamp(16px,5vw,32px); }
+    }
+
+    @media(max-width:380px){
+      .hero-eyebrow { letter-spacing:.12em; }
     }
 
     /* ── LLM STREAM WIDGET ── */
     #llm-box {
-      margin-top:clamp(24px,4vw,40px);
+      margin-top:clamp(28px,4.5vw,44px);
       background:var(--white);
-      border:1px solid var(--border);
-      border-radius:var(--r);
-      padding:clamp(14px,2.5vw,24px) clamp(16px,3vw,28px);
-      max-width:620px; width:100%;
-      box-shadow:var(--sh);
+      border:1px solid var(--border2);
+      border-radius:24px;
+      padding:clamp(18px,3vw,28px) clamp(20px,3.4vw,32px);
+      max-width:640px; width:100%;
+      box-shadow:0 18px 50px rgba(17,17,17,.07), 0 4px 14px rgba(17,17,17,.04);
       text-align:left;
     }
     .llm-head {
@@ -741,14 +805,22 @@
 
 <!-- ══════════════ HERO ══════════════ -->
 <header id="hero" class="hero-white">
-  <p class="hero-label">MARS Artificial Intelligence Laboratory</p>
+  <svg id="hero-net"></svg>
 
-  <h1 class="hero-h1">
-    MARSAIL
-    <span class="hero-subtitle">
-      Motor AI Recognition Solution&nbsp;<span style="white-space:nowrap">AI Lab</span>
+  <p class="hero-eyebrow">
+    <span class="label-group">
+      <span class="dot"></span>
+      <span class="label-text">MARS Artificial Intelligence Laboratory</span>
     </span>
-  </h1>
+  </p>
+
+  <h1 class="hero-h1">MARSAIL</h1>
+
+  <div class="hero-subtitle-row">
+    <span class="ln"></span>
+    <span class="hero-subtitle">Motor AI Recognition Solution&nbsp;AI Lab</span>
+    <span class="ln r"></span>
+  </div>
 
   <p class="hero-mission">
     We build and train AI that truly understands the entire automotive
@@ -763,6 +835,17 @@
       <span class="llm-label">MARSAIL · Model Inference</span>
     </div>
     <div id="llm-text"><span class="cursor"></span></div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#research" class="btn btn-dark">Explore Research →</a>
+    <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
+       target="_blank" rel="noopener" class="btn btn-ghost">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:7px;">
+        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Publication
+    </a>
   </div>
 
   <div class="hero-scroll">SCROLL</div>
@@ -1811,6 +1894,125 @@ pip install -r requirements.txt</pre>
 
 <!-- ══════════════ SCRIPTS ══════════════ -->
 <script>
+/* ── HERO CONSTELLATION NETWORK (animated, text-safe) ── */
+(function(){
+  const svg = document.getElementById('hero-net');
+  if(!svg) return;
+
+  function build(){
+    const w = window.innerWidth, h = svg.parentElement.offsetHeight || window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.setAttribute('preserveAspectRatio','none');
+    svg.innerHTML = '';
+
+    // ── text-safe exclusion zone ──
+    // Keeps every node/line/pulse clear of the headline column (eyebrow → wordmark →
+    // subtitle → mission → inference card → buttons), so nothing ever crosses the copy.
+    const cx = w / 2;
+    const cy = h / 2;
+    const zoneW = Math.min(w * 0.78, 860) / 2;   // half-width of the safe column
+    const zoneH = Math.min(h * 0.86, 940) / 2;   // half-height of the safe column
+    const pad = 10; // small buffer so lines don't kiss the edge of the zone
+
+    function inZone(x, y){
+      return Math.abs(x - cx) < zoneW + pad && Math.abs(y - cy) < zoneH + pad;
+    }
+    // reject a segment if it crosses the zone at any sampled point along its length
+    function segmentHitsZone(ax, ay, bx, by){
+      const steps = 10;
+      for(let s=0; s<=steps; s++){
+        const t = s/steps;
+        if(inZone(ax + (bx-ax)*t, ay + (by-ay)*t)) return true;
+      }
+      return false;
+    }
+
+    const density = Math.max(28, Math.min(48, Math.round((w*h)/30000)));
+    const pts = [];
+    let tries = 0;
+    while(pts.length < density && tries < density*16){
+      tries++;
+      const x = Math.random()*w, y = Math.random()*h;
+      if(inZone(x,y)) continue;
+      const roll = Math.random();
+      pts.push({
+        x, y,
+        r: Math.random()*1.7 + 1,
+        c: roll < 0.66 ? 'rgba(58,58,58,.32)'
+           : roll < 0.83 ? 'rgba(230,57,70,.50)'
+           : 'rgba(69,123,157,.50)',
+        pulse: Math.random() < 0.42
+      });
+    }
+
+    // connect nearby points — skip any edge that would cross the text column
+    const maxDist = Math.min(w,h) * 0.19;
+    const edges = [];
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx = pts[i].x-pts[j].x, dy = pts[i].y-pts[j].y;
+        const d = Math.sqrt(dx*dx+dy*dy);
+        if(d < maxDist && Math.random() < 0.5 && !segmentHitsZone(pts[i].x,pts[i].y,pts[j].x,pts[j].y)){
+          edges.push({a:pts[i], b:pts[j], d});
+        }
+      }
+    }
+
+    let linesSvg = '';
+    edges.forEach(e => {
+      const op = (1 - e.d/maxDist) * 0.2;
+      linesSvg += `<line x1="${e.a.x.toFixed(1)}" y1="${e.a.y.toFixed(1)}" x2="${e.b.x.toFixed(1)}" y2="${e.b.y.toFixed(1)}" stroke="rgba(58,58,58,${op.toFixed(3)})" stroke-width="1"/>`;
+    });
+
+    // nodes — a portion gently pulse like firing neurons, with a soft outer glow ring
+    let dotsSvg = '';
+    pts.forEach(p => {
+      if(p.pulse){
+        const dur = (Math.random()*2.6+2.4).toFixed(2);
+        const delay = (Math.random()*3.2).toFixed(2);
+        const r2 = (p.r*2.6).toFixed(2);
+        const glowR = (p.r*4.2).toFixed(2);
+        dotsSvg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${glowR}" fill="${p.c}" opacity="0">
+            <animate attributeName="opacity" values="0;0.10;0" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(2)}" fill="${p.c}">
+            <animate attributeName="opacity" values="0.85;0.18;0.85" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="${p.r.toFixed(2)};${r2};${p.r.toFixed(2)}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+          </circle>`;
+      } else {
+        dotsSvg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(2)}" fill="${p.c}"/>`;
+      }
+    });
+
+    // traveling signal pulses along a handful of edges — reads as "data flowing"
+    const pulseCount = Math.min(9, edges.length);
+    const chosen = [];
+    while(chosen.length < pulseCount && edges.length){
+      const idx = Math.floor(Math.random()*edges.length);
+      if(!chosen.includes(idx)) chosen.push(idx);
+    }
+    let pulseSvg = '';
+    chosen.forEach(idx => {
+      const e = edges[idx];
+      const dur = (Math.random()*2.6+2.8).toFixed(2);
+      const delay = (Math.random()*4.5).toFixed(2);
+      const color = Math.random() < 0.5 ? '#e63946' : '#457b9d';
+      pulseSvg += `<circle r="2.3" fill="${color}" opacity="0">
+        <animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite"
+          path="M${e.a.x.toFixed(1)},${e.a.y.toFixed(1)} L${e.b.x.toFixed(1)},${e.b.y.toFixed(1)}"/>
+        <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.15;0.85;1"
+          dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+      </circle>`;
+    });
+
+    svg.innerHTML = linesSvg + dotsSvg + pulseSvg;
+  }
+
+  build();
+  let resizeT;
+  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(build, 250); });
+})();
+
 /* ── HERO LLM STREAM ── */
 (function(){
   const msgs = [
