@@ -1,1290 +1,738 @@
 <!doctype html>
 <html lang="en" translate="no">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="google" content="notranslate"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>MARSAIL (MARS AI Laboratory)</title>
-
-  <link rel="icon" type="image/png" sizes="32x32" href="img/MARSAIL_LOGO.png"/>
-  <link rel="apple-touch-icon" href="img/MARSAIL_LOGO.png"/>
-  <meta name="theme-color" content="#0f0f0f"/>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900&family=DM+Mono:wght@400;500&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet"/>
-
-  <style>
-    /* ══════════════════════════════════════
-       TOKENS
-    ══════════════════════════════════════ */
-    :root {
-      --paper:   #faf8f3;
-      --paper2:  #f2ede3;
-      --white:   #ffffff;
-      --ink:     #111111;
-      --ink2:    #3a3a3a;
-      --ink3:    #767676;
-      --ink4:    #b0b0b0;
-      --border:  #ddd8cc;
-      --border2: #e8e2d5;
-      --red:     #e63946;
-      --blue:    #1d3557;
-      --blue2:   #457b9d;
-      --green:   #22c55e;
-      --r:       20px;
-      --rs:      12px;
-      --sh:      0 4px 24px rgba(0,0,0,.07);
-      --shL:     0 12px 48px rgba(0,0,0,.10);
-    }
-
-    /* ══════════════════════════════════════
-       RESET
-    ══════════════════════════════════════ */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; -webkit-overflow-scrolling:touch; }
-    body {
-      font-family:'DM Sans',sans-serif;
-      color:var(--ink);
-      background:var(--paper);
-      overflow-x:hidden;
-      -webkit-text-size-adjust:100%;
-      word-break:break-word;
-      overflow-wrap:break-word;
-      padding-left:env(safe-area-inset-left);
-      padding-right:env(safe-area-inset-right);
-    }
-    ::selection { background:var(--ink); color:#fff; }
-    img { max-width:100%; height:auto; display:block; }
-    a   { color:var(--red); text-decoration:none; }
-    h1,h2,h3,h4 { font-weight:700; }
-
-    /* ══════════════════════════════════════
-       PAPER TEXTURE
-    ══════════════════════════════════════ */
-    body {
-      background-color: var(--paper);
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 27px,
-          rgba(0,0,0,.022) 27px,
-          rgba(0,0,0,.022) 28px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 59px,
-          rgba(0,0,0,.01) 59px,
-          rgba(0,0,0,.01) 60px
-        );
-    }
-
-    /* ══════════════════════════════════════
-       LAYOUT
-    ══════════════════════════════════════ */
-    .wrap { max-width:1100px; margin:auto; padding:0 clamp(16px,5vw,48px); }
-
-    section {
-      max-width:1100px;
-      margin: clamp(20px,4vw,52px) auto;
-      padding: clamp(18px,4vw,36px) clamp(16px,4vw,36px);
-      background: var(--white);
-      border-radius: var(--r);
-      border: 1px solid var(--border2);
-      box-shadow: var(--sh);
-    }
-    section h2 {
-      font-size: clamp(1.15rem,2.8vw,1.55rem);
-      margin-bottom: clamp(12px,2.5vw,18px);
-      color: var(--blue);
-      border-left: 5px solid var(--red);
-      padding-left: 11px;
-      line-height: 1.3;
-    }
-    section p, section li {
-      font-size: clamp(.88rem,1.8vw,.98rem);
-      line-height: 1.75;
-      margin-bottom: 9px;
-    }
-    ul { padding-left:20px; }
-
-    /* ══════════════════════════════════════
-       STATIC NAVBAR
-    ══════════════════════════════════════ */
-    #site-nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 9999;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      background: rgba(250,248,243,0.72);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-      transition: background .3s ease, box-shadow .3s ease;
-    }
-    #site-nav.scrolled {
-      background: rgba(250,248,243,0.94);
-      box-shadow: 0 1px 24px rgba(0,0,0,0.07);
-    }
-    .nav-inner {
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 clamp(16px,5vw,48px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .nav-logo {
-      font-family: 'DM Mono', monospace;
-      font-size: .78rem;
-      font-weight: 500;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: opacity .2s;
-    }
-    .nav-logo:hover { opacity: .6; color: var(--ink); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: clamp(18px,3vw,36px);
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: .75rem;
-      font-weight: 500;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--ink3);
-      text-decoration: none;
-      transition: color .2s;
-      white-space: nowrap;
-    }
-    .nav-links a:hover { color: var(--ink); }
-
-    .nav-pub {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'DM Mono', monospace;
-      font-size: .68rem;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      padding: 6px 14px;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      background: transparent;
-      transition: background .2s, border-color .2s, color .2s;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .nav-pub:hover {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: #fff;
-    }
-    .nav-pub svg { flex-shrink:0; }
-
-    /* hamburger for mobile */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 4.5px;
-      cursor: pointer;
-      padding: 6px;
-      background: none;
-      border: none;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 22px; height: 1.5px;
-      background: var(--ink);
-      border-radius: 2px;
-      transition: .3s;
-    }
-
-    @media(max-width:720px) {
-      .nav-links, .nav-pub { display:none; }
-      .nav-toggle { display:flex; }
-      #site-nav.nav-open .nav-links {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        position: absolute;
-        top: 58px; left: 0; right: 0;
-        background: rgba(250,248,243,0.98);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border2);
-        padding: 12px 0 18px;
-      }
-      #site-nav.nav-open .nav-links li { width: 100%; }
-      #site-nav.nav-open .nav-links a {
-        display: block;
-        padding: 11px clamp(16px,5vw,48px);
-        font-size: .78rem;
-      }
-    }
-
-    /* ══════════════════════════════════════
-       HERO
-    ══════════════════════════════════════ */
-    .hero-white {
-      min-height:100svh;
-      display:flex; flex-direction:column;
-      justify-content:center; align-items:center;
-      text-align:center;
-      position:relative; overflow:hidden;
-      padding: calc(58px + clamp(60px,10vw,100px)) clamp(20px,6vw,64px) clamp(70px,12vw,110px);
-    }
-    /* animated paper lines overlay */
-    .hero-white::before {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background-image: repeating-linear-gradient(
-        0deg, transparent, transparent 27px,
-        rgba(0,0,0,.025) 27px, rgba(0,0,0,.025) 28px
-      );
-      z-index:0;
-    }
-    /* drifting light orbs */
-    .hero-white::after {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background:
-        radial-gradient(circle at 18% 22%, rgba(29,53,87,.055), transparent 44%),
-        radial-gradient(circle at 82% 68%, rgba(230,57,70,.04),  transparent 44%);
-      animation:orbDrift 20s ease-in-out infinite alternate;
-      z-index:0;
-    }
-    @keyframes orbDrift {
-      from { transform:translate(0,0) scale(1); }
-      to   { transform:translate(22px,14px) scale(1.07); }
-    }
-    .hero-white > * { position:relative; z-index:1; }
-
-    /* constellation network canvas — sits above orbs, below content */
-    #hero-net {
-      position:absolute; inset:0; z-index:0;
-      pointer-events:none;
-      opacity:.9;
-      animation: netDrift 30s ease-in-out infinite alternate;
-    }
-    @keyframes netDrift {
-      from { transform:translate(0,0) scale(1); }
-      to   { transform:translate(16px,-12px) scale(1.015); }
-    }
-
-    .hero-eyebrow {
-      display:flex; align-items:flex-start; justify-content:center;
-      flex-wrap:wrap; row-gap:6px; column-gap:10px;
-      font-size:clamp(.62rem,.95vw,.78rem);
-      letter-spacing:.32em; text-transform:uppercase;
-      font-weight:500; color:var(--ink3);
-      margin-bottom:clamp(20px,4vw,34px);
-      font-family:'DM Mono',monospace;
-      text-align:center;
-    }
-    .hero-eyebrow .label-group {
-      display:inline-flex; align-items:baseline; gap:9px;
-      max-width:100%;
-    }
-    .hero-eyebrow .dot {
-      width:7px; height:7px; border-radius:50%;
-      background:var(--green); flex-shrink:0;
-      box-shadow:0 0 0 3px rgba(34,197,94,.18);
-      animation:pulse 2s ease-in-out infinite;
-      position:relative; top:1px;
-    }
-    .hero-eyebrow .label-text { white-space:normal; }
-
-    .hero-h1 {
-      font-size:clamp(4rem,10.5vw,8.5rem);
-      font-weight:900; letter-spacing:-.04em; line-height:1;
-      margin-bottom:clamp(16px,3vw,26px); color:var(--ink);
-      position:relative; display:inline-block;
-    }
-    /* subtle red accent glow along the left edge, echoing the brand mark */
-    .hero-h1::before {
-      content:''; position:absolute;
-      left:clamp(-10px,-1.4vw,-6px); top:6%; bottom:6%;
-      width:clamp(36px,7vw,64px);
-      background:linear-gradient(90deg, rgba(230,57,70,.16), rgba(230,57,70,0) 78%);
-      filter:blur(2px);
-      z-index:-1; pointer-events:none;
-    }
-    .hero-subtitle-row {
-      display:flex; align-items:center; justify-content:center; gap:clamp(14px,3vw,28px);
-      margin-bottom:clamp(18px,3.5vw,30px);
-    }
-    .hero-subtitle-row .ln {
-      height:1px; width:clamp(28px,6vw,64px);
-      background:linear-gradient(90deg, transparent, var(--border));
-      flex-shrink:0;
-    }
-    .hero-subtitle-row .ln.r { background:linear-gradient(90deg, var(--border), transparent); }
-    .hero-subtitle {
-      font-size:clamp(.85rem,1.7vw,1.18rem);
-      font-weight:500; letter-spacing:.18em; text-transform:uppercase;
-      color:var(--ink2); line-height:1.4;
-      white-space:nowrap;
-    }
-    .hero-mission {
-      font-size:clamp(.92rem,1.7vw,1.3rem);
-      max-width:780px; font-weight:300;
-      color:var(--ink2); line-height:1.85;
-      margin-top:0;
-    }
-
-    .hero-actions {
-      display:flex; align-items:center; justify-content:center;
-      flex-wrap:wrap; gap:clamp(10px,2vw,14px);
-      margin-top:clamp(22px,4vw,34px);
-    }
-
-    @media(max-width:560px){
-      .hero-eyebrow { letter-spacing:.18em; column-gap:8px; }
-      .hero-subtitle { white-space:normal; }
-      .hero-subtitle-row .ln { width:clamp(16px,5vw,32px); }
-    }
-
-    @media(max-width:380px){
-      .hero-eyebrow { letter-spacing:.12em; }
-    }
-
-    /* ── LLM STREAM WIDGET ── */
-    #llm-box {
-      margin-top:clamp(28px,4.5vw,44px);
-      background:var(--white);
-      border:1px solid var(--border2);
-      border-radius:24px;
-      padding:clamp(18px,3vw,28px) clamp(20px,3.4vw,32px);
-      max-width:640px; width:100%;
-      box-shadow:0 18px 50px rgba(17,17,17,.07), 0 4px 14px rgba(17,17,17,.04);
-      text-align:left;
-    }
-    .llm-head {
-      display:flex; align-items:center; gap:9px;
-      margin-bottom:12px;
-    }
-    .llm-dot {
-      width:8px; height:8px; border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 0 3px rgba(34,197,94,.18);
-      flex-shrink:0;
-      animation:pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%,100%{ box-shadow:0 0 0 3px rgba(34,197,94,.18); }
-      50%    { box-shadow:0 0 0 6px rgba(34,197,94,.08); }
-    }
-    .llm-label {
-      font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
-      color:var(--ink3); font-family:'DM Mono',monospace;
-    }
-    #llm-text {
-      font-size:clamp(.88rem,1.5vw,1rem);
-      color:var(--ink2); line-height:1.75; font-weight:400;
-      min-height:3.6em;
-    }
-    .cursor {
-      display:inline-block; width:2px; height:1.05em;
-      background:currentColor; vertical-align:middle;
-      margin-left:2px; animation:blink 1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    .hero-scroll {
-      position:absolute; bottom:clamp(18px,4vw,32px);
-      font-size:.68rem; letter-spacing:.32em; color:var(--ink4);
-      animation:scrollFade 2.5s ease-in-out infinite;
-      font-family:'DM Mono',monospace;
-    }
-    @keyframes scrollFade {
-      0%,100%{opacity:.4;transform:translateY(0);}
-      50%{opacity:.85;transform:translateY(7px);}
-    }
-
-    /* ══════════════════════════════════════
-       BUTTONS
-    ══════════════════════════════════════ */
-    .btn {
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 20px; border-radius:100px;
-      background:var(--red); color:#fff;
-      font-family:'DM Sans',sans-serif;
-      font-size:clamp(.8rem,1.5vw,.92rem); font-weight:600;
-      text-decoration:none; border:none; cursor:pointer;
-      transition:all .22s ease; min-height:44px; white-space:nowrap;
-    }
-    .btn:hover { opacity:.86; transform:translateY(-2px); }
-    .btn-dark  { background:var(--ink); }
-    .btn-ghost { background:transparent; color:var(--ink); border:1.5px solid var(--border); }
-    .btn-ghost:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
-
-    /* ══════════════════════════════════════
-       IMG GRID
-    ══════════════════════════════════════ */
-    .img-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
-      gap:clamp(10px,2vw,18px); margin-top:clamp(12px,2vw,18px);
-    }
-    .img-grid img {
-      width:100%; border-radius:var(--rs);
-      transition:transform .3s ease, box-shadow .3s ease;
-    }
-    .img-grid img:hover { transform:scale(1.03); box-shadow:var(--shL); }
-
-    /* ══════════════════════════════════════
-       PAPER CARD (press / talk etc.)
-    ══════════════════════════════════════ */
-    .paper-card {
-      display:flex; flex-wrap:wrap;
-      gap:clamp(14px,3vw,26px); align-items:center;
-      background:var(--paper); border-radius:var(--r);
-      padding:clamp(14px,3vw,26px); border:1px solid var(--border2);
-      margin-bottom:clamp(14px,2vw,22px);
-    }
-    .paper-card > .pc-img { flex:1 1 min(100%,240px); text-align:center; }
-    .paper-card > .pc-body { flex:1 1 280px; }
-
-    /* ══════════════════════════════════════
-       RESEARCH CARDS
-    ══════════════════════════════════════ */
-    .rc {
-      margin-top:clamp(14px,2vw,22px);
-      padding:clamp(12px,2.5vw,20px) clamp(14px,2.5vw,24px);
-      border-radius:var(--rs); border-left:6px solid #aaa;
-      box-shadow:0 4px 16px rgba(0,0,0,.05);
-    }
-    .rc h3 { font-size:clamp(.95rem,2vw,1.3rem); margin-bottom:.45rem; line-height:1.35; }
-    .rc p  { font-size:clamp(.85rem,1.6vw,.97rem); line-height:1.72; margin-bottom:.7rem; }
-    .btn-row { display:flex; gap:clamp(7px,1.5vw,11px); flex-wrap:wrap; margin-top:9px; }
-
-    /* ══════════════════════════════════════
-       CHIP / BADGE
-    ══════════════════════════════════════ */
-    .chip {
-      display:inline-block; padding:.3rem .8rem;
-      border-radius:100px; font-size:.72rem; font-weight:600;
-      letter-spacing:.05em; font-family:'DM Mono',monospace;
-      margin-bottom:.5rem;
-    }
-    .c-blue   { background:#eff6ff; color:#2563eb; }
-    .c-purple { background:#f3f0ff; color:#6610f2; }
-    .c-green  { background:#ecfdf5; color:#059669; }
-    .c-red    { background:#fff0f1; color:#e63946; }
-    .c-dark   { background:#e8eaed; color:#003049; }
-
-    /* ══════════════════════════════════════
-       META BOXES
-    ══════════════════════════════════════ */
-    .meta-grid { display:flex; flex-wrap:wrap; gap:clamp(7px,1.5vw,10px); margin-top:clamp(10px,2vw,16px); }
-    .meta-box  { background:#fff; border:1px solid var(--border2); border-radius:var(--rs); padding:clamp(9px,2vw,13px) clamp(10px,2vw,16px); flex:1 1 130px; }
-    .meta-sm   { color:var(--ink4); font-size:.68rem; letter-spacing:.08em; font-family:'DM Mono',monospace; margin-bottom:.25rem; }
-    .meta-val  { font-weight:600; color:var(--ink); font-size:clamp(.82rem,1.7vw,.92rem); }
-
-    /* ══════════════════════════════════════
-       AUTOTECH SECTION
-    ══════════════════════════════════════ */
-    .autotech-sec {
-      max-width:1100px; margin:clamp(20px,4vw,52px) auto;
-      padding:clamp(18px,4vw,3rem) clamp(16px,4vw,2rem);
-      background:var(--white); border-radius:var(--r);
-      border:1px solid var(--border2); box-shadow:var(--sh);
-    }
-    .at-grid {
-      margin-top:clamp(14px,2.5vw,2.4rem);
-      display:grid; grid-template-columns:1.4fr 1fr;
-      gap:clamp(10px,2vw,1.4rem);
-    }
-    .at-card {
-      background:var(--paper); border:1px solid var(--border2);
-      border-radius:var(--r); overflow:hidden;
-      box-shadow:0 10px 28px rgba(0,0,0,.05);
-    }
-    .at-cover   { width:100%; display:block; object-fit:cover; }
-    .at-content { padding:clamp(12px,2.5vw,1.8rem); }
-    .at-spk-card {
-      background:linear-gradient(145deg,#0f172a,#111827);
-      border-radius:var(--r); padding:clamp(12px,3vw,1.8rem);
-      color:#fff; text-align:center; position:relative; overflow:hidden;
-    }
-    .at-glow {
-      position:absolute; width:180px; height:180px;
-      background:rgba(37,99,235,.18); border-radius:999px;
-      top:-60px; right:-60px;
-    }
-    .at-spk-img {
-      width:clamp(110px,20vw,170px); height:clamp(140px,26vw,210px);
-      object-fit:cover; border-radius:14px;
-      margin:0 auto clamp(10px,2vw,1.1rem);
-      position:relative; z-index:2;
-      box-shadow:0 12px 28px rgba(0,0,0,.32);
-    }
-    .at-spk-name { font-size:clamp(.95rem,2vw,1.25rem); margin-bottom:.35rem; position:relative; z-index:2; }
-    .at-spk-role { color:rgba(255,255,255,.72); line-height:1.7; margin:0; position:relative; z-index:2; font-size:clamp(.78rem,1.5vw,.9rem); }
-    .at-side { display:flex; flex-direction:column; gap:clamp(8px,2vw,1.3rem); }
-    .at-topic-wrap { padding:clamp(10px,2vw,1.5rem) clamp(12px,2vw,1.7rem); }
-    .at-links { display:flex; justify-content:center; gap:clamp(7px,1.5vw,.9rem); flex-wrap:wrap; }
-    .at-btn-p, .at-btn-s {
-      padding:clamp(9px,2vw,.85rem) clamp(12px,2.5vw,1.4rem);
-      border-radius:100px; text-decoration:none;
-      font-size:clamp(.8rem,1.5vw,.92rem); font-weight:600;
-      transition:all .22s ease; min-height:44px;
-      display:inline-flex; align-items:center; justify-content:center;
-    }
-    .at-btn-p { background:linear-gradient(135deg,#0f172a,#1e293b); color:#fff; box-shadow:0 8px 18px rgba(15,23,42,.14); }
-    .at-btn-s { background:#fff; color:var(--ink); border:1px solid var(--border); }
-    .at-btn-p:hover, .at-btn-s:hover { transform:translateY(-2px); }
-
-    /* ══════════════════════════════════════
-      AUTOTECH MOMENTS
-    ══════════════════════════════════════ */
-
-    .atm-section{position:relative;overflow:hidden;text-align:center;padding:clamp(22px,4vw,56px) 0;background:radial-gradient(circle at top left,rgba(37,99,235,.07),transparent 28%),linear-gradient(to bottom,#fff 0%,#f8fafc 100%)}
-
-    .atm-title{border:none!important;padding:0!important;margin:0 0 .55rem;font-size:clamp(1.35rem,4vw,2.3rem);line-height:1;letter-spacing:-.045em;color:var(--ink)}
-
-    .atm-sub{margin:0 auto 1.2rem;font-size:clamp(.82rem,1.7vw,.95rem);color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
-
-    /* loop area */
-    .atm-loop{position:relative;overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
-
-    /* moving row */
-    .atm-track{display:flex;align-items:center;gap:14px;width:max-content;animation:atmMove 68s linear infinite;will-change:transform;transform:translateZ(0)}
-
-    .atm-loop:hover .atm-track{animation-play-state:paused}
-
-    @keyframes atmMove{
-      from{transform:translateX(0)}
-      to{transform:translateX(-50%)}
-    }
-
-    /* card */
-    .atm-card{position:relative;overflow:hidden;flex-shrink:0;width:260px;height:165px;border-radius:24px;background:#e2e8f0;border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 24px rgba(15,23,42,.08),inset 0 1px rgba(255,255,255,.4);transition:transform .45s ease,box-shadow .45s ease;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-
-    .atm-card.wide{width:360px;height:190px}
-    .atm-card.tall{width:190px;height:280px}
-
-    .atm-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(37,99,235,.14),0 10px 22px rgba(15,23,42,.10)}
-
-    .atm-card img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 1s ease}
-
-    .atm-card:hover img{transform:scale(1.04)}
-
-    /* cinematic overlay */
-    .atm-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,23,42,.22),transparent 55%);pointer-events:none}
-
-    /* footer */
-    .atm-mini-note{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.6rem;margin-top:1rem;color:#7c8798;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
-
-    .atm-mini-note i{width:4px;height:4px;border-radius:50%;background:#3b82f6;box-shadow:0 0 10px #3b82f6}
-
-    /* touch device */
-    @media (hover:none){.atm-card:hover,.atm-card:hover img{transform:none}}
-
-    /* ══════════════ TABLET ══════════════ */
-    @media(max-width:900px){.atm-track{gap:12px;animation-duration:58s}.atm-card{width:220px;height:145px;border-radius:20px}.atm-card.wide{width:300px;height:165px}.atm-card.tall{width:160px;height:235px}}
-
-    /* ══════════════ MOBILE ══════════════ */
-    @media(max-width:640px){.atm-section{padding:18px 0 24px}.atm-title{font-size:1.45rem;line-height:1.02}.atm-sub{font-size:.72rem;margin-bottom:.95rem}.atm-track{gap:9px;animation-duration:42s}.atm-card{width:180px;height:118px;border-radius:18px}.atm-card.wide{width:245px;height:132px}.atm-card.tall{width:132px;height:190px}.atm-mini-note{margin-top:.8rem;font-size:.54rem;gap:.4rem;letter-spacing:.12em;padding:0 10px}.atm-mini-note i{width:3px;height:3px}}
-
-    /* small iphone */
-    @media(max-width:390px){.atm-card{width:160px;height:105px}.atm-card.wide{width:220px;height:118px}.atm-card.tall{width:120px;height:175px}.atm-track{gap:8px}}
-
-    /* ══════════════════════════════════════
-       PRESS LOGOS
-    ══════════════════════════════════════ */
-    .press-grid {
-      display:grid; grid-template-columns:repeat(3,1fr);
-      gap:clamp(14px,3vw,2.6rem); align-items:center; justify-items:center;
-      background:var(--paper); border:1px solid var(--border2);
-      border-radius:var(--r); padding:clamp(18px,4vw,2.8rem) clamp(14px,4vw,2rem);
-      margin-top:clamp(14px,2.5vw,20px);
-    }
-    .press-grid img { max-width:100%; max-height:76px; opacity:.9; transition:transform .25s, opacity .25s; }
-    .press-grid a:hover img { transform:scale(1.06); opacity:1; }
-
-    /* ══════════════════════════════════════
-       CONTRIB GRID
-    ══════════════════════════════════════ */
-    .contrib-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));
-      gap:clamp(9px,2vw,14px); margin-top:clamp(14px,3vw,24px);
-    }
-    .contrib-card {
-      padding:clamp(11px,2vw,16px); border:1px solid var(--border2);
-      border-radius:var(--rs); background:var(--paper);
-    }
-    .contrib-card h4 { font-size:clamp(.85rem,1.7vw,.97rem); margin-bottom:.35rem; }
-    .contrib-card p  { font-size:clamp(.78rem,1.4vw,.88rem); color:var(--ink3); line-height:1.62; margin:0; }
-
-    /* ══════════════════════════════════════
-       TEAM
-    ══════════════════════════════════════ */
-    .team-section{text-align:center}
-    .team-intro{max-width:700px;margin:0 auto 40px;font-size:clamp(.88rem,1.8vw,.98rem);line-height:1.72;color:var(--ink2)}
-
-    .team-row{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(18px,4vw,46px)}
-    .team-row+.team-row{margin-top:2.5rem}
-    .team-row-head{margin-bottom:3rem}
-
-    .team-card{display:flex;flex-direction:column;align-items:center;text-align:center;transition:.3s}
-    .team-card:hover{transform:translateY(-6px)}
-
-    .team-card img{display:block;margin:0 auto;width:clamp(86px,18vw,144px);height:clamp(86px,18vw,144px);object-fit:cover;border-radius:50%;filter:grayscale(100%);transition:.4s}
-    .team-card:hover img{filter:grayscale(0%)}
-
-    .team-card.head img{width:clamp(108px,20vw,174px);height:clamp(108px,20vw,174px)}
-
-    .team-card h3{margin:12px 0 2px;font-size:clamp(.82rem,1.7vw,.97rem);font-weight:500;line-height:1.25;color:var(--ink)}
-    .team-card h3 span{font-weight:400;color:var(--ink3)}
-
-    .thai-name{margin:2px 0 0;color:#999;font-size:.87em;line-height:1.2;font-family:'Sarabun','DM Sans',sans-serif}
-
-    .team-card .role{margin-top:6px;font-size:clamp(.74rem,1.4vw,.84rem);color:var(--ink3);line-height:1.25}
-    /* ══════════════════════════════════════
-       GRATITUDE
-    ══════════════════════════════════════ */
-    .grat-box {
-      margin:clamp(28px,5vw,46px) auto clamp(14px,3vw,18px);
-      padding:clamp(18px,4vw,32px);
-      max-width:840px; border-radius:var(--r);
-      background:linear-gradient(135deg,#fff9f5,#f3f0ff);
-      box-shadow:0 12px 32px rgba(90,24,154,.1), 0 5px 16px rgba(0,0,0,.05);
-      text-align:center;
-    }
-    .grat-bar { height:4px; width:72px; margin:0 auto clamp(12px,2.5vw,18px); border-radius:100px; background:linear-gradient(90deg,#ff6b6b,#5a189a); }
-    .grat-box h3 { color:#5a189a; font-size:clamp(1rem,2.5vw,1.4rem); margin-bottom:clamp(10px,2vw,16px); }
-    .grat-box p  { font-size:clamp(.86rem,1.7vw,1.02rem); color:var(--ink2); line-height:1.9; max-width:740px; margin:0 auto; }
-
-    /* ══════════════════════════════════════
-       CODE
-    ══════════════════════════════════════ */
-    pre {
-      background:#0f172a; color:#e2e8f0;
-      padding:clamp(12px,3vw,20px);
-      border-radius:var(--rs);
-      overflow-x:auto; -webkit-overflow-scrolling:touch;
-      font-family:'DM Mono',monospace;
-      font-size:clamp(.72rem,1.4vw,.85rem);
-      line-height:1.68;
-    }
-    .cite-pre { background:var(--paper2); color:var(--ink2); border-left:5px solid #aaa; margin-top:clamp(8px,1.5vw,14px); }
-
-    /* ══════════════════════════════════════
-       FANCY LINKS
-    ══════════════════════════════════════ */
-    .fl    { color:var(--blue); font-weight:600; position:relative; text-decoration:none; transition:color .25s; }
-    .fl::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:linear-gradient(90deg,var(--blue),#4cc9f0); transition:width .32s; border-radius:2px; }
-    .fl:hover { color:#4cc9f0; } .fl:hover::after { width:100%; }
-
-    .flt    { color:var(--red); font-weight:600; position:relative; text-decoration:none; transition:color .25s; }
-    .flt::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:linear-gradient(90deg,var(--red),#ffb3b8); transition:width .32s; border-radius:2px; }
-    .flt:hover { color:#ff6b73; } .flt:hover::after { width:100%; }
-
-    strong > a { display:inline; }
-
-    /* ══════════════════════════════════════
-       CHATBOT
-    ══════════════════════════════════════ */
-    #marsailChat {
-      position:fixed; bottom:20px; right:20px;
-      width:clamp(250px,82vw,295px);
-      background:var(--white); color:var(--ink2);
-      border-radius:var(--r);
-      box-shadow:0 16px 44px rgba(0,0,0,.17);
-      padding:clamp(11px,3vw,16px) clamp(13px,3vw,20px);
-      z-index:9999; cursor:pointer;
-      font-family:'DM Sans',sans-serif;
-      transition:all .4s ease;
-      border:1px solid var(--border2);
-    }
-    #marsailMsg { font-size:clamp(.78rem,2vw,.88rem); line-height:1.55; color:var(--ink2); min-height:2.6em; }
-
-    /* ══════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════ */
-    .site-footer {
-      background:var(--ink);
-      padding:clamp(22px,5vw,2.6rem) clamp(16px,5vw,1.4rem);
-      text-align:center;
-      font-size:clamp(.78rem,1.5vw,.9rem);
-      padding-bottom:calc(clamp(22px,5vw,2.6rem) + env(safe-area-inset-bottom));
-    }
-    .site-footer p { margin:0; color:rgba(255,255,255,.7); letter-spacing:.03em; font-weight:300; }
-    .footer-brand  { color:rgba(255,255,255,.9); }
-    .footer-built  { color:rgba(255,255,255,.6); }
-    .site-footer a { color:rgba(255,255,255,.88); text-decoration:none; font-weight:400; }
-    .site-footer a:hover { text-decoration:underline; }
-
-    /* ══════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════ */
-    @media(max-width:900px) {
-      .at-grid { grid-template-columns:1fr; }
-      .press-grid { grid-template-columns:repeat(2,1fr); }
-    }
-    @media(max-width:600px) {
-      section { margin:clamp(12px,3vw,20px) 11px; }
-      .paper-card { flex-direction:column; }
-      .paper-card > .pc-img, .paper-card > .pc-body { flex:unset; width:100%; }
-      .btn-row { flex-direction:column; }
-      .btn-row .btn { display:block; width:100%; text-align:center; }
-      .meta-grid { flex-direction:column; }
-      .meta-box  { width:100%; }
-      .at-links  { flex-direction:column; }
-      .at-btn-p, .at-btn-s { width:100%; }
-      div[style*="display: flex"][style*="gap: 12px"] { flex-direction:column; }
-      div[style*="display: flex"][style*="gap: 12px"] a { display:block!important; width:100%!important; text-align:center!important; }
-      #marsailChat { bottom:10px; right:9px; left:9px; width:auto; max-width:100%; }
-      .footer-built { display:block; margin-top:.3rem; }
-    }
-    @media(max-width:480px) {
-      .press-grid { grid-template-columns:1fr; }
-      #marsTab { top:11px; }
-    }
-    @media(max-width:600px) { img { max-width:100%; } }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="google" content="notranslate"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>MARSAIL (MARS AI Laboratory)</title>
+<meta name="description" content="MARSAIL (Motor AI Recognition Solution AI Lab): AI research for the automotive insurance ecosystem — damage segmentation, document intelligence and transformer research."/>
+
+<link rel="icon" type="image/png" sizes="32x32" href="img/MARSAIL_LOGO.png"/>
+<link rel="apple-touch-icon" href="img/MARSAIL_LOGO.png"/>
+<meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Reenie+Beanie&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Mali:wght@400;500;600&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+/* ───────── TOKENS (MARSAIL palette: paper · ink · red · navy) ───────── */
+:root{
+  --bg:#faf8f3; --ink:#111111; --mut:#666666; --line:#ddd8cc;
+  --pen:#e63946; --blue:#1d3557; --blue2:#457b9d; --card:#ffffff;
+  --green:#22c55e; --paper2:#f2ede3;
+  --hand:Caveat,'Mali',cursive;
+  --serif:'Instrument Serif','Sarabun',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --wob:6px 24px 8px 22px;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#121110; --ink:#f3efe6; --mut:#a9a498; --line:#2d2b26;
+  --pen:#ff5d6a; --blue:#8fbbdb; --blue2:#7fb2d4; --card:#1b1a17; --paper2:#22201c;}}
+:root[data-theme=dark]{
+  --bg:#121110; --ink:#f3efe6; --mut:#a9a498; --line:#2d2b26;
+  --pen:#ff5d6a; --blue:#8fbbdb; --blue2:#7fb2d4; --card:#1b1a17; --paper2:#22201c;}
+
+/* ───────── BASE ───────── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.7 Inter,'Sarabun',system-ui,sans-serif;
+  overflow-x:clip;-webkit-font-smoothing:antialiased;overflow-wrap:break-word;
+  background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:26px 26px;
+  -webkit-tap-highlight-color:rgba(230,57,70,.15)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+ul{list-style:none}
+:focus-visible{outline:2px dashed var(--pen);outline-offset:4px}
+::selection{background:var(--pen);color:#fff}
+.wrap{width:min(1080px,100% - 44px);margin:auto}
+.hand{font-family:var(--hand);font-weight:700}
+.serif{font-family:var(--serif);font-weight:400}
+.mono{font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+p strong,li strong{font-weight:600}
+.lk-in{color:var(--pen);font-weight:600;position:relative;transition:color .25s}
+.lk-in::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:currentColor;transition:width .32s;border-radius:2px}
+.lk-in:hover::after{width:100%}
+.fl{color:var(--blue);font-weight:600;border-bottom:1.5px dashed currentColor}
+.fl:hover{color:var(--pen)}
+
+/* ───────── NAV ───────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:30;padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nv{display:flex;justify-content:space-between;align-items:center;height:60px;gap:14px}
+.logo{display:flex;align-items:center;gap:8px;font:700 1.8rem/1 var(--hand);letter-spacing:.01em;flex-shrink:0}
+.logo i{color:var(--pen);font-style:normal}
+.logo img{width:32px;height:32px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--pen);background:var(--card)}
+.lk{display:flex;gap:24px;align-items:center;font-size:.88rem;white-space:nowrap}
+.lk a:hover{color:var(--pen)}
+.pubpill{display:inline-flex;align-items:center;gap:6px;font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--ink);border-radius:99px;padding:5px 13px;transition:background .2s,color .2s}
+.lk a.pubpill:hover{background:var(--ink);color:var(--bg)}
+.tg{border:1px solid var(--ink);background:none;color:var(--ink);border-radius:99px;padding:4px 12px;cursor:pointer;font:500 .72rem var(--mono);min-height:30px}
+.tg:hover{background:var(--pen);border-color:var(--pen);color:#fff}
+#pg{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--pen)}
+
+/* ───────── HERO ───────── */
+.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:130px 0 90px;text-align:center}
+#cv{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:12px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.2);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(34,197,94,.06)}}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(4.2rem,17vw,12.5rem);line-height:.88;letter-spacing:-.04em;position:relative;display:inline-block;margin:0 auto}
+h1 span{color:var(--pen)}
+h1 svg{position:absolute;left:-2%;bottom:-6%;width:104%;height:.26em;overflow:visible}
+.draw{fill:none;stroke:var(--pen);stroke-width:5;stroke-linecap:round;stroke-dasharray:1200;stroke-dashoffset:1200;animation:dr 1.8s .9s ease forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.ch{display:inline-block;font-weight:inherit;opacity:0;transform:translateY(70%) rotate(9deg);animation:up .9s cubic-bezier(.2,.9,.3,1.25) forwards;animation-delay:calc(var(--i)*.1s + .1s)}
+@keyframes up{to{opacity:1;transform:none}}
+.sub{font:500 clamp(1.7rem,3.8vw,2.7rem)/1.15 var(--hand);margin:34px auto 0;max-width:760px}
+.sub em{font-style:normal;color:var(--blue);box-shadow:inset 0 -.32em 0 color-mix(in srgb,var(--blue) 20%,transparent)}
+.lead{color:var(--mut);max-width:640px;margin:18px auto 0;font-size:1.04rem;font-weight:300}
+.note{position:absolute;right:3%;top:150px;transform:rotate(7deg);text-align:center;font:700 1.6rem/1 var(--hand);color:var(--pen);z-index:2}
+.note svg{display:block;margin:4px auto 0}
+#llm-box{margin:34px auto 28px;max-width:640px;text-align:left;background:var(--card);border:1.5px solid var(--ink);border-radius:var(--wob);padding:20px 24px;box-shadow:6px 6px 0 var(--pen)}
+.llm-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.llm-head .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.2);animation:pulse 2s ease-in-out infinite}
+#llm-text{font:400 .88rem/1.7 var(--mono);color:var(--ink);min-height:3.4em}
+#llm-text::after{content:'';display:inline-block;width:2px;height:1.05em;background:var(--pen);vertical-align:middle;margin-left:3px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.hero-scroll{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:2;animation:sf 2.5s ease-in-out infinite}
+@keyframes sf{0%,100%{opacity:.4;transform:translate(-50%,0)}50%{opacity:.9;transform:translate(-50%,7px)}}
+
+/* ───────── BUTTONS ───────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;min-height:44px;border:1.5px solid var(--ink);color:var(--ink);background:transparent;
+  border-radius:255px 15px 225px 15px/15px 225px 15px 255px;font:500 .92rem Inter,sans-serif;margin:0 10px 10px 0;cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:rotate(-1.5deg) translateY(-2px);background:var(--ink);color:var(--bg)}
+.btn.p{background:var(--pen);border-color:var(--pen);color:#fff;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--pen) 70%,transparent)}
+.btn.p:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.d{background:var(--ink);color:var(--bg)}
+.btn.d:hover{background:var(--pen);border-color:var(--pen);color:#fff}
+.btn.c{background:var(--c);border-color:var(--c);color:#fff}
+.btn.c:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.pdf{background:#f4b6b6;border-color:#f4b6b6;color:#4a1c1c}
+.btn.pdf:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn svg{flex-shrink:0}
+.btns{display:flex;flex-wrap:wrap;margin-top:14px}
+
+/* ───────── MARQUEE + STATS ───────── */
+.mq{overflow:hidden;white-space:nowrap;padding:14px 0;background:var(--ink);color:var(--bg);transform:rotate(-1.4deg);margin:34px -3% 0;position:relative;z-index:3}
+.mq div{display:inline-block;animation:mq 34s linear infinite;font:400 2.1rem var(--serif)}
+.mq span{margin:0 24px}.mq i{color:var(--pen);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+.sts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:80px 0 30px}
+.sts b{display:block;font:400 clamp(3rem,7vw,5.4rem)/1 var(--serif)}
+.sts b i{font-style:normal}.sts b small{font-size:.5em;color:var(--pen)}
+.sts span{font:700 1.3rem var(--hand);color:var(--blue)}
+
+/* ───────── SECTIONS ───────── */
+section{padding:90px 0;border-top:1px solid var(--line);position:relative}
+.hd{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:44px}
+.hd.c{justify-content:center;text-align:center}
+h2{font:400 clamp(2.3rem,5.2vw,3.9rem)/1.02 var(--serif);letter-spacing:-.02em}
+h2 em{color:var(--pen)}
+.scrawl{font:700 1.5rem var(--hand);color:var(--blue);transform:rotate(-3deg);display:inline-block}
+.intro{color:var(--mut);max-width:760px;margin:-18px 0 36px;font-size:1.02rem}
+.intro strong{color:var(--ink)}
+.mission{font:400 clamp(1.6rem,3.5vw,2.7rem)/1.22 var(--serif);max-width:960px;margin-bottom:46px}
+.mission em{color:var(--pen)}
+.mission strong{font-weight:400;box-shadow:inset 0 -.3em 0 color-mix(in srgb,var(--blue) 20%,transparent)}
+.mission .w{opacity:.14;transition:opacity .35s}.mission .w.on{opacity:1}
+.big{font:400 clamp(1.45rem,3vw,2.1rem)/1.3 var(--serif);max-width:860px}
+.big b{font-weight:400;color:var(--pen)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s,transform .8s}.rv.on{opacity:1;transform:none}
+
+/* acronym */
+.acr{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:38px 0 56px}
+.acr div{border-left:1.5px solid var(--ink);padding-left:18px}
+.acr b{display:block;font:400 clamp(4rem,8vw,6.4rem)/.9 var(--serif);color:var(--pen)}
+.acr span{font:700 1.45rem var(--hand);color:var(--ink)}
+
+/* frames & cards */
+.fr{display:block;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden;background:var(--card);box-shadow:6px 6px 0 var(--pen);transform:rotate(var(--r,-1.5deg));transition:transform .25s}
+.fr img{width:100%}
+.fr.k{box-shadow:6px 6px 0 var(--ink)}
+.solo{max-width:820px;margin:0 auto 40px}
+.nc{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--wob);padding:clamp(24px,4vw,42px);box-shadow:7px 7px 0 var(--c,var(--pen));max-width:860px;margin:0 auto 56px;position:relative}
+.nc h3{font:400 clamp(1.8rem,3.6vw,2.7rem)/1.05 var(--serif);color:var(--c,var(--ink));margin-bottom:14px}
+.nc h3 small{font-size:.62em;color:var(--mut)}
+.nc p{color:var(--mut);line-height:1.9}.nc p strong{color:var(--ink)}
+.nc .sig{margin-top:20px;font:700 1.45rem var(--hand);color:var(--c,var(--pen))}
+.nc .sig span{display:block;font:500 .72rem var(--mono);letter-spacing:.06em;color:var(--mut);margin-top:4px}
+.nc.ctr{text-align:center}
+.bar{height:4px;width:72px;margin:0 auto 18px;border-radius:100px;background:linear-gradient(90deg,#ff6b6b,#5a189a)}
+
+.pc{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,60px);align-items:center;margin-bottom:64px}
+.pc.rev .fr{order:2}
+.pc h3,.cd h3{font:400 clamp(1.7rem,3vw,2.5rem)/1.08 var(--serif);margin:8px 0 14px}
+.pc p{color:var(--mut);margin-bottom:12px}
+.pc p strong,.pc p em{color:var(--ink)}
+.lgchip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;margin-bottom:12px}
+.lgchip img{height:30px;width:auto}
+.chip{display:inline-block;font:500 .68rem var(--mono);letter-spacing:.06em;border:1px dashed var(--c,var(--blue));color:color-mix(in srgb,var(--c,var(--blue)) 72%,var(--ink));padding:3px 12px;border-radius:99px;transform:rotate(-1.5deg);margin:0 0 10px}
+
+/* autotech */
+.at{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;margin-top:34px;align-items:start}
+.cd{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--wob);overflow:hidden;box-shadow:6px 6px 0 var(--ink)}
+.cd .cov{border-bottom:1.5px solid var(--ink);width:100%}
+.cd .in{padding:clamp(20px,3vw,32px)}
+.cd h3 span{color:var(--pen)}
+.cd p{color:var(--mut)}
+.meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.mb{flex:1 1 130px;border:1px dashed var(--mut);border-radius:10px;padding:10px 14px;background:var(--bg)}
+.mb .mono{font-size:.62rem;display:block}
+.mb b{font:400 1.35rem/1.2 var(--serif)}
+.side{display:flex;flex-direction:column;gap:30px}
+.spk{background:linear-gradient(145deg,#0f172a,#1d2f4a);color:#fff;text-align:center;border:1.5px solid var(--ink);border-radius:6px 24px 8px 22px;padding:30px 22px;position:relative;overflow:hidden;box-shadow:6px 6px 0 var(--pen)}
+.spk .glow{position:absolute;width:180px;height:180px;background:rgba(69,123,157,.28);border-radius:50%;top:-60px;right:-60px}
+.spk img{position:relative;width:clamp(120px,22vw,170px);aspect-ratio:4/5;object-fit:cover;border-radius:4px;margin:0 auto 16px;border:1.5px solid rgba(255,255,255,.7);transform:rotate(-2.5deg);box-shadow:5px 5px 0 var(--pen)}
+.spk h3{font:400 1.7rem/1.1 var(--serif);position:relative;margin-bottom:6px}
+.spk p{position:relative;color:rgba(255,255,255,.75);font-size:.9rem;line-height:1.6}
+.tp{padding:26px 28px}
+.tp h4{font:400 1.7rem var(--serif);margin-bottom:10px}
+.ls li{position:relative;padding-left:26px;color:var(--mut);margin-bottom:4px}
+.ls li::before{content:'✺';position:absolute;left:0;color:var(--pen)}
+.cta-r{text-align:center;max-width:860px;margin:44px auto 0}
+.cta-r p{color:var(--mut);margin-bottom:18px}
+
+/* moments strip */
+.atm{text-align:center;overflow:hidden}
+.atm h2{margin-bottom:6px}
+.atm .hsub{font:700 1.5rem var(--hand);color:var(--blue);margin-bottom:30px}
+.loop{overflow:hidden;width:100%;padding:12px 0;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;align-items:center;gap:16px;width:max-content;animation:mq 70s linear infinite;will-change:transform}
+.loop:hover .track{animation-play-state:paused}
+.mc{flex-shrink:0;width:260px;height:165px;border:1.5px solid var(--ink);border-radius:4px;overflow:hidden;background:var(--paper2);transition:transform .35s}
+.mc:nth-child(odd){transform:rotate(-1.2deg)}.mc:nth-child(even){transform:rotate(1deg)}
+.mc.wide{width:360px;height:190px}.mc.tall{width:190px;height:280px}
+.mc:hover{transform:rotate(0) translateY(-6px)}
+.mc img{width:100%;height:100%;object-fit:cover}
+.mini{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.7rem;margin-top:26px}
+.mini i{width:5px;height:5px;border-radius:50%;background:var(--pen)}
+
+/* logos */
+.logos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--ink);border-radius:var(--wob);overflow:hidden;background:#fff;box-shadow:6px 6px 0 var(--ink)}
+.logos a{display:flex;align-items:center;justify-content:center;padding:clamp(18px,3vw,34px);min-height:120px;border-right:1px dashed #cfc9bb;border-bottom:1px dashed #cfc9bb}
+.logos a:nth-child(3n){border-right:0}.logos a:nth-last-child(-n+3){border-bottom:0}
+.logos img{max-height:70px;width:auto;max-width:100%;filter:grayscale(1);opacity:.8;transition:filter .3s,opacity .3s,transform .3s}
+.logos a:hover img{filter:none;opacity:1;transform:scale(1.07) rotate(-1deg)}
+.after{margin-top:26px;color:var(--mut);max-width:840px;font-size:.95rem}
+
+/* principles-like grid */
+.pr{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:10px}
+.pr div{border-left:1.5px solid var(--ink);padding-left:20px}
+.pr b{display:block;font:400 1.75rem/1.1 var(--serif);margin:0 0 8px}
+.pr p{color:var(--mut);font-size:.93rem;margin:0}
+
+/* research list */
+.pj{display:grid;grid-template-columns:90px 1fr;gap:10px 28px;padding:38px 0;border-bottom:1px solid var(--line);transition:padding .3s}
+.pj:first-of-type{border-top:1px solid var(--line)}
+.pj:hover{padding-left:14px}
+.n{font:400 5.2rem/.8 'Reenie Beanie',cursive;color:color-mix(in srgb,var(--c) 75%,var(--ink))}
+.pj h3{font:400 clamp(2rem,4vw,3rem)/1.02 var(--serif);display:inline-block;background:linear-gradient(var(--c),var(--c)) 0 100%/0 3px no-repeat;transition:background-size .5s,color .2s}
+.pj:hover h3{background-size:100% 3px;color:color-mix(in srgb,var(--c) 75%,var(--ink))}
+.th{font:700 1.35rem/1.25 var(--hand);color:var(--blue);margin:6px 0 10px}
+.th small{font:500 .78em var(--hand);color:var(--mut)}
+.pj p{color:var(--mut);max-width:680px;font-size:.97rem;margin-bottom:10px}
+.pj p strong{color:var(--ink)}
+.rl{font:500 .72rem var(--mono);letter-spacing:.04em;color:var(--mut)}
+.rl strong{color:var(--ink);font-weight:500}
+.fin{margin:56px 0 6px;padding:16px 22px;text-align:center;border:2px dashed var(--mut);border-radius:14px;font:700 1.55rem/1.3 var(--hand);color:var(--blue);transform:rotate(-.8deg)}
+
+/* code / bib */
+.bib{position:relative;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--c,var(--mut));border-radius:10px;margin-bottom:16px}
+.bib pre{font:400 .78rem/1.65 var(--mono);padding:20px;padding-right:90px;overflow-x:auto;white-space:pre;color:var(--ink)}
+.bib button{position:absolute;top:10px;right:10px;font:500 .68rem var(--mono);background:var(--bg);color:var(--ink);border:1px solid var(--ink);border-radius:99px;padding:3px 12px;cursor:pointer;min-height:30px}
+.bib button:hover{background:var(--pen);color:#fff;border-color:var(--pen)}
+.bib.dk{background:#0f172a;border-color:#0f172a;border-left-color:var(--pen);box-shadow:6px 6px 0 var(--ink)}
+.bib.dk pre{color:#e2e8f0}
+.bib.dk button{background:transparent;color:#e2e8f0;border-color:rgba(255,255,255,.5)}
+.ds li{font-size:1.05rem;margin-bottom:6px}
+.ds li::before{content:'✎ ';color:var(--pen)}
+.cen{text-align:center}
+.cen p{color:var(--mut);max-width:720px;margin:0 auto 22px}
+
+/* team */
+.tr{display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(22px,4vw,48px)}
+.tr + .tr{margin-top:44px}
+.tc{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:220px;transition:transform .3s}
+.tc:hover{transform:translateY(-6px) rotate(-1deg)}
+.tc .pho{position:relative;display:inline-block}
+.tc img{width:clamp(96px,18vw,140px);height:clamp(96px,18vw,140px);object-fit:cover;border-radius:50%;filter:grayscale(1);border:1.5px solid var(--ink);box-shadow:4px 4px 0 var(--pen);transition:filter .4s;background:var(--card)}
+.tc:hover img{filter:none}
+.tc.head img{width:clamp(120px,22vw,180px);height:clamp(120px,22vw,180px);box-shadow:6px 6px 0 var(--pen)}
+.tc h3{font:400 1.45rem/1.15 var(--serif);margin:16px 0 2px}
+.tc h3 span{font:700 1.2rem var(--hand);color:var(--blue)}
+.tc .tn{font:500 .86rem/1.3 'Mali',var(--hand);color:var(--mut);margin:2px 0 0}
+.tc .role{font:500 .68rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-top:8px;line-height:1.4}
+.tc .yr{font:500 .68rem var(--mono);color:#9a86bb;margin-top:4px;letter-spacing:.06em}
+.bdg{position:absolute;bottom:2px;right:-4px;font:700 1rem/1 var(--hand);color:#fff;padding:3px 10px;border-radius:99px;transform:rotate(-6deg);background:var(--bc,#5a189a)}
+.lab{text-align:center;margin:56px 0 30px}
+.lab .tag{display:inline-block;font:700 1.35rem var(--hand);color:var(--tc,var(--blue));border:1.5px solid var(--tc,var(--blue));border-radius:50%/60%;padding:4px 22px;transform:rotate(-2deg);background:var(--bg)}
+.div{position:relative;margin:64px 0 34px;text-align:center}
+.div::before{content:'';position:absolute;top:50%;left:0;right:0;border-top:1.5px dashed var(--line)}
+.div .lab{position:relative;display:inline-block;margin:0;background:var(--bg);padding:0 22px}
+.tnote{text-align:center;max-width:640px;margin:0 auto 34px;color:var(--mut);font-size:.95rem}
+.tnote strong{color:var(--ink)}
+.adv{max-width:780px;margin:0 auto 54px;padding:clamp(24px,4vw,40px);border-radius:var(--wob);background:linear-gradient(135deg,#0f172a,#1d2f4a);color:#fff;position:relative;overflow:hidden;text-align:center;border:1.5px solid var(--ink);box-shadow:7px 7px 0 var(--pen)}
+.adv .g1{position:absolute;width:220px;height:220px;background:rgba(69,123,157,.22);border-radius:50%;top:-80px;right:-60px}
+.adv .g2{position:absolute;width:160px;height:160px;background:rgba(230,57,70,.14);border-radius:50%;bottom:-60px;left:-40px}
+.adv > *{position:relative}
+.adv .mono{color:rgba(255,255,255,.55);margin-bottom:20px;display:block}
+.adv img{width:clamp(100px,18vw,132px);height:clamp(100px,18vw,132px);object-fit:cover;border-radius:50%;border:3px solid rgba(255,255,255,.25);margin:0 auto 16px;transition:border-color .4s}
+.adv img:hover{border-color:var(--pen)}
+.adv h3{font:400 clamp(1.7rem,3vw,2.2rem)/1.1 var(--serif)}
+.adv h3 span{font:700 1.35rem var(--hand);color:rgba(255,255,255,.6)}
+.adv .tn{font:500 .88rem 'Mali',var(--hand);color:rgba(255,255,255,.55);margin:4px 0 10px}
+.adv p.r{color:rgba(255,255,255,.75);font-size:.92rem;line-height:1.6;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.tags span{font:500 .68rem var(--mono);padding:4px 12px;border-radius:99px;border:1px solid}
+.tags .a{background:rgba(69,123,157,.3);color:#a9d0ea;border-color:rgba(69,123,157,.6)}
+.tags .b{background:rgba(230,57,70,.2);color:#ffb3b8;border-color:rgba(230,57,70,.45)}
+.tags .c2{background:rgba(20,184,166,.22);color:#5eead4;border-color:rgba(20,184,166,.4)}
+.adv blockquote{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);font:italic 400 1.3rem/1.5 var(--serif);color:rgba(255,255,255,.8)}
+.adv-arrow{text-align:center;margin-bottom:34px}
+.adv-arrow i{display:block;width:1px;height:34px;background:var(--mut);margin:6px auto}
+
+/* sponsors */
+.sp{text-align:center;margin-bottom:56px}
+.sp h3{font:700 1.8rem var(--hand);color:var(--blue);margin-bottom:14px}
+.sp .lgchip{padding:12px 20px}.sp .lgchip img{height:clamp(56px,11vw,96px)}
+.sp p{max-width:620px;margin:14px auto 0;color:var(--mut)}
+.pg3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;max-width:900px;margin:0 auto;text-align:center}
+.pg3 div{display:flex;flex-direction:column;align-items:center;gap:12px}
+.pg3 a.lgchip{margin:0}.pg3 img{height:clamp(34px,7vw,52px)}
+.pg3 p{font:500 .74rem var(--mono);letter-spacing:.06em;color:var(--mut)}
+
+/* fun facts */
+.ff{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.ffc{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--wob);padding:clamp(22px,3vw,34px);box-shadow:7px 7px 0 var(--c)}
+.ffc h3{font:400 clamp(1.6rem,2.6vw,2.1rem)/1.1 var(--serif);margin-bottom:16px}
+.ffc p{color:var(--mut);font-size:.96rem;line-height:1.8}
+.ffc p strong{color:var(--ink)}
+.ffc hr{border:none;border-top:1px dashed var(--line);margin:16px 0}
+.ffc.th-v p{font-family:'Sarabun',sans-serif;line-height:1.95;font-size:1rem}
+
+/* farewell meta */
+.fm{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:840px;margin:10px 0 40px}
+.fm div{border-left:1.5px solid var(--ink);padding-left:18px}
+.fm b{display:block;font:400 clamp(1.6rem,3vw,2.3rem)/1.1 var(--serif)}
+
+/* chat */
+#marsailChat{position:fixed;bottom:20px;right:20px;width:clamp(250px,82vw,300px);z-index:40;cursor:pointer;background:var(--card);color:var(--ink);
+  border:1.5px solid var(--ink);border-radius:var(--wob);padding:14px 18px 16px;box-shadow:5px 5px 0 var(--pen);transition:transform .25s}
+#marsailChat:hover{transform:rotate(-1deg) translateY(-2px)}
+.ch-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ch-h div{display:flex;align-items:center;gap:8px;font:700 1.35rem/1 var(--hand)}
+.ch-h .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+#marsailClose{background:none;border:none;font-size:14px;color:var(--mut);cursor:pointer;padding:4px 6px}
+#marsailMsg{font-size:.86rem;line-height:1.55;color:var(--mut);min-height:2.7em}
+#marsailMsg::after{content:'';display:inline-block;width:2px;height:1.05em;background:var(--pen);vertical-align:middle;margin-left:2px;animation:bl 1s steps(1) infinite}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:50px 0 calc(60px + env(safe-area-inset-bottom,0px));text-align:center}
+footer .hand{font-size:2.4rem;color:var(--pen);line-height:1}
+footer p{color:var(--mut);font-size:.84rem;margin-top:12px}
+footer a{border-bottom:1px solid;color:var(--ink)}
+
+/* ink cursor */
+#ink{position:fixed;left:0;top:0;width:24px;height:24px;border:1.5px solid var(--pen);border-radius:50%;pointer-events:none;z-index:99;opacity:0;transition:scale .25s,background .25s,opacity .3s}
+#ink.big{scale:2;background:color-mix(in srgb,var(--pen) 22%,transparent)}
+@media(pointer:coarse){#ink{display:none}}
+
+/* ───────── RESPONSIVE ───────── */
+@media(max-width:1000px){.note{display:none}}
+@media(max-width:900px){
+  .at,.ff{grid-template-columns:1fr}
+  .pr{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  .wrap{width:min(1080px,100% - 32px)}
+  .nv{height:56px}
+  .lk{gap:16px;font-size:.8rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lk::-webkit-scrollbar{display:none}
+  .logo{font-size:1.55rem}.logo img{width:28px;height:28px}
+  .hero{padding:104px 0 80px}
+  section{padding:62px 0}.hd{margin-bottom:30px}
+  .sts{grid-template-columns:1fr 1fr;padding:56px 0 10px}
+  .acr{grid-template-columns:1fr 1fr}
+  .pc{grid-template-columns:1fr;margin-bottom:50px}.pc.rev .fr{order:0}
+  .pj{grid-template-columns:1fr;padding:28px 0}.pj:hover{padding-left:0}.n{font-size:3.6rem}
+  .mq{margin-left:-6%;margin-right:-6%}.mq div{font-size:1.6rem}
+  .fm{grid-template-columns:1fr}
+  .btn{width:100%;margin-right:0}
+  .logos{grid-template-columns:1fr 1fr}
+  .logos a{border-right:1px dashed #cfc9bb!important;border-bottom:1px dashed #cfc9bb!important}
+  .logos a:nth-child(2n){border-right:0!important}.logos a:nth-last-child(-n+2){border-bottom:0!important}
+  .mc{width:190px;height:122px}.mc.wide{width:250px;height:136px}.mc.tall{width:140px;height:200px}
+  .bib pre{font-size:.72rem;padding:16px;padding-top:44px}
+  #marsailChat{left:10px;right:10px;bottom:10px;width:auto}
+}
+@media(max-width:480px){
+  h1{font-size:clamp(3.4rem,20vw,6rem)}
+  .sts{gap:14px}.acr{gap:18px}.pr{grid-template-columns:1fr}
+  .logos{grid-template-columns:1fr}
+  .logos a{border-right:0!important;border-bottom:1px dashed #cfc9bb!important}.logos a:last-child{border-bottom:0!important}
+}
+@media(hover:none){.pj:hover h3{background-size:0 3px;color:inherit}.btn:hover{transform:none;background:inherit;color:inherit}.btn.p:hover{background:var(--pen);border-color:var(--pen);color:#fff}.btn.d:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}.btn.c:hover{background:var(--c);border-color:var(--c);color:#fff}.btn.pdf:hover{background:#f4b6b6;border-color:#f4b6b6;color:#4a1c1c}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .draw{stroke-dashoffset:0}.rv,.ch{opacity:1;transform:none}.mission .w{opacity:1}
+  .track,.mq div{animation:none!important}
+}
+</style>
 </head>
-
 <body>
+<div id="ink"></div>
 
-<!-- ══════════════ STATIC NAVBAR ══════════════ -->
-<nav id="site-nav">
-  <div class="nav-inner">
-    <a href="#hero" class="nav-logo">MARSAIL</a>
-
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#team">People</a></li>
-      <li><a href="#funfacts">Story</a></li>
-    </ul>
-
-    <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
-       target="_blank" rel="noopener" class="nav-pub">
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      PUBLICATION
-    </a>
-
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<!-- ══════════════ NAV ══════════════ -->
+<nav id="site-nav"><i id="pg"></i>
+  <div class="wrap nv">
+    <a class="logo" href="#hero"><img src="img/MARSAIL_LOGO.png" alt="" width="32" height="32" onerror="this.style.display='none'"/>MARS<i>AIL</i></a>
+    <div class="lk">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#team">People</a>
+      <a href="#funfacts">Story</a>
+      <a class="pubpill" href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Publication</a>
+      <button class="tg" id="th" aria-label="Toggle theme">◐ theme</button>
+    </div>
   </div>
 </nav>
-<script>
-  /* scroll class */
-  const _nav = document.getElementById('site-nav');
-  window.addEventListener('scroll', () => _nav.classList.toggle('scrolled', window.scrollY > 10));
-
-  /* smooth scroll for all nav links */
-  document.querySelectorAll('#site-nav a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); _nav.classList.remove('nav-open'); }
-    });
-  });
-
-  /* mobile toggle */
-  document.getElementById('navToggle').addEventListener('click', () => _nav.classList.toggle('nav-open'));
-</script>
 
 <!-- ══════════════ HERO ══════════════ -->
-<header id="hero" class="hero-white">
-  <svg id="hero-net"></svg>
+<header class="hero" id="hero">
+  <canvas id="cv" aria-hidden="true"></canvas>
+  <div class="note">since Jan 2022<svg width="60" height="46" viewBox="0 0 60 46" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M50 4C48 24 32 34 8 38M8 38l11-9M8 38l13 4"/></svg></div>
+  <div class="wrap">
+    <div class="mono eyebrow"><span class="dot"></span>MARS Artificial Intelligence Laboratory</div><br/>
+    <h1 aria-label="MARSAIL"><b class="ch" style="--i:0">M</b><b class="ch" style="--i:1">A</b><b class="ch" style="--i:2">R</b><b class="ch" style="--i:3">S</b><span><b class="ch" style="--i:4">A</b><b class="ch" style="--i:5">I</b><b class="ch" style="--i:6">L</b></span>
+      <svg viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true"><path class="draw" d="M4 24 C90 6 190 38 300 18 S510 8 596 22"/></svg></h1>
+    <p class="sub">Motor AI Recognition Solution <em>AI Lab</em></p>
+    <p class="lead">We build and train AI that truly understands the entire automotive insurance ecosystem — from every scratch and component to every claim, repair note, and document. Ethical, transparent, and fair.</p>
 
-  <p class="hero-eyebrow">
-    <span class="label-group">
-      <span class="dot"></span>
-      <span class="label-text">MARS Artificial Intelligence Laboratory</span>
-    </span>
-  </p>
-
-  <h1 class="hero-h1">MARSAIL</h1>
-
-  <div class="hero-subtitle-row">
-    <span class="ln"></span>
-    <span class="hero-subtitle">Motor AI Recognition Solution&nbsp;AI Lab</span>
-    <span class="ln r"></span>
-  </div>
-
-  <p class="hero-mission">
-    We build and train AI that truly understands the entire automotive
-    insurance ecosystem — from every scratch and component to every claim,
-    repair note, and document. Ethical, transparent, and fair.
-  </p>
-
-  <!-- LLM STREAM -->
-  <div id="llm-box">
-    <div class="llm-head">
-      <div class="llm-dot"></div>
-      <span class="llm-label">MARSAIL · Model Inference</span>
+    <div id="llm-box">
+      <div class="llm-head"><span class="dot"></span><span class="mono">MARSAIL · Model Inference</span></div>
+      <div id="llm-text" aria-live="off"></div>
     </div>
-    <div id="llm-text"><span class="cursor"></span></div>
-  </div>
 
-  <div class="hero-actions">
-    <a href="#research" class="btn btn-dark">Explore Research →</a>
-    <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3"
-       target="_blank" rel="noopener" class="btn btn-ghost">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:7px;">
-        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      Publication
-    </a>
+    <a class="btn p" href="#research">Explore Research →</a>
+    <a class="btn" href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Publication</a>
   </div>
-
-  <div class="hero-scroll">SCROLL</div>
+  <div class="hero-scroll mono">scroll ↓</div>
 </header>
 
+<div class="mq" aria-hidden="true"><div>
+  <span>Car damage segmentation</span><i>✺</i><span>Vision transformers</span><i>✺</i><span>Document OCR</span><i>✺</i><span>Insurance AI</span><i>✺</i><span>Knowledge distillation</span><i>✺</i><span>Property risk</span><i>✺</i><span>Ethical · Transparent · Fair</span><i>✺</i>
+  <span>Car damage segmentation</span><i>✺</i><span>Vision transformers</span><i>✺</i><span>Document OCR</span><i>✺</i><span>Insurance AI</span><i>✺</i><span>Knowledge distillation</span><i>✺</i><span>Property risk</span><i>✺</i><span>Ethical · Transparent · Fair</span><i>✺</i>
+</div></div>
+
+<div class="wrap sts rv">
+  <div><b><i data-n="4.7" data-d="1">0</i></b><span>years in the making</span></div>
+  <div><b><i data-n="9">0</i></b><span>research highlights</span></div>
+  <div><b><i data-n="173">0</i></b><span>handbook pages</span></div>
+  <div><b><i data-n="17">0</i></b><span>property risk categories</span></div>
+</div>
+
 <!-- ══════════════ ABOUT ══════════════ -->
-<section id="about">
-  <h2>🚀 About MARS</h2>
-  <p><b>MARS</b> is a state-of-the-art deep learning model for car damage instance segmentation. <span style="font-weight:600">It stands for:</span></p>
+<section id="about"><div class="wrap">
+  <div class="hd rv"><h2>About <em>MARS</em></h2><span class="scrawl">🚀 meet the model ↓</span></div>
 
-  <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem 1.3rem;margin:12px 0;padding:13px 16px;border:1px solid var(--border2);border-radius:var(--rs);background:var(--paper);">
-    <span><strong style="color:var(--blue);font-size:1.3rem">M</strong> <span style="font-size:.9rem;color:var(--ink2)">Mask</span></span>
-    <span><strong style="color:var(--blue);font-size:1.3rem">A</strong> <span style="font-size:.9rem;color:var(--ink2)">Attention</span></span>
-    <span><strong style="color:var(--blue);font-size:1.3rem">R</strong> <span style="font-size:.9rem;color:var(--ink2)">Refinement</span></span>
-    <span><strong style="color:var(--blue);font-size:1.3rem">S</strong> <span style="font-size:.9rem;color:var(--ink2)">Sequential Quadtree</span></span>
+  <p class="big rv"><b>MARS</b> is a state-of-the-art deep learning model for car damage instance segmentation. <span style="font-style:italic">It stands for:</span></p>
+
+  <div class="acr rv">
+    <div><b>M</b><span>Mask</span></div>
+    <div><b>A</b><span>Attention</span></div>
+    <div><b>R</b><span>Refinement</span></div>
+    <div><b>S</b><span>Sequential Quadtree</span></div>
   </div>
 
-  <div style="margin:clamp(18px,4vw,30px) auto;padding:clamp(16px,4vw,28px);max-width:840px;border-radius:var(--r);background:linear-gradient(135deg,#f5f3ff,#eef2ff);border:1px solid #ddd9f5;box-shadow:var(--sh);">
-    <h3 style="font-size:clamp(1rem,2.5vw,1.55rem);color:#4a3f8f;margin-bottom:.8rem;">🕰️ MARSAIL Lab <span style="opacity:.72">(2022 – 2026)</span></h3>
-    <p style="font-size:clamp(.88rem,1.7vw,1.02rem);color:#2f3e46;line-height:1.88;"><strong style="color:#5a189a">MARSAIL</strong> was built and developed over <strong>4 years and 7 months</strong>, spanning from <strong>2022 to 2026</strong>, advancing <strong>AI-driven automation for automotive insurance</strong> — integrating computer vision, intelligent segmentation, transformer architectures, and decision intelligence systems.<br/><br/>As of July 2026, MARSAIL stands as a <strong>fully realized research chapter</strong> — an independent AI initiative shaped by long-term vision, technical precision, and an unwavering commitment to meaningful innovation.</p>
-    <p style="margin-top:16px;font-size:.88rem;color:#6c757d;letter-spacing:.35px;">— Dr. Teerapong Panboonyuen <span style="display:block;opacity:.72;margin-top:5px">Founder &amp; Research Architect · January 2022 – July 2026.</span></p>
+  <div class="nc rv" style="--c:#5a189a">
+    <h3>🕰️ MARSAIL Lab <small>(2022 – 2026)</small></h3>
+    <p><strong style="color:#5a189a">MARSAIL</strong> was built and developed over <strong>4 years and 7 months</strong>, spanning from <strong>2022 to 2026</strong>, advancing <strong>AI-driven automation for automotive insurance</strong> — integrating computer vision, intelligent segmentation, transformer architectures, and decision intelligence systems.<br/><br/>As of July 2026, MARSAIL stands as a <strong>fully realized research chapter</strong> — an independent AI initiative shaped by long-term vision, technical precision, and an unwavering commitment to meaningful innovation.</p>
+    <div class="sig">— Dr. Teerapong Panboonyuen<span>Founder &amp; Research Architect · January 2022 – July 2026.</span></div>
   </div>
 
-  <div class="img-grid">
-    <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/" target="_blank">
-      <img src="https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png" alt="MARSAIL Lab Logo" style="border-radius:var(--rs);box-shadow:var(--sh);"/>
-    </a>
-  </div>
-</section>
+  <a class="fr solo rv" style="--r:-1deg" href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/" target="_blank">
+    <img src="https://github.com/kaopanboonyuen/kaopanboonyuen.github.io/raw/main/files/MARS/MARSAIL.png" alt="MARSAIL Lab Logo" loading="lazy"/>
+  </a>
+</div></section>
 
 <!-- ══════════════ VISUAL RESULTS ══════════════ -->
-<section>
-  <h2>✨ Visual Results</h2>
-  <p>MARS delivers superior segmentation accuracy:</p>
-  <div class="img-grid">
-    <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">
-      <img src="img/featured.png" alt="Architecture" style="border-radius:var(--rs);box-shadow:var(--sh);"/>
-    </a>
-  </div>
-</section>
+<section><div class="wrap">
+  <div class="hd rv"><h2>Visual <em>Results</em></h2><span class="scrawl">✨ superior accuracy</span></div>
+  <p class="intro rv">MARS delivers superior segmentation accuracy:</p>
+  <a class="fr solo rv" style="--r:1deg" href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">
+    <img src="img/featured.png" alt="Architecture" loading="lazy"/>
+  </a>
+  <a class="fr solo rv" style="--r:-1deg;margin-bottom:0" href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">
+    <img src="img/MARS_003.png" alt="MARS Segmentation" loading="lazy"/>
+  </a>
+</div></section>
 
-<section>
-  <div class="img-grid">
-    <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank">
-      <img src="img/MARS_003.png" alt="MARS Segmentation" style="border-radius:var(--rs);box-shadow:var(--sh);"/>
-    </a>
-  </div>
-</section>
+<!-- ══════════════ PRESS (FEATURE) ══════════════ -->
+<section><div class="wrap">
+  <div class="hd rv"><h2>Press &amp; <em>Media Coverage</em></h2><span class="scrawl">📰 in the news</span></div>
+  <p class="intro rv">MARSAIL's research and real-world AI systems have received recognition from <strong>leading technology media</strong>, highlighting our ability to translate top-tier academic research into <em>deployable, industry-grade innovation</em>.</p>
 
-<!-- ══════════════ PRESS ══════════════ -->
-<section>
-  <h2>📰 Press &amp; Media Coverage</h2>
-  <p style="max-width:840px;color:#334155;margin-bottom:clamp(14px,3vw,2.2rem);">MARSAIL's research and real-world AI systems have received recognition from <strong>leading technology media</strong>, highlighting our ability to translate top-tier academic research into <em>deployable, industry-grade innovation</em>.</p>
-
-  <div class="paper-card">
-    <div class="pc-img"><img src="img/techsauce_featured.png" alt="Techsauce Feature" style="border-radius:var(--rs);box-shadow:var(--shL);"/></div>
-    <div class="pc-body">
-      <img src="img/techsauce_logo.png" alt="Techsauce" style="height:30px;margin-bottom:.75rem;display:inline-block;"/>
-      <p style="font-size:.76rem;letter-spacing:.08em;color:#64748b;margin-bottom:.45rem;font-family:'DM Mono',monospace;">FEATURED NEWS · OCTOBER 2023</p>
-      <h3 style="font-size:clamp(.95rem,2.5vw,1.4rem);margin-bottom:.65rem;line-height:1.35;">"MARS" Deep Tech Startup from Thaivivat Insurance Recognized at ICIAP 2023</h3>
-      <p style="color:#475569;margin-bottom:1.1rem;">Techsauce featured <strong>MARS</strong> as a deep-tech startup from <strong>Thaivivat Insurance</strong>, spotlighting award-winning research presented at the <strong>International Conference on Image Analysis and Processing (ICIAP 2023)</strong>.</p>
-      <a href="https://techsauce.co/news/mars-deep-tech-startup-thaivivat-ai" target="_blank" rel="noopener" class="btn btn-dark">Read Full Coverage →</a>
+  <div class="pc rv" style="margin-bottom:0">
+    <div class="fr" style="--r:-1.5deg"><img src="img/techsauce_featured.png" alt="Techsauce Feature" loading="lazy"/></div>
+    <div>
+      <span class="lgchip"><img src="img/techsauce_logo.png" alt="Techsauce"/></span>
+      <div class="mono">Featured News · October 2023</div>
+      <h3>"MARS" Deep Tech Startup from Thaivivat Insurance Recognized at ICIAP 2023</h3>
+      <p>Techsauce featured <strong>MARS</strong> as a deep-tech startup from <strong>Thaivivat Insurance</strong>, spotlighting award-winning research presented at the <strong>International Conference on Image Analysis and Processing (ICIAP 2023)</strong>.</p>
+      <a href="https://techsauce.co/news/mars-deep-tech-startup-thaivivat-ai" target="_blank" rel="noopener" class="btn d">Read Full Coverage →</a>
     </div>
   </div>
-</section>
+</div></section>
 
 <!-- ══════════════ AUTOTECH ══════════════ -->
-<section class="autotech-sec" style="padding:clamp(18px,4vw,3rem) clamp(16px,4vw,2rem);">
-  <span class="chip c-blue" style="margin-bottom:clamp(9px,2vw,.9rem);">INVITED SPEAKER · AUTOTECH 2026</span>
-  <h2 style="font-size:clamp(1.25rem,3.5vw,2.3rem);border:none;padding:0;margin-bottom:clamp(9px,2vw,.9rem);color:var(--ink);">AutoTech Aftermarket Summit 2026</h2>
-  <p style="font-size:clamp(.88rem,1.7vw,1.02rem);line-height:1.85;color:#475569;max-width:840px;">Dr. Teerapong Panboonyuen, Head of AI at <strong>MARSAIL</strong>, was invited as a panel speaker to discuss AI-driven transformation, intelligent automotive ecosystems, and future mobility technologies.</p>
+<section><div class="wrap">
+  <div class="rv">
+    <span class="chip" style="--c:#2563eb">INVITED SPEAKER · AUTOTECH 2026</span>
+    <h2 style="margin:6px 0 16px">AutoTech Aftermarket Summit 2026</h2>
+    <p class="intro" style="margin:0">Dr. Teerapong Panboonyuen, Head of AI at <strong>MARSAIL</strong>, was invited as a panel speaker to discuss AI-driven transformation, intelligent automotive ecosystems, and future mobility technologies.</p>
+  </div>
 
-  <div class="at-grid">
-    <div class="at-card">
-      <img src="img/Autotech-Aftermarket-Summit-2026-01.png" alt="AutoTech 2026" class="at-cover"/>
-      <div class="at-content">
-        <p style="font-size:.72rem;letter-spacing:.08em;color:#94a3b8;margin-bottom:.55rem;font-family:'DM Mono',monospace;">PANEL SESSION · 15 MAY 2026 · 11:30 AM</p>
-        <h3 style="font-size:clamp(.95rem,2.5vw,1.5rem);margin-bottom:.75rem;line-height:1.35;color:var(--ink);">AutoTech in Transition: <span style="color:#2563eb">Current Trends &amp; Future Trajectories</span></h3>
-        <p style="font-size:clamp(.85rem,1.6vw,.98rem);line-height:1.78;color:#475569;margin-bottom:clamp(10px,2vw,1.5rem);">Exploring how innovation is reshaping the automotive aftermarket — from AI-powered services and predictive systems to scalable industrial intelligence and future-ready mobility ecosystems.</p>
-        <div class="meta-grid">
-          <div class="meta-box"><div class="meta-sm">VENUE</div><div class="meta-val">BITEC Bangkok</div></div>
-          <div class="meta-box"><div class="meta-sm">ORGANIZER</div><div class="meta-val">Informa Markets</div></div>
+  <div class="at">
+    <div class="cd rv">
+      <img class="cov" src="img/Autotech-Aftermarket-Summit-2026-01.png" alt="AutoTech 2026" loading="lazy"/>
+      <div class="in">
+        <div class="mono">Panel Session · 15 May 2026 · 11:30 AM</div>
+        <h3>AutoTech in Transition: <span>Current Trends &amp; Future Trajectories</span></h3>
+        <p>Exploring how innovation is reshaping the automotive aftermarket — from AI-powered services and predictive systems to scalable industrial intelligence and future-ready mobility ecosystems.</p>
+        <div class="meta">
+          <div class="mb"><span class="mono">Venue</span><b>BITEC Bangkok</b></div>
+          <div class="mb"><span class="mono">Organizer</span><b>Informa Markets</b></div>
         </div>
       </div>
     </div>
 
-    <div class="at-side">
-      <div class="at-spk-card">
-        <div class="at-glow"></div>
-        <img src="img/members/teerapong-panboonyuen-ธีรพงศ์-ปานบุญยืน.png" alt="Dr. Teerapong Panboonyuen" class="at-spk-img"/>
-        <h3 class="at-spk-name">Dr. Teerapong Panboonyuen</h3>
-        <p class="at-spk-role">Head of AI Research · MARSAIL<br/>Invited Panel Speaker</p>
+    <div class="side rv">
+      <div class="spk">
+        <div class="glow"></div>
+        <img src="img/members/teerapong-panboonyuen-ธีรพงศ์-ปานบุญยืน.png" alt="Dr. Teerapong Panboonyuen"/>
+        <h3>Dr. Teerapong Panboonyuen</h3>
+        <p>Head of AI Research · MARSAIL<br/>Invited Panel Speaker</p>
       </div>
-      <div class="at-card">
-        <div class="at-topic-wrap">
-          <h4 style="font-size:clamp(.92rem,1.8vw,1.15rem);margin-bottom:.75rem;color:var(--ink);">Session Topics</h4>
-          <ul style="margin:0;padding-left:1.1rem;color:var(--ink3);line-height:1.9;font-size:clamp(.82rem,1.5vw,.95rem);">
-            <li>AI-powered automotive ecosystems</li>
-            <li>Computer vision for damage assessment</li>
-            <li>Intelligent claims automation</li>
-            <li>Future-ready mobility intelligence</li>
-          </ul>
-        </div>
+      <div class="cd tp">
+        <h4>Session Topics</h4>
+        <ul class="ls">
+          <li>AI-powered automotive ecosystems</li>
+          <li>Computer vision for damage assessment</li>
+          <li>Intelligent claims automation</li>
+          <li>Future-ready mobility intelligence</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <div style="max-width:1060px;margin:clamp(12px,2.5vw,1.8rem) auto 0;text-align:center;">
-    <p style="color:var(--ink3);line-height:1.8;font-size:clamp(.82rem,1.6vw,.92rem);margin-bottom:clamp(10px,2vw,1.4rem);">MARSAIL's presence at AutoTech 2026 demonstrates our commitment to bridging academic AI research and production-grade automotive industry solutions.</p>
-    <div class="at-links">
-      <a href="https://www.automrotive.com/conference-agenda-2026/" target="_blank" class="at-btn-p">View Summit →</a>
-      <a href="https://www.automrotive.com/conference-speakers/" target="_blank" class="at-btn-s">Speaker Profile →</a>
-    </div>
+  <div class="cta-r rv">
+    <p>MARSAIL's presence at AutoTech 2026 demonstrates our commitment to bridging academic AI research and production-grade automotive industry solutions.</p>
+    <a href="https://www.automrotive.com/conference-agenda-2026/" target="_blank" class="btn d">View Summit →</a>
+    <a href="https://www.automrotive.com/conference-speakers/" target="_blank" class="btn">Speaker Profile →</a>
   </div>
-</section>
+</div></section>
 
-<!-- ══════════════ MARSAIL × AUTOTECH MOMENTS ══════════════ -->
-<section class="atm-section">
-
-  <h2 class="atm-title">
-    MARSAIL × AutoTech 2026
-  </h2>
-
-  <p class="atm-sub">
-    Final stage moments from the AI journey.
-  </p>
-
-  <!-- cinematic loop -->
-  <div class="atm-loop">
-
-    <div class="atm-track">
-
-      <!-- set 1 -->
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_001.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_002.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_003.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_005.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_006.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_007.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_009.jpg" alt="">
-      </div>
-
-      <div class="atm-card">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_011.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_014.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_021.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_027.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_030.jpg" alt="">
-      </div>
-
-      <!-- duplicate -->
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_001.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_002.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_003.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_005.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_006.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_007.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_009.jpg" alt="">
-      </div>
-
-      <div class="atm-card">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_011.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_014.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_021.jpg" alt="">
-      </div>
-
-      <div class="atm-card wide">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_027.jpg" alt="">
-      </div>
-
-      <div class="atm-card tall">
-        <img src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_030.jpg" alt="">
-      </div>
-
-    </div>
+<!-- ══════════════ MOMENTS ══════════════ -->
+<section class="atm">
+  <div class="wrap rv">
+    <h2>MARSAIL × <em>AutoTech 2026</em></h2>
+    <p class="hsub">Final stage moments from the AI journey.</p>
   </div>
-
-  <div class="atm-mini-note">
-    <span>AutoTech Aftermarket Summit 2026</span>
-    <i></i>
-    <span>BITEC Bangkok</span>
-    <i></i>
-    <span>MARSAIL AI LAB</span>
-  </div>
-
+  <div class="loop"><div class="track" id="track">
+    <div class="mc wide"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_001.jpg" alt=""></div>
+    <div class="mc wide"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_002.jpg" alt=""></div>
+    <div class="mc tall"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_003.jpg" alt=""></div>
+    <div class="mc wide"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_005.jpg" alt=""></div>
+    <div class="mc tall"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_006.jpg" alt=""></div>
+    <div class="mc wide"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_007.jpg" alt=""></div>
+    <div class="mc tall"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_009.jpg" alt=""></div>
+    <div class="mc"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_011.jpg" alt=""></div>
+    <div class="mc wide"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_014.jpg" alt=""></div>
+    <div class="mc tall"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_021.jpg" alt=""></div>
+    <div class="mc wide"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_027.jpg" alt=""></div>
+    <div class="mc tall"><img loading="lazy" src="img/AutoTech2026xMARSAIL/Kao_AutoTech_Aftermarket_Summit_2026_030.jpg" alt=""></div>
+  </div></div>
+  <div class="mini mono"><span>AutoTech Aftermarket Summit 2026</span><i></i><span>BITEC Bangkok</span><i></i><span>MARSAIL AI LAB</span></div>
 </section>
 
 <!-- ══════════════ PRESS LOGOS ══════════════ -->
-<section>
-  <h2>📰 Press &amp; Media Coverage</h2>
-
-  <p style="max-width:860px;color:#334155;margin-bottom:clamp(14px,3vw,2.2rem);">
-    Our work has been featured by leading technology, finance, and business
-    media, reflecting strong external trust in MARSAIL's real-world AI
-    research and deployment.
-  </p>
-
-  <div class="press-grid" style="grid-template-columns:repeat(3,1fr);">
-    <a href="https://today.line.me/th/v2/article/RBJPMlY" target="_blank" rel="noopener">
-      <img src="img/line_today_logo.jpeg" alt="LINE TODAY"/>
-    </a>
-    <a href="https://moneychat.co.th/mars-deep-tech-startup-gets-award-from-iciap-2023/" target="_blank" rel="noopener">
-      <img src="img/money_chat_logo.jpg" alt="Money Chat"/>
-    </a>
-    <a href="https://www.kaohoon.com/pr/632082" target="_blank" rel="noopener">
-      <img src="img/kaohoon_logo_2023.png" alt="Kaohoon"/>
-    </a>
-    <a href="https://www.mitihoon.com/2023/10/09/411039/" target="_blank" rel="noopener">
-      <img src="img/logo-mitihoon-01.png" alt="Mitihoon"/>
-    </a>
-    <a href="https://techsauce.co/news/mars-deep-tech-startup-thaivivat-ai" target="_blank" rel="noopener">
-      <img src="img/techsauce_logo.png" alt="Techsauce"/>
-    </a>
-    <a href="https://www.wealthplustoday.com/2023/10/09/mars-deep/" target="_blank" rel="noopener">
-      <img src="img/wealthplustoday_logo.jpg" alt="Wealth Plus Today"/>
-    </a>
+<section><div class="wrap">
+  <div class="hd rv"><h2>Press &amp; <em>Media Coverage</em></h2><span class="scrawl">📰 trusted by the press</span></div>
+  <p class="intro rv">Our work has been featured by leading technology, finance, and business media, reflecting strong external trust in MARSAIL's real-world AI research and deployment.</p>
+  <div class="logos rv">
+    <a href="https://today.line.me/th/v2/article/RBJPMlY" target="_blank" rel="noopener"><img src="img/line_today_logo.jpeg" alt="LINE TODAY" loading="lazy"/></a>
+    <a href="https://moneychat.co.th/mars-deep-tech-startup-gets-award-from-iciap-2023/" target="_blank" rel="noopener"><img src="img/money_chat_logo.jpg" alt="Money Chat" loading="lazy"/></a>
+    <a href="https://www.kaohoon.com/pr/632082" target="_blank" rel="noopener"><img src="img/kaohoon_logo_2023.png" alt="Kaohoon" loading="lazy"/></a>
+    <a href="https://www.mitihoon.com/2023/10/09/411039/" target="_blank" rel="noopener"><img src="img/logo-mitihoon-01.png" alt="Mitihoon" loading="lazy"/></a>
+    <a href="https://techsauce.co/news/mars-deep-tech-startup-thaivivat-ai" target="_blank" rel="noopener"><img src="img/techsauce_logo.png" alt="Techsauce" loading="lazy"/></a>
+    <a href="https://www.wealthplustoday.com/2023/10/09/mars-deep/" target="_blank" rel="noopener"><img src="img/wealthplustoday_logo.jpg" alt="Wealth Plus Today" loading="lazy"/></a>
   </div>
-
-  <p style="margin-top:clamp(14px,2.5vw,2rem);font-size:clamp(.82rem,1.5vw,.92rem);color:#64748b;max-width:840px;">
-    Independent media coverage provides external validation of MARSAIL's
-    research quality, technical rigor, and industry relevance.
-  </p>
-</section>
+  <p class="after rv">Independent media coverage provides external validation of MARSAIL's research quality, technical rigor, and industry relevance.</p>
+</div></section>
 
 <!-- ══════════════ ACADEMIC TALK ══════════════ -->
-<section>
-  <h2>🎓 Invited Academic Talk</h2>
-  <p style="max-width:860px;color:#334155;margin-bottom:clamp(14px,3vw,2.2rem);">Beyond publications and media recognition, MARSAIL actively contributes to the academic community through <strong>invited talks</strong> that bridge <em>mathematical foundations</em>, <em>modern vision transformers</em>, and <em>real-world insurance AI systems</em>.</p>
-  <div class="paper-card">
-    <div class="pc-img"><img src="img/UAMC2025xMARSxPanboonyuen.jpeg" alt="UAMC 2025" style="border-radius:var(--rs);box-shadow:var(--shL);"/></div>
-    <div class="pc-body">
-      <p style="font-size:.76rem;letter-spacing:.08em;color:#64748b;margin-bottom:.45rem;font-family:'DM Mono',monospace;">INVITED GUEST SPEAKER · 2025</p>
-      <h3 style="font-size:clamp(.95rem,2.5vw,1.45rem);margin-bottom:.65rem;line-height:1.35;">13th Undergraduate in Applied Mathematics Conference (UAMC 2025)</h3>
-      <p style="color:#475569;margin-bottom:1.1rem;"><strong>Dr. Teerapong Panboonyuen</strong> delivered a talk titled <em>"Mathematics Foundations of Vision Transformer in Car Insurance AI"</em>, highlighting how <strong>linear algebra, attention mechanisms, and optimization theory</strong> underpin modern Vision Transformers in large-scale automotive insurance systems.</p>
-      <div class="btn-row">
-        <a href="http://www.math.sci.kmitl.ac.th/uamc2025/index.html" target="_blank" rel="noopener" class="btn btn-dark">Conference Website →</a>
-        <a href="https://careers.thaivivat.co.th/en/newsandevents/6808628ebfad6e8912fd5c57" target="_blank" rel="noopener" class="btn btn-ghost">Event News →</a>
+<section><div class="wrap">
+  <div class="hd rv"><h2>Invited <em>Academic Talk</em></h2><span class="scrawl">🎓 from lab to lecture hall</span></div>
+  <p class="intro rv">Beyond publications and media recognition, MARSAIL actively contributes to the academic community through <strong>invited talks</strong> that bridge <em>mathematical foundations</em>, <em>modern vision transformers</em>, and <em>real-world insurance AI systems</em>.</p>
+  <div class="pc rv" style="margin-bottom:0">
+    <div class="fr" style="--r:1.5deg"><img src="img/UAMC2025xMARSxPanboonyuen.jpeg" alt="UAMC 2025" loading="lazy"/></div>
+    <div>
+      <div class="mono">Invited Guest Speaker · 2025</div>
+      <h3>13th Undergraduate in Applied Mathematics Conference (UAMC 2025)</h3>
+      <p><strong>Dr. Teerapong Panboonyuen</strong> delivered a talk titled <em>"Mathematics Foundations of Vision Transformer in Car Insurance AI"</em>, highlighting how <strong>linear algebra, attention mechanisms, and optimization theory</strong> underpin modern Vision Transformers in large-scale automotive insurance systems.</p>
+      <div class="btns">
+        <a href="http://www.math.sci.kmitl.ac.th/uamc2025/index.html" target="_blank" rel="noopener" class="btn d">Conference Website →</a>
+        <a href="https://careers.thaivivat.co.th/en/newsandevents/6808628ebfad6e8912fd5c57" target="_blank" rel="noopener" class="btn">Event News →</a>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
 <!-- ══════════════ HANDBOOK ══════════════ -->
-<section>
-  <h2>📘 Motor AI Handbook</h2>
-  <p style="max-width:860px;color:#334155;margin-bottom:clamp(14px,3vw,2.2rem);">A comprehensive, production-driven handbook presenting the <strong>foundations, architectures, and deployment paradigms</strong> of artificial intelligence for motor insurance.</p>
-  <div class="paper-card">
-    <div class="pc-img"><img src="img/Handbook_MotorAI_COVER.png" alt="Motor AI Handbook" style="border-radius:var(--rs);box-shadow:var(--shL);"/></div>
-    <div class="pc-body">
-      <p style="font-size:.76rem;letter-spacing:.08em;color:#64748b;margin-bottom:.45rem;font-family:'DM Mono',monospace;">RESEARCH HANDBOOK · 2026 · 173 PAGES</p>
-      <h3 style="font-size:clamp(.95rem,2.5vw,1.45rem);margin-bottom:.75rem;line-height:1.35;">Foundations and Architectures of AI for Motor Insurance</h3>
-      <p style="color:#475569;margin-bottom:.85rem;">Introduces a <strong>vertically integrated AI paradigm</strong> unifying <strong>computer vision</strong>, <strong>multimodal reasoning</strong>, and <strong>production-scale MLOps</strong> into a single intelligence stack.</p>
-      <p style="color:#475569;margin-bottom:1.3rem;">Developed from large-scale deployment in Thailand, demonstrating how <strong>domain-adapted transformers</strong> can be translated into <em>reliable, high-stakes industrial applications</em>.</p>
-      <div class="btn-row">
-        <a href="https://arxiv.org/abs/2603.18508" target="_blank" rel="noopener" class="btn btn-dark">View on arXiv →</a>
-        <a href="https://arxiv.org/pdf/2603.18508" target="_blank" rel="noopener" class="btn btn-ghost">Download PDF</a>
+<section><div class="wrap">
+  <div class="hd rv"><h2>Motor AI <em>Handbook</em></h2><span class="scrawl">📘 173 pages</span></div>
+  <p class="intro rv">A comprehensive, production-driven handbook presenting the <strong>foundations, architectures, and deployment paradigms</strong> of artificial intelligence for motor insurance.</p>
+  <div class="pc rv">
+    <div class="fr" style="--r:-2deg"><img src="img/Handbook_MotorAI_COVER.png" alt="Motor AI Handbook" loading="lazy"/></div>
+    <div>
+      <div class="mono">Research Handbook · 2026 · 173 Pages</div>
+      <h3>Foundations and Architectures of AI for Motor Insurance</h3>
+      <p>Introduces a <strong>vertically integrated AI paradigm</strong> unifying <strong>computer vision</strong>, <strong>multimodal reasoning</strong>, and <strong>production-scale MLOps</strong> into a single intelligence stack.</p>
+      <p>Developed from large-scale deployment in Thailand, demonstrating how <strong>domain-adapted transformers</strong> can be translated into <em>reliable, high-stakes industrial applications</em>.</p>
+      <div class="btns">
+        <a href="https://arxiv.org/abs/2603.18508" target="_blank" rel="noopener" class="btn d">View on arXiv →</a>
+        <a href="https://arxiv.org/pdf/2603.18508" target="_blank" rel="noopener" class="btn">Download PDF</a>
       </div>
     </div>
   </div>
-  <div class="contrib-grid">
-    <div class="contrib-card"><h4>🧠 AI Architecture</h4><p>Domain-specific transformer systems for structured vehicle understanding and multimodal intelligence.</p></div>
-    <div class="contrib-card"><h4>🚗 Motor Insurance AI</h4><p>End-to-end automation of claims, damage analysis, and underwriting workflows.</p></div>
-    <div class="contrib-card"><h4>⚙️ Production Systems</h4><p>Scalable MLOps pipelines designed for real-world nationwide deployment.</p></div>
-    <div class="contrib-card"><h4>🌏 Thailand Deployment</h4><p>Designed, built, and rigorously validated under real-world operational constraints.</p></div>
-    <!-- <div class="contrib-card"><h4>🧩 Multimodal AI Stack</h4><p>Unified reasoning across images, documents, and structured data.</p></div>
-    <div class="contrib-card"><h4>🔒 Trustworthy AI</h4><p>Designed for reliability, auditability, and risk-sensitive environments.</p></div> -->
+  <div class="pr rv">
+    <div><b>🧠 AI Architecture</b><p>Domain-specific transformer systems for structured vehicle understanding and multimodal intelligence.</p></div>
+    <div><b>🚗 Motor Insurance AI</b><p>End-to-end automation of claims, damage analysis, and underwriting workflows.</p></div>
+    <div><b>⚙️ Production Systems</b><p>Scalable MLOps pipelines designed for real-world nationwide deployment.</p></div>
+    <div><b>🌏 Thailand Deployment</b><p>Designed, built, and rigorously validated under real-world operational constraints.</p></div>
   </div>
-</section>
+</div></section>
 
 <!-- ══════════════ RESEARCH ══════════════ -->
-<section id="research">
-  <h2>🧠 MARSAIL Research Highlights (2023–2026)</h2>
-  <p style="max-width:920px;line-height:1.82;">MARSAIL drives the next generation of automotive AI through foundational transformer research led by <strong>Dr. Kao (Teerapong Panboonyuen)</strong>. Our work unifies <em>damage-centric computer vision</em>, <em>knowledge distillation at scale</em>, and <em>document intelligence</em> into deployable systems.</p>
+<section id="research"><div class="wrap">
+  <div class="hd rv"><h2>MARSAIL <em>Research Highlights</em> (2023–2026)</h2><span class="scrawl">🧠 the full list ↓</span></div>
+  <p class="mission">MARSAIL drives the next generation of automotive AI through foundational transformer research led by <strong>Dr. Kao (Teerapong Panboonyuen)</strong>. Our work unifies <em>damage-centric computer vision</em>, <em>knowledge distillation at scale</em>, and <em>document intelligence</em> into deployable systems.</p>
 
-  <div class="rc" style="background:linear-gradient(180deg,#fbf9ff,#f1ecff);border-color:#6f42c1;">
-    <h3>🌌 <strong>MARS</strong> — Mask Attention Refinement with Sequential Quadtree Nodes</h3>
+  <article class="pj rv" style="--c:#6f42c1"><div class="n">01</div><div>
+    <h3>MARS</h3>
+    <div class="th">🌌 Mask Attention Refinement with Sequential Quadtree Nodes</div>
     <p>Introduced the <strong>Sequential Quadtree Attention</strong> mechanism for precise instance-level damage mask refinement. Demonstrated clear gains over Mask R-CNN, PointRend, and Mask Transfiner — MARSAIL's first official research publication.</p>
-    <div class="btn-row">
-      <a href="https://arxiv.org/abs/2305.04743" target="_blank" class="btn" style="background:#6f42c1;">📄 Abstract (arXiv)</a>
-      <a href="https://arxiv.org/pdf/2305.04743" target="_blank" class="btn" style="background:#f4b6b6;color:#4a1c1c;">⬇️ PDF</a>
-      <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" class="btn" style="background:#5a3ea6;">📘 Springer</a>
-    </div>
-  </div>
+    <div class="btns">
+      <a href="https://arxiv.org/abs/2305.04743" target="_blank" class="btn c">📄 Abstract (arXiv)</a>
+      <a href="https://arxiv.org/pdf/2305.04743" target="_blank" class="btn pdf">⬇️ PDF</a>
+      <a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" class="btn c" style="--c:#5a3ea6">📘 Springer</a>
+    </div></div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#fbfdff,#f3f7ff);border-color:#0d6efd;">
-    <h3>🚗 <strong>ALBERT</strong> — Transformers for Automotive Damage Evaluation <span style="font-size:.82em;color:#555">(Teacher Model)</span></h3>
+  <article class="pj rv" style="--c:#0d6efd"><div class="n">02</div><div>
+    <h3>ALBERT</h3>
+    <div class="th">🚗 Transformers for Automotive Damage Evaluation <small>(Teacher Model)</small></div>
     <p>Large-scale transformer backbone delivering rich contextual embeddings, multi-level localization, and robust attention signals — the <strong>foundational teacher model</strong> for downstream automotive AI systems.</p>
-    <div class="btn-row">
-      <a href="http://arxiv.org/abs/2506.10524" target="_blank" class="btn" style="background:#0d6efd;">📄 Abstract</a>
-      <a href="http://arxiv.org/pdf/2506.10524" target="_blank" class="btn" style="background:#f4b6b6;color:#4a1c1c;">⬇️ PDF</a>
-    </div>
-  </div>
+    <div class="btns">
+      <a href="http://arxiv.org/abs/2506.10524" target="_blank" class="btn c">📄 Abstract</a>
+      <a href="http://arxiv.org/pdf/2506.10524" target="_blank" class="btn pdf">⬇️ PDF</a>
+    </div></div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#fbfff9,#f1f8f4);border-color:#198754;">
-    <h3>🧩 <strong>SLICK</strong> — Knowledge-Enhanced Vehicle Damage Segmentation <span style="font-size:.82em;color:#555">(Student Model)</span></h3>
+  <article class="pj rv" style="--c:#198754"><div class="n">03</div><div>
+    <h3>SLICK</h3>
+    <div class="th">🧩 Knowledge-Enhanced Vehicle Damage Segmentation <small>(Student Model)</small></div>
     <p>Distills ALBERT's knowledge into a lightweight, production-ready model delivering <strong>real-time, fine-grained damage segmentation</strong> optimized for insurance workflows and automated repair pipelines.</p>
-    <div class="btn-row">
-      <a href="http://arxiv.org/abs/2506.10528" target="_blank" class="btn" style="background:#198754;">📄 Abstract</a>
-      <a href="http://arxiv.org/pdf/2506.10528" target="_blank" class="btn" style="background:#f4b6b6;color:#4a1c1c;">⬇️ PDF</a>
-    </div>
-  </div>
+    <div class="btns">
+      <a href="http://arxiv.org/abs/2506.10528" target="_blank" class="btn c">📄 Abstract</a>
+      <a href="http://arxiv.org/pdf/2506.10528" target="_blank" class="btn pdf">⬇️ PDF</a>
+    </div></div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#fffaf5,#fff2e8);border-color:#fd7e14;">
-    <h3>🔍 <strong>DOTA</strong> — Enhanced OCR for Automotive Services</h3>
+  <article class="pj rv" style="--c:#fd7e14"><div class="n">04</div><div>
+    <h3>DOTA</h3>
+    <div class="th">🔍 Enhanced OCR for Automotive Services</div>
     <p>Integrates deformable attention with retrieval-augmented generation to achieve <strong>human-level robustness</strong> in real-world automotive documents — claims, invoices, and inspection reports.</p>
-    <div class="btn-row">
-      <a href="https://arxiv.org/abs/2505.04175" target="_blank" class="btn" style="background:#fd7e14;">📄 Abstract</a>
-      <a href="https://arxiv.org/pdf/2505.04175" target="_blank" class="btn" style="background:#f4b6b6;color:#4a1c1c;">⬇️ PDF</a>
-    </div>
-  </div>
+    <div class="btns">
+      <a href="https://arxiv.org/abs/2505.04175" target="_blank" class="btn c">📄 Abstract</a>
+      <a href="https://arxiv.org/pdf/2505.04175" target="_blank" class="btn pdf">⬇️ PDF</a>
+    </div></div></article>
 
-  <div style="margin-top:clamp(18px,4vw,2.8rem);padding:.85rem 1.1rem;border-radius:var(--rs);text-align:center;background:linear-gradient(135deg,#eef6ff,#f8f4ff);border:2px dashed #adb5bd;color:#495057;font-weight:500;font-size:clamp(.82rem,1.5vw,.92rem);">
-    🎓 Final Research Series (2026) — The concluding academic contributions of MARSAIL Lab
-  </div>
+  <div class="fin rv">🎓 Final Research Series (2026) — The concluding academic contributions of MARSAIL Lab</div>
 
-  <div class="rc" style="background:linear-gradient(180deg,#fff5f5,#ffecec);border-color:#9d0208;">
-    <h3>🌏 <strong>Deconstructing GPT Geopolitical Bias with Fairness</strong> in the 2025 Thailand–Cambodia Border Conflict</h3>
-    <span class="chip c-red">✅ Accepted — ICCAI 2026 · Okinawa, Japan</span>
+  <article class="pj rv" style="--c:#9d0208"><div class="n">05</div><div>
+    <h3>Deconstructing GPT Geopolitical Bias with Fairness</h3>
+    <div class="th">🌏 in the 2025 Thailand–Cambodia Border Conflict</div>
+    <span class="chip" style="--c:#9d0208">✅ Accepted — ICCAI 2026 · Okinawa, Japan</span>
     <p>Investigates stance distortion in LLMs during geopolitically sensitive events. Introduces <strong>GeoFACT</strong>, a counterfactually calibrated bias mitigation framework, plus <strong>10K-THAC</strong>, a 10,000-statement multilingual dataset.</p>
-    <p style="font-size:.86rem;color:#555;">Research Lead: <strong>Dr. Teerapong Panboonyuen</strong></p>
-  </div>
+    <div class="rl">Research Lead: <strong>Dr. Teerapong Panboonyuen</strong></div>
+  </div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#f9f5ff,#f3ecff);border-color:#5a189a;">
-    <h3>🧠 <strong>DABertAttn</strong> — Diversity-Aware BertAttention for Reducing the Systematicity Gap in VQA</h3>
-    <span class="chip c-purple">✅ Accepted — ICCAI 2026 · Okinawa, Japan</span>
+  <article class="pj rv" style="--c:#5a189a"><div class="n">06</div><div>
+    <h3>DABertAttn</h3>
+    <div class="th">🧠 Diversity-Aware BertAttention for Reducing the Systematicity Gap in VQA</div>
+    <span class="chip" style="--c:#5a189a">✅ Accepted — ICCAI 2026 · Okinawa, Japan</span>
     <p>Reduces the systematicity gap by <strong>44% on Minimal splits</strong> and <strong>60% on Complex splits</strong>, demonstrating that architectural sensitivity to attribute diversity enhances compositional generalization beyond data scaling alone.</p>
-    <p style="font-size:.86rem;color:#555;">Research Lead: <strong>Dr. Teerapong Panboonyuen</strong></p>
-  </div>
+    <div class="rl">Research Lead: <strong>Dr. Teerapong Panboonyuen</strong></div>
+  </div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#f1f7fb,#e6f0f7);border-color:#003049;">
-    <h3>🧩 <strong>CAREF</strong> — Calibration-Aware Regularization for Explanation Faithfulness Without Rationale Supervision</h3>
-    <span class="chip c-dark">📝 Under Review — ACL Rolling Review</span>
+  <article class="pj rv" style="--c:#003049"><div class="n">07</div><div>
+    <h3>CAREF</h3>
+    <div class="th">🧩 Calibration-Aware Regularization for Explanation Faithfulness Without Rationale Supervision</div>
+    <span class="chip" style="--c:#003049">📝 Under Review — ACL Rolling Review</span>
     <p>Integrates <strong>entropy-guided learning</strong> with <strong>sparsity-aware regularization</strong> to jointly optimize prediction accuracy and interpretability. Outperforms LoRA and AdaLoRA in low-resource and fully supervised settings.</p>
-    <p style="font-size:.86rem;color:#555;">Research Lead: <strong>Dr. Teerapong Panboonyuen</strong></p>
-  </div>
+    <div class="rl">Research Lead: <strong>Dr. Teerapong Panboonyuen</strong></div>
+  </div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#fff5f5,#ffeaea);border-color:#dc3545;">
-    <h3>🏠 <strong>HOMEY</strong> — Heuristic Object Masking with Enhanced YOLO for Property Insurance Risk Detection</h3>
-    <span class="chip c-red">✅ Accepted — arXiv 2026 · March 19, 2026</span>
+  <article class="pj rv" style="--c:#dc3545"><div class="n">08</div><div>
+    <h3>HOMEY</h3>
+    <div class="th">🏠 Heuristic Object Masking with Enhanced YOLO for Property Insurance Risk Detection</div>
+    <span class="chip" style="--c:#dc3545">✅ Accepted — arXiv 2026 · March 19, 2026</span>
     <p>Detects 17 property risk categories including structural damages and maintenance neglect. Leverages <strong>risk-aware loss calibration</strong> to balance class skew and severity weighting for scalable AI-driven property insurance workflows.</p>
-    <div class="btn-row">
-      <a href="https://arxiv.org/abs/2603.18502" target="_blank" class="btn" style="background:#dc3545;">📄 Abstract</a>
-      <a href="https://arxiv.org/pdf/2603.18502" target="_blank" class="btn" style="background:#f4b6b6;color:#4a1c1c;">⬇️ PDF</a>
-    </div>
-  </div>
+    <div class="btns">
+      <a href="https://arxiv.org/abs/2603.18502" target="_blank" class="btn c">📄 Abstract</a>
+      <a href="https://arxiv.org/pdf/2603.18502" target="_blank" class="btn pdf">⬇️ PDF</a>
+    </div></div></article>
 
-  <div class="rc" style="background:linear-gradient(180deg,#f5f3ff,#ede9ff);border-color:#6610f2;">
-    <h3>🚙 <strong>AutoAI-Motor</strong> — Foundations and Architectures of AI for Motor Insurance</h3>
-    <span class="chip c-purple">✅ Accepted — arXiv 2026 · March 19, 2026</span>
+  <article class="pj rv" style="--c:#6610f2"><div class="n">09</div><div>
+    <h3>AutoAI-Motor</h3>
+    <div class="th">🚙 Foundations and Architectures of AI for Motor Insurance</div>
+    <span class="chip" style="--c:#6610f2">✅ Accepted — arXiv 2026 · March 19, 2026</span>
     <p>Formalizes a <strong>vertically integrated AI paradigm</strong> for end-to-end vehicle risk assessment and claims processing, introducing domain-adapted transformer architectures for structured visual understanding and multimodal document intelligence.</p>
-    <div class="btn-row">
-      <a href="https://arxiv.org/abs/2603.18508" target="_blank" class="btn" style="background:#6610f2;">📄 Abstract</a>
-      <a href="https://arxiv.org/pdf/2603.18508" target="_blank" class="btn" style="background:#f4b6b6;color:#4a1c1c;">⬇️ PDF</a>
-    </div>
-  </div>
-</section>
+    <div class="btns">
+      <a href="https://arxiv.org/abs/2603.18508" target="_blank" class="btn c">📄 Abstract</a>
+      <a href="https://arxiv.org/pdf/2603.18508" target="_blank" class="btn pdf">⬇️ PDF</a>
+    </div></div></article>
+</div></section>
 
 <!-- ══════════════ QUICK START ══════════════ -->
-<section>
-  <h2>⚡ Quick Start</h2>
-  <pre>git clone https://github.com/kaopanboonyuen/MARS.git
+<section><div class="wrap">
+  <div class="hd rv"><h2>Quick <em>Start</em></h2><span class="scrawl">⚡ copy &amp; run</span></div>
+  <div class="bib dk rv"><button data-c>copy</button><pre>git clone https://github.com/kaopanboonyuen/MARS.git
 cd MARS
 python3 -m venv mars-env
 source mars-env/bin/activate
-pip install -r requirements.txt</pre>
-  <div style="margin-top:clamp(12px,2.5vw,18px);">
-    <a href="https://github.com/kaopanboonyuen/MARS" class="btn btn-dark" target="_blank">GitHub Repository</a>
-  </div>
-</section>
+pip install -r requirements.txt</pre></div>
+  <a href="https://github.com/kaopanboonyuen/MARS" class="btn d" target="_blank" style="margin-top:14px">GitHub Repository</a>
+</div></section>
 
 <!-- ══════════════ DATASETS ══════════════ -->
-<section>
-  <h2>📂 Datasets</h2>
-  <ul>
+<section><div class="wrap">
+  <div class="hd rv"><h2><em>Datasets</em></h2><span class="scrawl">📂 open &amp; restricted</span></div>
+  <ul class="ds rv">
     <li><a href="https://drive.google.com/file/d/1bbyqVCKZX5Ur5Zg-uKj0jD0maWAVeOLx/view" target="_blank" class="fl">Public Dataset</a></li>
     <li><b>Private Dataset</b>: Restricted (THAIVIVAT Insurance PCL)</li>
   </ul>
-</section>
+</div></section>
 
 <!-- ══════════════ CITATION ══════════════ -->
-<section>
-  <h2>✍️ Citation</h2>
-  <pre class="cite-pre" style="border-color:#6f42c1;">@inproceedings{panboonyuen2023mars,
+<section><div class="wrap">
+  <div class="hd rv"><h2><em>Citation</em></h2><span class="scrawl">✍️ copy the BibTeX</span></div>
+
+  <div class="bib rv" style="--c:#6f42c1"><button data-c>copy</button><pre>@inproceedings{panboonyuen2023mars,
   title     = {MARS: Mask Attention Refinement with Sequential Quadtree Nodes},
   author    = {Panboonyuen, Teerapong},
   booktitle = {ICIAP},
@@ -1292,776 +740,433 @@ pip install -r requirements.txt</pre>
   pages     = {28--38},
   year      = {2023},
   publisher = {Springer Nature Switzerland}
-}</pre>
-  <pre class="cite-pre" style="border-color:#0d6efd;">@article{panboonyuen2025albert,
+}</pre></div>
+  <div class="bib rv" style="--c:#0d6efd"><button data-c>copy</button><pre>@article{panboonyuen2025albert,
   title   = {ALBERT: Advanced Localization and Bidirectional Encoder Representations from Transformers for Automotive Damage Evaluation},
   author  = {Panboonyuen, Teerapong},
   journal = {arXiv preprint arXiv:2506.10524},
   year    = {2025}
-}</pre>
-  <pre class="cite-pre" style="border-color:#198754;">@article{panboonyuen2025slick,
+}</pre></div>
+  <div class="bib rv" style="--c:#198754"><button data-c>copy</button><pre>@article{panboonyuen2025slick,
   title   = {SLICK: Selective Localization and Instance Calibration for Knowledge-Enhanced Car Damage Segmentation},
   author  = {Panboonyuen, Teerapong},
   journal = {arXiv preprint arXiv:2506.10528},
   year    = {2025}
-}</pre>
-  <pre class="cite-pre" style="border-color:#fd7e14;">@inproceedings{marsail2025dota,
+}</pre></div>
+  <div class="bib rv" style="--c:#fd7e14"><button data-c>copy</button><pre>@inproceedings{marsail2025dota,
   title     = {DOTA: Deformable Optimized Transformer Architecture for End-to-End Text Recognition with RAG},
   author    = {N., N. and Panboonyuen, Teerapong},
   booktitle = {KST},
   pages     = {301--306},
   year      = {2025},
   publisher = {IEEE}
-}</pre>
-  <pre class="cite-pre" style="border-color:#9d0208;">@inproceedings{marsail2026geofact,
+}</pre></div>
+  <div class="bib rv" style="--c:#9d0208"><button data-c>copy</button><pre>@inproceedings{marsail2026geofact,
   title     = {Deconstructing GPT Geopolitical Bias with Fairness in the 2025 Thailand--Cambodia Border Conflict},
   author    = {N., N. and Panboonyuen, Teerapong},
   booktitle = {ICCAI},
   address   = {Okinawa, Japan},
   year      = {2026}
-}</pre>
-  <pre class="cite-pre" style="border-color:#5a189a;">@inproceedings{marsail2026dabertattn,
+}</pre></div>
+  <div class="bib rv" style="--c:#5a189a"><button data-c>copy</button><pre>@inproceedings{marsail2026dabertattn,
   title     = {DABertAttn: A Diversity-Aware BertAttention for Reducing the Systematicity Gap in VQA},
   author    = {N., N. and Panboonyuen, Teerapong},
   booktitle = {ICCAI},
   address   = {Okinawa, Japan},
   year      = {2026}
-}</pre>
-  <pre class="cite-pre" style="border-color:#003049;">@article{marsail2026splint,
+}</pre></div>
+  <div class="bib rv" style="--c:#003049"><button data-c>copy</button><pre>@article{marsail2026splint,
   title   = {CAREF: Calibration-Aware Regularization for Explanation Faithfulness Without Rationale Supervision},
   author  = {N., N. and Panboonyuen, Teerapong},
   journal = {arXiv preprint arXiv:2605.27835},
   year    = {2026},
   note    = {Under Review: ACL Rolling Review}
-}</pre>
-  <pre class="cite-pre" style="border-color:#dc3545;">@article{panboonyuen2026homey,
+}</pre></div>
+  <div class="bib rv" style="--c:#dc3545"><button data-c>copy</button><pre>@article{panboonyuen2026homey,
   title   = {HOMEY: Heuristic Object Masking with Enhanced YOLO for Property Insurance Risk Detection},
   author  = {Panboonyuen, Teerapong},
   journal = {arXiv preprint arXiv:2603.18502},
   year    = {2026}
-}</pre>
-  <pre class="cite-pre" style="border-color:#6610f2;">@article{panboonyuen2026autoai,
+}</pre></div>
+  <div class="bib rv" style="--c:#6610f2"><button data-c>copy</button><pre>@article{panboonyuen2026autoai,
   title   = {AutoAI-Motor: Foundations and Architectures of AI for Motor Insurance},
   author  = {Panboonyuen, Teerapong},
   journal = {arXiv preprint arXiv:2603.18508},
   year    = {2026}
-}</pre>
-</section>
+}</pre></div>
+</div></section>
 
 <!-- ══════════════ LEARN MORE ══════════════ -->
-<section style="text-align:center;">
-  <h2 style="border:none;padding:0;font-size:clamp(1.05rem,2.8vw,1.45rem);">🧠 Want to Know More About MARSAIL?</h2>
-  <p style="max-width:720px;margin:0 auto clamp(12px,2.5vw,18px);color:var(--ink2);line-height:1.75;">Explore how our lab is shaping the future of automotive AI, blending deep vision models with smart insurance tech.</p>
-  <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/" class="btn" target="_blank">Read the Full Blog</a>
-</section>
+<section><div class="wrap cen rv">
+  <h2 style="margin-bottom:18px">🧠 Want to Know <em>More About MARSAIL?</em></h2>
+  <p>Explore how our lab is shaping the future of automotive AI, blending deep vision models with smart insurance tech.</p>
+  <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/" class="btn p" target="_blank">Read the Full Blog</a>
+</div></section>
 
 <!-- ══════════════ LOGO ══════════════ -->
-<section>
-  <h2>🎨 MARSAIL Official Logo</h2>
-  <p>The official <strong>MARSAIL</strong> logo is available for use in academic papers, research posters, presentations, and conference submissions.</p>
-  <div style="display:flex;justify-content:center;margin-top:clamp(14px,3vw,22px);">
-    <a href="img/MARSAIL_LOGO.png" target="_blank" download>
-      <img src="img/MARSAIL_LOGO.png" alt="MARSAIL Logo" style="width:clamp(110px,28vw,170px);border-radius:var(--rs);box-shadow:var(--sh);transition:transform .3s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'"/>
+<section><div class="wrap">
+  <div class="hd rv"><h2>MARSAIL <em>Official Logo</em></h2><span class="scrawl">🎨 free to use</span></div>
+  <p class="intro rv">The official <strong>MARSAIL</strong> logo is available for use in academic papers, research posters, presentations, and conference submissions.</p>
+  <div class="cen rv">
+    <a class="fr k" style="--r:-2deg;width:clamp(130px,28vw,190px);margin:0 auto 26px" href="img/MARSAIL_LOGO.png" target="_blank" download>
+      <img src="img/MARSAIL_LOGO.png" alt="MARSAIL Logo" loading="lazy"/>
     </a>
+    <a href="img/MARSAIL_LOGO.png" download class="btn p">⬇️ Download Logo (PNG)</a>
   </div>
-  <div style="text-align:center;margin-top:clamp(12px,2.5vw,22px);">
-    <a href="img/MARSAIL_LOGO.png" download class="btn">⬇️ Download Logo (PNG)</a>
-  </div>
-</section>
+</div></section>
 
 <!-- ══════════════ TEAM ══════════════ -->
-<section id="team" class="team-section">
+<section id="team"><div class="wrap">
+  <div class="hd c rv"><h2>MARSAIL <em>People</em></h2></div>
+  <p class="tnote rv" style="margin-top:-18px;font-size:1.02rem">We build and train AI models using real-world car images and insurance data to support automated inspection, claims, and decision-making at scale.</p>
 
-  <h2 style="border:none;padding:0;font-size:clamp(1.15rem,3vw,1.55rem);text-align:center;">
-    MARSAIL People
-  </h2>
-
-  <p class="team-intro" style="text-align:center;max-width:720px;margin:0 auto 1.5rem;">
-    We build and train AI models using real-world car images and insurance data to support automated inspection, claims, and decision-making at scale.
-  </p>
-
-  <div class="grat-box">
-    <div class="grat-bar"></div>
+  <div class="nc ctr rv" style="--c:#5a189a">
+    <div class="bar"></div>
     <h3>🤍 A Note of Gratitude</h3>
-    <p>
-      MARSAIL was never built by algorithms alone — it was shaped by people.<br/><br/>
+    <p>MARSAIL was never built by algorithms alone — it was shaped by people.<br/><br/>
       To every team member who annotated data with patience, engineered systems with precision, and contributed effort behind the scenes — thank you.<br/><br/>
       And to myself — for having the courage to start, the discipline to sustain, and the vision to complete this initiative over four remarkable years — this chapter stands as proof that independent conviction, when paired with persistence, can build something real.<br/><br/>
-      MARSAIL will always represent belief, resilience, and the pursuit of intelligent systems built with purpose.
-    </p>
-    <p style="margin-top:22px;font-size:.88rem;color:#6c757d;letter-spacing:.35px;">
-      — Dr. Teerapong Panboonyuen
-      <span style="display:block;opacity:.72;margin-top:5px;">
-        Founder &amp; Research Architect (January 2022 – July 2026)
-      </span>
-    </p>
+      MARSAIL will always represent belief, resilience, and the pursuit of intelligent systems built with purpose.</p>
+    <div class="sig">— Dr. Teerapong Panboonyuen<span>Founder &amp; Research Architect (January 2022 – July 2026)</span></div>
   </div>
 
   <!-- Head -->
-  <div class="team-row team-row-head" style="margin-top:clamp(28px,5vw,56px);display:flex;justify-content:center;">
-    <a href="https://kaopanboonyuen.github.io/" target="_blank" style="text-decoration:none;color:inherit;">
-      <div class="team-card head">
-        <img src="img/members/teerapong-panboonyuen-ธีรพงศ์-ปานบุญยืน.png"
-             alt="Teerapong Panboonyuen"/>
+  <div class="tr rv">
+    <a href="https://kaopanboonyuen.github.io/" target="_blank">
+      <div class="tc head">
+        <div class="pho"><img src="img/members/teerapong-panboonyuen-ธีรพงศ์-ปานบุญยืน.png" alt="Teerapong Panboonyuen" loading="lazy"/></div>
         <h3>Teerapong Panboonyuen <span>(Kao)</span></h3>
-        <p class="thai-name">ธีรพงศ์ ปานบุญยืน (เก้า)</p>
+        <p class="tn">ธีรพงศ์ ปานบุญยืน (เก้า)</p>
         <p class="role">Head of AI · Senior Research Scientist</p>
       </div>
     </a>
   </div>
 
-  <!-- ── CURRENT TEAM label ── -->
-  <div style="text-align:center;margin:clamp(28px,5vw,44px) 0 clamp(18px,3vw,28px);">
-    <span class="chip c-blue" style="font-size:.72rem;padding:.4rem 1.1rem;letter-spacing:.1em;">
-      Current Team · 2022 – 2026
-    </span>
+  <div class="lab rv"><span class="tag">Current Team · 2022 – 2026</span></div>
+
+  <div class="tr rv">
+    <div class="tc"><div class="pho"><img src="img/members/mike.png" alt="Mike" loading="lazy"/></div><h3>Naphat Nithisopa <span>(Mike)</span></h3><p class="tn">ณภัทร นิธิโสภา (ไมค์)</p><p class="role">AI Data Engineer</p></div>
+    <div class="tc"><div class="pho"><img src="img/members/pond.png" alt="Pond" loading="lazy"/></div><h3>Kittipat Puantong <span>(Pond)</span></h3><p class="tn">กิตติพัฒน์ พวงทอง (ปอนด์)</p><p class="role">AI Dev Trainee</p></div>
+    <div class="tc"><div class="pho"><img src="img/members/tul.png" alt="Tul" loading="lazy"/></div><h3>Darakorn Tisilanon <span>(Tul)</span></h3><p class="tn">ดารากร ติสิลานนท์ (ตุลย์)</p><p class="role">AI Data Annotator</p></div>
+  </div>
+  <div class="tr rv">
+    <div class="tc"><div class="pho"><img src="img/members/phueng.png" alt="Phueng" loading="lazy"/></div><h3>Rumrada Thubthimted <span>(Phueng)</span></h3><p class="tn">รัมภ์รดา ทับทิมเทศ (ผึ้ง)</p><p class="role">AI Data Annotator</p></div>
+    <div class="tc"><div class="pho"><img src="img/members/jaae.png" alt="Jaae" loading="lazy"/></div><h3>Shahchriya Boothongthalay <span>(Jaae)</span></h3><p class="tn">ชาคริยา บุ่ทองทะเล (จ๊ะเอ๋)</p><p class="role">AI Data Annotator</p></div>
   </div>
 
-  <!-- Team grid -->
-  <div class="team-row">
-    <div class="team-card">
-      <img src="img/members/mike.png" alt="Mike"/>
-      <h3>Naphat Nithisopa <span>(Mike)</span></h3>
-      <p class="thai-name">ณภัทร นิธิโสภา (ไมค์)</p>
-      <p class="role">AI Data Engineer</p>
-    </div>
-    <div class="team-card">
-      <img src="img/members/pond.png" alt="Pond"/>
-      <h3>Kittipat Puantong <span>(Pond)</span></h3>
-      <p class="thai-name">กิตติพัฒน์ พวงทอง (ปอนด์)</p>
-      <p class="role">AI Dev Trainee</p>
-    </div>
-    <div class="team-card">
-      <img src="img/members/tul.png" alt="Tul"/>
-      <h3>Darakorn Tisilanon <span>(Tul)</span></h3>
-      <p class="thai-name">ดารากร ติสิลานนท์ (ตุลย์)</p>
-      <p class="role">AI Data Annotator</p>
-    </div>
+  <!-- Alumni -->
+  <div class="div rv"><div class="lab"><span class="tag" style="--tc:#5a189a">🎓 Alumni · 2022 – 2023</span></div></div>
+  <p class="tnote rv">The founding generation who helped shape MARSAIL from its earliest days — under the direct lead of <strong>Dr. Teerapong Panboonyuen</strong>.</p>
+
+  <div class="tr rv">
+    <div class="tc"><div class="pho"><img src="img/alumni/Chu.png" alt="Chu" loading="lazy"/><span class="bdg">Alumni</span></div><h3>Chukit Ruanpeng <span>(Chu)</span></h3><p class="tn">ชูกิจ เรือนเป็ง (ชู)</p><p class="role">AI Data Engineer</p><p class="yr">2022 – 2023</p></div>
+    <div class="tc"><div class="pho"><img src="img/alumni/Pin.png" alt="Pin" loading="lazy"/><span class="bdg">Alumni</span></div><h3>Natthakan Phromchino <span>(Pin)</span></h3><p class="tn">ณัฐกานต์ พรหมชิโน (ปิ่น)</p><p class="role">AI Data Annotator</p><p class="yr">2022 – 2023</p></div>
+    <div class="tc"><div class="pho"><img src="img/alumni/Fah.png" alt="Fah" loading="lazy"/><span class="bdg">Alumni</span></div><h3>Pitchayaphorn Tangngam <span>(Fah)</span></h3><p class="tn">พิชญาภรณ์ ตั้งงาม (ฟ้า)</p><p class="role">AI Data Annotator</p><p class="yr">2022 – 2023</p></div>
   </div>
 
-  <div class="team-row">
-    <div class="team-card">
-      <img src="img/members/phueng.png" alt="Phueng"/>
-      <h3>Rumrada Thubthimted <span>(Phueng)</span></h3>
-      <p class="thai-name">รัมภ์รดา ทับทิมเทศ (ผึ้ง)</p>
-      <p class="role">AI Data Annotator</p>
-    </div>
-    <div class="team-card">
-      <img src="img/members/jaae.png" alt="Jaae"/>
-      <h3>Shahchriya Boothongthalay <span>(Jaae)</span></h3>
-      <p class="thai-name">ชาคริยา บุ่ทองทะเล (จ๊ะเอ๋)</p>
-      <p class="role">AI Data Annotator</p>
-    </div>
+  <div class="nc ctr rv" style="--c:#5a189a;margin-top:56px;margin-bottom:0;max-width:680px;padding:clamp(18px,3vw,28px)">
+    <p style="margin:0">✨ Once a MARSAIL member, always part of the story.<br/>Thank you for being part of the foundation.</p>
   </div>
-
-  <!-- ══════════ ALUMNI DIVIDER ══════════ -->
-  <div style="position:relative;margin:clamp(36px,6vw,60px) 0 clamp(22px,4vw,36px);text-align:center;">
-    <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--border2) 20%,var(--border2) 80%,transparent);"></div>
-    <span style="position:relative;display:inline-block;background:var(--white);padding:0 clamp(14px,3vw,24px);">
-      <span class="chip" style="background:linear-gradient(135deg,#f5f3ff,#ede9ff);color:#5a189a;border:1px solid #d8b4fe;font-size:.72rem;padding:.4rem 1.1rem;letter-spacing:.1em;">
-        🎓 Alumni · 2022 – 2023
-      </span>
-    </span>
-  </div>
-
-  <p style="text-align:center;max-width:620px;margin:0 auto clamp(22px,4vw,36px);font-size:clamp(.82rem,1.6vw,.92rem);color:var(--ink3);line-height:1.72;">
-    The founding generation who helped shape MARSAIL from its earliest days —
-    under the direct lead of <strong style="color:var(--ink2);">Dr. Teerapong Panboonyuen</strong>.
-  </p>
-
-  <!-- Alumni cards -->
-  <div class="team-row" style="opacity:.92;">
-
-    <div class="team-card">
-    <div style="position:relative;display:inline-block;">
-      <img src="img/alumni/Chu.png" alt="Chu"
-          style="filter:grayscale(100%);transition:.4s;"
-          onmouseover="this.style.filter='grayscale(0%)'"
-          onmouseout="this.style.filter='grayscale(100%)'"/>
-      <span style="position:absolute;bottom:4px;right:4px;background:#5a189a;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Alumni</span>
-    </div>
-    <h3>Chukit Ruanpeng <span>(Chu)</span></h3>
-    <p class="thai-name">ชูกิจ เรือนเป็ง (ชู)</p>
-    <p class="role">AI Data Engineer</p>
-    <p style="font-size:.7rem;color:#b0a0cc;font-family:'DM Mono',monospace;margin-top:4px;letter-spacing:.06em;">2022 – 2023</p>
-  </div>
-
-  <div class="team-card">
-    <div style="position:relative;display:inline-block;">
-      <img src="img/alumni/Pin.png" alt="Pin"
-          style="filter:grayscale(100%);transition:.4s;"
-          onmouseover="this.style.filter='grayscale(0%)'"
-          onmouseout="this.style.filter='grayscale(100%)'"/>
-      <span style="position:absolute;bottom:4px;right:4px;background:#5a189a;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Alumni</span>
-    </div>
-    <h3>Natthakan Phromchino <span>(Pin)</span></h3>
-    <p class="thai-name">ณัฐกานต์ พรหมชิโน (ปิ่น)</p>
-    <p class="role">AI Data Annotator</p>
-    <p style="font-size:.7rem;color:#b0a0cc;font-family:'DM Mono',monospace;margin-top:4px;letter-spacing:.06em;">2022 – 2023</p>
-  </div>
-
-  <div class="team-card">
-    <div style="position:relative;display:inline-block;">
-      <img src="img/alumni/Fah.png" alt="Fah"
-          style="filter:grayscale(100%);transition:.4s;"
-          onmouseover="this.style.filter='grayscale(0%)'"
-          onmouseout="this.style.filter='grayscale(100%)'"/>
-      <span style="position:absolute;bottom:4px;right:4px;background:#5a189a;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Alumni</span>
-    </div>
-    <h3>Pitchayaphorn Tangngam <span>(Fah)</span></h3>
-    <p class="thai-name">พิชญาภรณ์ ตั้งงาม (ฟ้า)</p>
-    <p class="role">AI Data Annotator</p>
-    <p style="font-size:.7rem;color:#b0a0cc;font-family:'DM Mono',monospace;margin-top:4px;letter-spacing:.06em;">2022 – 2023</p>
-  </div>
-
-  </div>
-
-  <!-- Alumni note -->
-  <div style="margin:clamp(24px,4vw,38px) auto 0;padding:clamp(14px,3vw,22px) clamp(16px,3vw,28px);max-width:680px;border-radius:var(--r);background:linear-gradient(135deg,#faf7ff,#f3f0ff);border:1px solid #e4d9f7;text-align:center;">
-    <p style="font-size:clamp(.82rem,1.6vw,.92rem);color:#6d5a8a;line-height:1.85;margin:0;">
-      ✨ Once a MARSAIL member, always part of the story.<br/>
-      Thank you for being part of the foundation.
-    </p>
-  </div>
-
-</section>
+</div></section>
 
 <!-- ══════════════ INTERNS ══════════════ -->
-<section id="interns" class="team-section">
+<section id="interns"><div class="wrap">
+  <div class="hd c rv"><h2>MARSAIL Open Lab — <em>Interns</em></h2></div>
+  <p class="tnote rv" style="margin-top:-18px;font-size:1.02rem;max-width:720px">MARSAIL is an open lab welcoming students who want to learn and grow in <strong>Automotive AI</strong>. Every intern is mentored directly by <strong>Dr. Teerapong Panboonyuen (Dr. Kao)</strong> — building real systems, real research, and real experience from day one.</p>
 
-  <h2 style="border:none;padding:0;font-size:clamp(1.15rem,3vw,1.55rem);text-align:center;">
-    MARSAIL Open Lab — Interns
-  </h2>
+  <div class="lab rv" style="margin-top:0"><span class="tag">🎓 MARSAIL AI Lab · Open to Students · Automotive AI</span></div>
 
-  <p class="team-intro" style="text-align:center;max-width:720px;margin:0 auto 1.5rem;">
-    MARSAIL is an open lab welcoming students who want to learn and grow in <strong>Automotive AI</strong>.
-    Every intern is mentored directly by <strong>Dr. Teerapong Panboonyuen (Dr. Kao)</strong> —
-    building real systems, real research, and real experience from day one.
-  </p>
-
-  <!-- Open Lab Badge -->
-  <div style="text-align:center;margin-bottom:clamp(28px,5vw,46px);">
-    <span class="chip c-blue" style="font-size:.78rem;padding:.45rem 1.2rem;letter-spacing:.08em;">
-      🎓 MARSAIL AI Lab · Open to Students · Automotive AI
-    </span>
+  <!-- Advisor -->
+  <div class="adv rv">
+    <div class="g1"></div><div class="g2"></div>
+    <span class="mono">Advisor · MARSAIL Open Lab</span>
+    <a href="https://kaopanboonyuen.github.io/" target="_blank"><img src="img/members/teerapong-panboonyuen-ธีรพงศ์-ปานบุญยืน.png" alt="Dr. Teerapong Panboonyuen" loading="lazy"/></a>
+    <h3>Teerapong Panboonyuen <span>(Kao)</span></h3>
+    <p class="tn">ธีรพงศ์ ปานบุญยืน (เก้า)</p>
+    <p class="r">Head of AI · Senior Research Scientist<br/>Founder &amp; Research Architect, MARSAIL</p>
+    <div class="tags"><span class="a">Computer Vision</span><span class="b">Transformer Research</span><span class="c2">Automotive AI</span></div>
+    <blockquote>"Every great researcher starts as a curious student. MARSAIL Open Lab exists so that curiosity has a place to become capability."</blockquote>
   </div>
 
-  <!-- ── ADVISOR BLOCK ── -->
-<div style="max-width:760px;margin:0 auto clamp(36px,6vw,60px);padding:clamp(20px,4vw,36px) clamp(20px,4vw,40px);border-radius:var(--r);background:linear-gradient(135deg,#0f172a,#1d2f4a);color:#fff;position:relative;overflow:hidden;box-shadow:0 16px 48px rgba(15,23,42,.18);">
+  <div class="adv-arrow rv"><i></i><span class="mono">Advisees</span><i></i></div>
 
-  <!-- subtle glow orbs -->
-  <div style="position:absolute;width:220px;height:220px;background:rgba(37,99,235,.15);border-radius:50%;top:-80px;right:-60px;pointer-events:none;"></div>
-  <div style="position:absolute;width:160px;height:160px;background:rgba(139,92,246,.1);border-radius:50%;bottom:-60px;left:-40px;pointer-events:none;"></div>
-
-  <!-- label -->
-  <p style="font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;margin-bottom:clamp(14px,3vw,22px);position:relative;z-index:1;text-align:center;">
-    Advisor · MARSAIL Open Lab
-  </p>
-
-  <!-- photo + info: stacks to column on mobile -->
-  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(14px,3vw,24px);position:relative;z-index:1;">
-
-    <!-- photo -->
-    <a href="https://kaopanboonyuen.github.io/" target="_blank" style="flex-shrink:0;">
-      <img src="img/members/teerapong-panboonyuen-ธีรพงศ์-ปานบุญยืน.png"
-           alt="Dr. Teerapong Panboonyuen"
-           style="width:clamp(96px,18vw,130px);height:clamp(96px,18vw,130px);object-fit:cover;border-radius:50%;border:3px solid rgba(255,255,255,.18);transition:.4s;"
-           onmouseover="this.style.filter='grayscale(0%)';this.style.borderColor='rgba(255,255,255,.5)'"
-           onmouseout="this.style.filter='';this.style.borderColor='rgba(255,255,255,.18)'"/>
-    </a>
-
-    <!-- info -->
-    <div>
-      <h3 style="font-size:clamp(1rem,2.8vw,1.35rem);font-weight:700;color:#fff;margin-bottom:4px;line-height:1.25;">
-        Teerapong Panboonyuen
-        <span style="font-weight:400;color:rgba(255,255,255,.55);font-size:.8em;">(Kao)</span>
-      </h3>
-      <p style="font-family:'Sarabun','DM Sans',sans-serif;font-size:.87em;color:rgba(255,255,255,.45);margin:0 0 8px;">
-        ธีรพงศ์ ปานบุญยืน (เก้า)
-      </p>
-      <p style="font-size:clamp(.78rem,1.6vw,.9rem);color:rgba(255,255,255,.72);line-height:1.6;margin:0 0 clamp(10px,2vw,16px);">
-        Head of AI · Senior Research Scientist<br/>
-        Founder &amp; Research Architect, MARSAIL
-      </p>
-
-      <!-- tags -->
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;">
-        <span style="font-size:.68rem;font-family:'DM Mono',monospace;padding:.28rem .7rem;border-radius:100px;background:rgba(37,99,235,.3);color:#93c5fd;border:1px solid rgba(37,99,235,.4);">Computer Vision</span>
-        <span style="font-size:.68rem;font-family:'DM Mono',monospace;padding:.28rem .7rem;border-radius:100px;background:rgba(139,92,246,.3);color:#c4b5fd;border:1px solid rgba(139,92,246,.4);">Transformer Research</span>
-        <span style="font-size:.68rem;font-family:'DM Mono',monospace;padding:.28rem .7rem;border-radius:100px;background:rgba(20,184,166,.25);color:#5eead4;border:1px solid rgba(20,184,166,.35);">Automotive AI</span>
-      </div>
-    </div>
-
+  <div class="tr rv">
+    <div class="tc"><div class="pho"><img src="img/intern_marsail/Ohm.png" alt="Ohm" loading="lazy"/><span class="bdg" style="--bc:#1d3557">Intern</span></div><h3>Kasidit Sermsri <span>(Ohm)</span></h3><p class="tn">กษิดิศ เสริมศรี (โอม)</p><p class="role">AI Research Intern</p></div>
+    <div class="tc"><div class="pho"><img src="img/intern_marsail/Chokun.png" alt="Chokun" loading="lazy"/><span class="bdg" style="--bc:#1d3557">Intern</span></div><h3>Chotanansub Sophaken <span>(Chokun)</span></h3><p class="tn">โชติอนันต์ทรัพย์ โสภาเคน (โชกุน)</p><p class="role">AI Research Intern</p></div>
+    <div class="tc"><div class="pho"><img src="img/intern_marsail/Merge.png" alt="Third" loading="lazy"/><span class="bdg" style="--bc:#1d3557">Intern</span></div><h3>Kantapong Vongpanich <span>(Third)</span></h3><p class="tn">กันตพงศ์ วงศ์พานิชย์ (เติร์ด)</p><p class="role">AI Research Intern</p></div>
+  </div>
+  <div class="tr rv">
+    <div class="tc"><div class="pho"><img src="img/intern_marsail/Beauty.png" alt="Beauty" loading="lazy"/><span class="bdg" style="--bc:#1d3557">Intern</span></div><h3>Naruebet Pholsilp <span>(Beauty)</span></h3><p class="tn">นฤเบศ พลศิลป์ (บิวตี้)</p><p class="role">AI Research Intern</p></div>
+    <div class="tc"><div class="pho"><img src="img/intern_marsail/Third.png" alt="Merge" loading="lazy"/><span class="bdg" style="--bc:#1d3557">Intern</span></div><h3>Yossaphan Kaenwong <span>(Merge)</span></h3><p class="tn">ยศพันธ์ แก่นวงษ์ (เมิร์จ)</p><p class="role">AI Research Intern</p></div>
+    <div class="tc"><div class="pho"><img src="img/intern_marsail/Petch.png" alt="Petch" loading="lazy"/><span class="bdg" style="--bc:#1d3557">Intern</span></div><h3>Phantakan Mongkol <span>(Petch)</span></h3><p class="tn">พันธกานต์ มงคล (เพชร)</p><p class="role">AI Research Intern</p></div>
   </div>
 
-  <!-- quote -->
-  <div style="margin-top:clamp(16px,3vw,26px);padding-top:clamp(14px,2.5vw,20px);border-top:1px solid rgba(255,255,255,.1);position:relative;z-index:1;text-align:center;">
-    <p style="font-size:clamp(.84rem,1.6vw,.96rem);color:rgba(255,255,255,.65);line-height:1.85;font-style:italic;margin:0;">
-      "Every great researcher starts as a curious student. MARSAIL Open Lab exists so that curiosity has a place to become capability."
-    </p>
+  <div class="nc ctr rv" style="--c:#1d3557;margin:56px auto 0;max-width:760px;padding:clamp(18px,3vw,30px)">
+    <p style="margin:0;color:var(--ink)">💡 <strong>MARSAIL is an open lab.</strong> We believe in nurturing the next generation of AI practitioners. Students passionate about <em>computer vision, automotive intelligence, and real-world AI systems</em> are always welcome to learn, build, and grow alongside our team.</p>
   </div>
-
-</div>
-
-  <!-- ── DIVIDER WITH ARROW ── -->
-  <div style="text-align:center;margin-bottom:clamp(28px,4vw,40px);">
-    <div style="display:inline-flex;flex-direction:column;align-items:center;gap:4px;">
-      <div style="width:1px;height:clamp(24px,4vw,36px);background:linear-gradient(to bottom,#1d2f4a,var(--border2));margin:0 auto;"></div>
-      <span style="font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink4);font-family:'DM Mono',monospace;">Advisees</span>
-      <div style="width:1px;height:clamp(24px,4vw,36px);background:linear-gradient(to bottom,var(--border2),transparent);margin:0 auto;"></div>
-    </div>
-  </div>
-
-  <!-- ── INTERN GRID row 1 ── -->
-  <div class="team-row">
-
-    <div class="team-card">
-      <div style="position:relative;display:inline-block;">
-        <img src="img/intern_marsail/Ohm.png" alt="Ohm"
-             style="filter:grayscale(100%);transition:.4s;"
-             onmouseover="this.style.filter='grayscale(0%)'"
-             onmouseout="this.style.filter='grayscale(100%)'"/>
-        <span style="position:absolute;bottom:4px;right:4px;background:#1d3557;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Intern</span>
-      </div>
-      <h3>Kasidit Sermsri <span>(Ohm)</span></h3>
-      <p class="thai-name">กษิดิศ เสริมศรี (โอม)</p>
-      <p class="role">AI Research Intern</p>
-    </div>
-
-    <div class="team-card">
-      <div style="position:relative;display:inline-block;">
-        <img src="img/intern_marsail/Chokun.png" alt="Chokun"
-             style="filter:grayscale(100%);transition:.4s;"
-             onmouseover="this.style.filter='grayscale(0%)'"
-             onmouseout="this.style.filter='grayscale(100%)'"/>
-        <span style="position:absolute;bottom:4px;right:4px;background:#1d3557;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Intern</span>
-      </div>
-      <h3>Chotanansub Sophaken <span>(Chokun)</span></h3>
-      <p class="thai-name">โชติอนันต์ทรัพย์ โสภาเคน (โชกุน)</p>
-      <p class="role">AI Research Intern</p>
-    </div>
-
-    <div class="team-card">
-      <div style="position:relative;display:inline-block;">
-        <img src="img/intern_marsail/Merge.png" alt="Third"
-             style="filter:grayscale(100%);transition:.4s;"
-             onmouseover="this.style.filter='grayscale(0%)'"
-             onmouseout="this.style.filter='grayscale(100%)'"/>
-        <span style="position:absolute;bottom:4px;right:4px;background:#1d3557;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Intern</span>
-      </div>
-      <h3>Kantapong Vongpanich <span>(Third)</span></h3>
-      <p class="thai-name">กันตพงศ์ วงศ์พานิชย์ (เติร์ด)</p>
-      <p class="role">AI Research Intern</p>
-    </div>
-
-  </div>
-
-  <!-- ── INTERN GRID row 2 ── -->
-  <div class="team-row">
-
-    <div class="team-card">
-      <div style="position:relative;display:inline-block;">
-        <img src="img/intern_marsail/Beauty.png" alt="Beauty"
-             style="filter:grayscale(100%);transition:.4s;"
-             onmouseover="this.style.filter='grayscale(0%)'"
-             onmouseout="this.style.filter='grayscale(100%)'"/>
-        <span style="position:absolute;bottom:4px;right:4px;background:#1d3557;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Intern</span>
-      </div>
-      <h3>Naruebet Pholsilp <span>(Beauty)</span></h3>
-      <p class="thai-name">นฤเบศ พลศิลป์ (บิวตี้)</p>
-      <p class="role">AI Research Intern</p>
-    </div>
-
-    <div class="team-card">
-      <div style="position:relative;display:inline-block;">
-        <img src="img/intern_marsail/Third.png" alt="Merge"
-             style="filter:grayscale(100%);transition:.4s;"
-             onmouseover="this.style.filter='grayscale(0%)'"
-             onmouseout="this.style.filter='grayscale(100%)'"/>
-        <span style="position:absolute;bottom:4px;right:4px;background:#1d3557;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Intern</span>
-      </div>
-      <h3>Yossaphan Kaenwong <span>(Merge)</span></h3>
-      <p class="thai-name">ยศพันธ์ แก่นวงษ์ (เมิร์จ)</p>
-      <p class="role">AI Research Intern</p>
-    </div>
-
-    <div class="team-card">
-      <div style="position:relative;display:inline-block;">
-        <img src="img/intern_marsail/Petch.png" alt="Petch"
-             style="filter:grayscale(100%);transition:.4s;"
-             onmouseover="this.style.filter='grayscale(0%)'"
-             onmouseout="this.style.filter='grayscale(100%)'"/>
-        <span style="position:absolute;bottom:4px;right:4px;background:#1d3557;color:#fff;font-size:.58rem;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:100px;letter-spacing:.06em;">Intern</span>
-      </div>
-      <h3>Phantakan Mongkol <span>(Petch)</span></h3>
-      <p class="thai-name">พันธกานต์ มงคล (เพชร)</p>
-      <p class="role">AI Research Intern</p>
-    </div>
-
-  </div>
-
-  <!-- ── OPEN LAB NOTE ── -->
-  <div style="margin:clamp(28px,5vw,46px) auto 0;padding:clamp(16px,3vw,26px) clamp(18px,4vw,32px);max-width:740px;border-radius:var(--r);background:linear-gradient(135deg,#f0f7ff,#eef6f0);border:1px solid #c8dff5;text-align:center;box-shadow:var(--sh);">
-    <p style="font-size:clamp(.86rem,1.7vw,1rem);color:var(--ink2);line-height:1.88;margin:0;">
-      💡 <strong>MARSAIL is an open lab.</strong> We believe in nurturing the next generation of AI practitioners.
-      Students passionate about <em>computer vision, automotive intelligence, and real-world AI systems</em> are
-      always welcome to learn, build, and grow alongside our team.
-    </p>
-  </div>
-
-</section>
+</div></section>
 
 <!-- ══════════════ SPONSORS ══════════════ -->
-<section style="background:#f5f7fa;padding:40px 16px;">
+<section><div class="wrap">
+  <div class="hd c rv"><h2>Our Trusted <em>Sponsors &amp; Partners</em></h2><span class="scrawl">🤝 thank you</span></div>
+  <p class="tnote rv" style="margin-top:-18px;font-size:1.02rem;max-width:720px">We are grateful for the invaluable support of our sponsors, partners, and collaborators whose investment and belief in our mission empower MARSAIL to push boundaries in automotive AI.</p>
 
-  <h2 style="text-align:center;font-size:clamp(1.15rem,3vw,1.75rem);margin-bottom:10px;">
-    🤝 Our Trusted Sponsors &amp; Partners
-  </h2>
-
-  <p style="text-align:center;max-width:720px;margin:0 auto 2rem;color:var(--ink2);line-height:1.72;">
-    We are grateful for the invaluable support of our sponsors, partners, and collaborators whose investment and belief in our mission empower MARSAIL to push boundaries in automotive AI.
-  </p>
-
-  <!-- Strategic Investor -->
-  <div style="text-align:center;margin-bottom:2.5rem;">
-    <h3 style="color:#007acc;font-size:clamp(.95rem,2.5vw,1.35rem);margin-bottom:1rem;">
-      🌟 Strategic Investor
-    </h3>
-
-    <a href="https://thaivivat.co.th/en/index.php" target="_blank" style="display:inline-block;">
-      <img src="img/logo/logo_01_tvi.png"
-           alt="Thaivivat"
-           style="height:clamp(56px,11vw,100px);display:block;margin:0 auto;border-radius:var(--rs);" />
-    </a>
-
-    <p style="max-width:600px;margin:.8rem auto 0;color:var(--ink2);line-height:1.65;">
-      A special thank you to <strong>Thaivivat Insurance Public Company Limited (TVI)</strong> for their forward-thinking investment in AI-driven automotive solutions.
-    </p>
+  <div class="sp rv">
+    <h3>🌟 Strategic Investor</h3>
+    <a class="lgchip" href="https://thaivivat.co.th/en/index.php" target="_blank"><img src="img/logo/logo_01_tvi.png" alt="Thaivivat" loading="lazy"/></a>
+    <p>A special thank you to <strong>Thaivivat Insurance Public Company Limited (TVI)</strong> for their forward-thinking investment in AI-driven automotive solutions.</p>
   </div>
 
-  <!-- Partners Grid -->
-  <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-      gap:clamp(16px,3vw,28px);
-      max-width:900px;
-      margin:0 auto;
-      align-items:start;
-      text-align:center;
-  ">
-
-    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <a href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/" target="_blank">
-        <img src="img/logo/logo_03_marsail.png" alt="MARSAIL"
-             style="height:clamp(34px,7vw,56px);" />
-      </a>
-      <p style="font-size:clamp(.76rem,1.5vw,.88rem);color:var(--ink3);margin:0;">
-        MARSAIL (MARS AI Lab)
-      </p>
+  <div class="pg3 rv">
+    <div>
+      <a class="lgchip" href="https://kaopanboonyuen.github.io/blog/2025-07-01-marsail-the-smart-engine-behind-the-future-of-car-insurance/" target="_blank"><img src="img/logo/logo_03_marsail.png" alt="MARSAIL" loading="lazy"/></a>
+      <p>MARSAIL (MARS AI Lab)</p>
     </div>
-
-    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <a href="https://www.chula.ac.th/en/" target="_blank">
-        <img src="img/logo/logo_02_chula.png" alt="Chulalongkorn"
-             style="height:clamp(34px,7vw,56px);" />
-      </a>
-      <p style="font-size:clamp(.76rem,1.5vw,.88rem);color:var(--ink3);margin:0;">
-        Chulalongkorn University
-      </p>
+    <div>
+      <a class="lgchip" href="https://www.chula.ac.th/en/" target="_blank"><img src="img/logo/logo_02_chula.png" alt="Chulalongkorn" loading="lazy"/></a>
+      <p>Chulalongkorn University</p>
     </div>
-
-    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <a href="https://pbylab.github.io/" target="_blank">
-        <img src="img/logo/pby_logo_01.png" alt="PBY.LAB"
-             style="height:clamp(34px,7vw,56px);" />
-      </a>
-      <p style="font-size:clamp(.76rem,1.5vw,.88rem);color:var(--ink3);margin:0;">
-        PBY Artificial Intelligence Lab
-      </p>
+    <div>
+      <a class="lgchip" href="https://pbylab.github.io/" target="_blank"><img src="img/logo/pby_logo_01.png" alt="PBY.LAB" loading="lazy"/></a>
+      <p>PBY Artificial Intelligence Lab</p>
     </div>
-
   </div>
-</section>
+</div></section>
 
 <!-- ══════════════ FAREWELL ══════════════ -->
-<section class="farewell-sec" style="padding:clamp(18px,4vw,3rem) clamp(16px,4vw,2rem);">
-  <span class="chip c-blue" style="margin-bottom:clamp(9px,2vw,.9rem);">A CHAPTER CLOSES · MARSAIL 2026</span>
-  <h2 style="font-size:clamp(1.25rem,3.5vw,2.3rem);border:none;padding:0;margin-bottom:clamp(9px,2vw,.9rem);color:var(--ink);">🚀 Farewell, MARSAIL — 4.7 Unforgettable Years</h2>
-  <p style="font-size:clamp(.88rem,1.7vw,1.02rem);line-height:1.85;color:#475569;max-width:840px;margin-bottom:clamp(14px,3vw,2.2rem);">
-    Four years and seven months as <strong>Head of AI</strong>. From a small deep-tech team to <strong>award-winning research</strong>, <strong>real-world AI systems</strong>, and a stage at <strong>AutoTech 2026</strong> — this was a <em>once-in-a-lifetime</em> journey, and it was never a solo one.
-  </p>
+<section class="farewell-sec"><div class="wrap">
+  <div class="rv">
+    <span class="chip" style="--c:#2563eb">A CHAPTER CLOSES · MARSAIL 2026</span>
+    <div class="hd" style="margin-bottom:26px"><h2>Farewell, MARSAIL — <em>4.7 Unforgettable Years</em></h2><span class="scrawl">🚀 thank you ♡</span></div>
+  </div>
+  <p class="mission">Four years and seven months as <strong>Head of AI</strong>. From a small deep-tech team to <strong>award-winning research</strong>, <strong>real-world AI systems</strong>, and a stage at <strong>AutoTech 2026</strong> — this was a <em>once-in-a-lifetime</em> journey, and it was never a solo one.</p>
 
-  <!-- Card 1: Real photo -->
-  <div class="paper-card">
-    <div class="pc-img">
-      <img src="img/farewell/Kao_LastDay_MARSAIL_2026.jpg" alt="Last day at MARSAIL — the team lighting up phone flashlights" loading="lazy" style="border-radius:var(--rs);box-shadow:var(--shL);width:100%;height:auto;"/>
-    </div>
-    <div class="pc-body">
-      <p style="font-size:.76rem;letter-spacing:.08em;color:#64748b;margin-bottom:.45rem;font-family:'DM Mono',monospace;">LAST DAY · MARSAIL · 2026</p>
-      <h3 style="font-size:clamp(.95rem,2.5vw,1.4rem);margin-bottom:.65rem;line-height:1.35;">A Thousand Little Lights ✨</h3>
-      <p style="color:#475569;margin-bottom:1.1rem;">On my final day, the whole team raised their phone flashlights into the night. No speeches needed — that glow said everything about the people I was lucky to build with. Thank you for the <strong>late-night debugging</strong>, the <strong>shared wins</strong>, and the <strong>friendships</strong> that will outlast any job title.</p>
-      <p style="color:#475569;margin-bottom:0;">And yes — a pair of <strong>Vibram FiveFingers</strong> as a parting gift. Ready for the next step, quite literally. 👣</p>
+  <div class="pc rv">
+    <div class="fr" style="--r:-1.5deg"><img src="img/farewell/Kao_LastDay_MARSAIL_2026.jpg" alt="Last day at MARSAIL — the team lighting up phone flashlights" loading="lazy"/></div>
+    <div>
+      <div class="mono">Last Day · MARSAIL · 2026</div>
+      <h3>A Thousand Little Lights ✨</h3>
+      <p>On my final day, the whole team raised their phone flashlights into the night. No speeches needed — that glow said everything about the people I was lucky to build with. Thank you for the <strong>late-night debugging</strong>, the <strong>shared wins</strong>, and the <strong>friendships</strong> that will outlast any job title.</p>
+      <p>And yes — a pair of <strong>Vibram FiveFingers</strong> as a parting gift. Ready for the next step, quite literally. 👣</p>
     </div>
   </div>
 
-  <!-- Card 2: Cartoon (reversed) -->
-  <div class="paper-card" style="margin-top:clamp(12px,2.5vw,1.8rem);">
-    <div class="pc-img">
-      <img src="img/farewell/Kao_LastDay_MARSAIL_2026_Cartoon.jpeg" alt="Cartoon: Farewell, Head of AI — MARS 4.7 Years" loading="lazy" style="border-radius:var(--rs);box-shadow:var(--shL);width:100%;height:auto;"/>
-    </div>
-    <div class="pc-body">
-      <p style="font-size:.76rem;letter-spacing:.08em;color:#64748b;margin-bottom:.45rem;font-family:'DM Mono',monospace;">MARS EDITION · 4.7 YEARS</p>
-      <h3 style="font-size:clamp(.95rem,2.5vw,1.4rem);margin-bottom:.65rem;line-height:1.35;">Same Team, Different Planet 🪐</h3>
-      <p style="color:#475569;margin-bottom:0;">Because we are <em>MARS</em>, even the farewell had to be out of this world. Same faces, same smiles — just with a red-planet sky behind us.</p>
+  <div class="pc rev rv">
+    <div class="fr" style="--r:1.5deg"><img src="img/farewell/Kao_LastDay_MARSAIL_2026_Cartoon.jpeg" alt="Cartoon: Farewell, Head of AI — MARS 4.7 Years" loading="lazy"/></div>
+    <div>
+      <div class="mono">MARS Edition · 4.7 Years</div>
+      <h3>Same Team, Different Planet 🪐</h3>
+      <p>Because we are <em>MARS</em>, even the farewell had to be out of this world. Same faces, same smiles — just with a red-planet sky behind us.</p>
     </div>
   </div>
 
-  <!-- Highlights -->
-  <div class="meta-grid" style="max-width:840px;margin:clamp(12px,2.5vw,1.8rem) 0 0;">
-    <div class="meta-box"><div class="meta-sm">TENURE</div><div class="meta-val">4.7 Years</div></div>
-    <div class="meta-box"><div class="meta-sm">ROLE</div><div class="meta-val">Head of AI</div></div>
-    <div class="meta-box"><div class="meta-sm">HIGHLIGHTS</div><div class="meta-val">ICIAP 2023 · AutoTech 2026</div></div>
+  <div class="fm rv">
+    <div><span class="mono">Tenure</span><b>4.7 Years</b></div>
+    <div><span class="mono">Role</span><b>Head of AI</b></div>
+    <div><span class="mono">Highlights</span><b>ICIAP 2023 · AutoTech 2026</b></div>
   </div>
 
-  <div style="max-width:1060px;margin:clamp(12px,2.5vw,1.8rem) auto 0;text-align:center;">
-    <p style="color:var(--ink3);line-height:1.8;font-size:clamp(.82rem,1.6vw,.92rem);">
-      To everyone at <strong>MARSAIL</strong> — teammates, partners, and friends: <em>thank you for being the best chapter of my career so far.</em> The mission continues, and I'll be cheering from the sidelines. 💛
-    </p>
-  </div>
-</section>
-
+  <p class="big rv" style="font-size:clamp(1.2rem,2.3vw,1.6rem);color:var(--mut)">To everyone at <strong style="font-weight:400;color:var(--ink)">MARSAIL</strong> — teammates, partners, and friends: <em>thank you for being the best chapter of my career so far.</em> The mission continues, and I'll be cheering from the sidelines. 💛</p>
+</div></section>
 
 <!-- ══════════════ FUN FACTS ══════════════ -->
-<section id="funfacts" style="background:#f7fbff;">
-  <h2>🌟 Fun Facts About MARSAIL</h2>
+<section id="funfacts"><div class="wrap">
+  <div class="hd rv"><h2>Fun Facts About <em>MARSAIL</em></h2><span class="scrawl">🌟 the story behind the lab</span></div>
 
-  <!-- English Version -->
-  <div style="padding:clamp(13px,3vw,1.3rem);border-left:5px solid var(--blue);background:#fff;border-radius:var(--rs);margin-bottom:clamp(14px,3vw,1.8rem);box-shadow:var(--sh);">
-    <h3 style="font-size:clamp(.95rem,2.5vw,1.28rem);margin-bottom:.75rem;">🇺🇸 Fun Facts — English Version</h3>
+  <div class="ff">
+    <div class="ffc rv" style="--c:var(--blue)">
+      <h3>🇺🇸 Fun Facts — English Version</h3>
+      <p>MARSAIL is the dedicated Artificial Intelligence Laboratory under
+        <strong><a href="https://www.marssolution.io/" target="_blank" rel="noopener" class="lk-in">MARS (Motor AI Recognition Solution)</a></strong>.
+        While MARS was founded earlier as a tech company, the AI-focused MARSAIL was later established and shaped by
+        <strong><a href="https://kaopanboonyuen.github.io/" target="_blank" rel="noopener" class="lk-in">Dr. Teerapong Panboonyuen (Dr. Kao)</a></strong>,
+        who leads the AI Research &amp; Development division.</p>
+      <hr/>
+      <p>After completing his
+        <strong><a href="https://kaopanboonyuen.github.io/talk/ph.d.-thesis-defense/" target="_blank" rel="noopener" class="lk-in">Ph.D. at Chulalongkorn University</a></strong>,
+        Dr. Kao joined MARS in <strong>January 2022</strong> to spearhead the next era of AI innovation.
+        Upon reviewing the existing "first-generation AI system" from 2021, he made a decisive move —
+        <strong>he removed the entire legacy system and rebuilt everything from the ground up.</strong></p>
+      <hr/>
+      <p>This total reboot resulted in the new
+        <strong><a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener" class="lk-in">MARS model</a></strong>
+        (Mask Attention Refinement with Sequential Quadtree Nodes), inspired partly by the company name.
+        It became MARSAIL's <strong>first official research publication</strong> and was presented on the international stage at
+        <strong><a href="https://link.springer.com/conference/iciap" target="_blank" rel="noopener" class="lk-in">ICIAP 2023 in Udine, Italy</a></strong>.</p>
+      <hr/>
+      <p>From 2022–2026, under Dr. Kao's leadership, MARSAIL evolved into a next-generation AI research lab,
+        producing advanced models including the flagship transformer
+        <strong><a href="https://arxiv.org/pdf/2506.10524v1" target="_blank" rel="noopener" class="lk-in">ALBERT</a></strong>.
+        Today, MARSAIL powers innovation across
+        <strong>car insurance, damage analytics, intelligent document understanding,</strong>
+        and <strong>AI assistance for vehicle damage assessment</strong>.</p>
+    </div>
 
-    <p style="line-height:1.72;">
-      MARSAIL is the dedicated Artificial Intelligence Laboratory under
-      <strong><a href="https://www.marssolution.io/" target="_blank" rel="noopener" class="flt">MARS (Motor AI Recognition Solution)</a></strong>.
-      While MARS was founded earlier as a tech company, the AI-focused MARSAIL was later established and shaped by
-      <strong><a href="https://kaopanboonyuen.github.io/" target="_blank" rel="noopener" class="flt">Dr. Teerapong Panboonyuen (Dr. Kao)</a></strong>,
-      who leads the AI Research &amp; Development division.
-    </p>
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:clamp(9px,2vw,.9rem) 0;"/>
-
-    <p style="line-height:1.72;">
-      After completing his
-      <strong><a href="https://kaopanboonyuen.github.io/talk/ph.d.-thesis-defense/" target="_blank" rel="noopener" class="flt">Ph.D. at Chulalongkorn University</a></strong>,
-      Dr. Kao joined MARS in <strong>January 2022</strong> to spearhead the next era of AI innovation.
-      Upon reviewing the existing "first-generation AI system" from 2021, he made a decisive move —
-      <strong>he removed the entire legacy system and rebuilt everything from the ground up.</strong>
-    </p>
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:clamp(9px,2vw,.9rem) 0;"/>
-
-    <p style="line-height:1.72;">
-      This total reboot resulted in the new
-      <strong><a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener" class="flt">MARS model</a></strong>
-      (Mask Attention Refinement with Sequential Quadtree Nodes), inspired partly by the company name.
-      It became MARSAIL's <strong>first official research publication</strong> and was presented on the international stage at
-      <strong><a href="https://link.springer.com/conference/iciap" target="_blank" rel="noopener" class="flt">ICIAP 2023 in Udine, Italy</a></strong>.
-    </p>
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:clamp(9px,2vw,.9rem) 0;"/>
-
-    <p style="line-height:1.72;">
-      From 2022–2026, under Dr. Kao's leadership, MARSAIL evolved into a next-generation AI research lab,
-      producing advanced models including the flagship transformer
-      <strong><a href="https://arxiv.org/pdf/2506.10524v1" target="_blank" rel="noopener" class="flt">ALBERT</a></strong>.
-      Today, MARSAIL powers innovation across
-      <strong>car insurance, damage analytics, intelligent document understanding,</strong>
-      and <strong>AI assistance for vehicle damage assessment</strong>.
-    </p>
+    <div class="ffc th-v rv" style="--c:var(--pen)">
+      <h3>🇹🇭 เกร็ดน่ารู้ — เวอร์ชันภาษาไทย</h3>
+      <p>MARSAIL คือห้องปฏิบัติการปัญญาประดิษฐ์ของบริษัท
+        <strong><a href="https://www.marssolution.io/" target="_blank" rel="noopener" class="lk-in">MARS – Motor AI Recognition Solution (บริษัท มอเตอร์ เอไอ เรคอกนิชั่น โซลูชั่น จำกัด)</a></strong>
+        โดยบริษัท MARS มีการก่อตั้งมาก่อน แต่ห้องแลป <strong>MARSAIL</strong> ถูกสร้างและพัฒนาโดย
+        <strong><a href="https://kaopanboonyuen.github.io/" target="_blank" rel="noopener" class="lk-in">ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)</a></strong>
+        ในฐานะ Head of AI Research เพื่อผลักดันการวิจัย AI ให้เติบโตระดับองค์กร</p>
+      <hr/>
+      <p>หลังจบ
+        <strong><a href="https://kaopanboonyuen.github.io/talk/ph.d.-thesis-defense/" target="_blank" rel="noopener" class="lk-in">ปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย</a></strong>
+        ดร.เก้าเริ่มเข้ามาทำงานที่ MARS ในช่วง <strong>มกราคม 2022</strong> เพื่อสานต่องานพัฒนา AI จากทีมรุ่นแรกในปี 2021
+        แต่แทนที่จะปรับแต่งแบบเดิม เขากลับตัดสินใจครั้งใหญ่ —
+        <strong>ลบระบบ AI เดิมทั้งหมด และสร้างระบบใหม่ตั้งแต่ศูนย์</strong>
+        เพื่อให้ทันสมัย แข็งแรง และรองรับงานระดับอุตสาหกรรม</p>
+      <hr/>
+      <p>โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ
+        <strong><a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener" class="lk-in">MARS</a></strong>
+        (Mask Attention Refinement with Sequential Quadtree Nodes) ซึ่งสอดคล้องกับชื่อบริษัท
+        และได้เป็นงานวิจัยลำดับแรกของห้องแลป MARSAIL ที่ถูกนำเสนอในเวทีนานาชาติ
+        <strong><a href="https://link.springer.com/conference/iciap" target="_blank" rel="noopener" class="lk-in">ICIAP 2023 ณ ประเทศอิตาลี</a></strong></p>
+      <hr/>
+      <p>ตั้งแต่ปี 2022–2026 ดร.เก้า ได้พัฒนา MARSAIL ให้เติบโตเป็นห้องวิจัย AI ระดับแนวหน้า สร้างโมเดลเด่น เช่น
+        <strong><a href="https://arxiv.org/pdf/2506.10524v1" target="_blank" rel="noopener" class="lk-in">ALBERT</a></strong>
+        ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์ การประเมินรอยความเสียหาย
+        การทำความเข้าใจเอกสารอัจฉริยะ และ
+        <strong>AI assistance สำหรับงานประเมินราคาความเสียหายของรถยนต์</strong>
+        <strong>ผลักดันอุตสาหกรรมยานยนต์ไทยให้ล้ำหน้าด้วยพลังของ AI</strong></p>
+    </div>
   </div>
-
-  <!-- Thai Version -->
-  <div style="padding:clamp(13px,3vw,1.3rem);border-left:5px solid var(--red);background:#fff;border-radius:var(--rs);box-shadow:var(--sh);">
-    <h3 style="font-size:clamp(.95rem,2.5vw,1.28rem);margin-bottom:.75rem;">🇹🇭 เกร็ดน่ารู้ — เวอร์ชันภาษาไทย</h3>
-
-    <p style="line-height:1.85;font-family:'Sarabun','DM Sans',sans-serif;">
-      MARSAIL คือห้องปฏิบัติการปัญญาประดิษฐ์ของบริษัท
-      <strong><a href="https://www.marssolution.io/" target="_blank" rel="noopener" class="flt">MARS – Motor AI Recognition Solution (บริษัท มอเตอร์ เอไอ เรคอกนิชั่น โซลูชั่น จำกัด)</a></strong>
-      โดยบริษัท MARS มีการก่อตั้งมาก่อน แต่ห้องแลป <strong>MARSAIL</strong> ถูกสร้างและพัฒนาโดย
-      <strong><a href="https://kaopanboonyuen.github.io/" target="_blank" rel="noopener" class="flt">ดร.ธีรพงศ์ ปานบุญยืน (ดร.เก้า)</a></strong>
-      ในฐานะ Head of AI Research เพื่อผลักดันการวิจัย AI ให้เติบโตระดับองค์กร
-    </p>
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:clamp(9px,2vw,.9rem) 0;"/>
-
-    <p style="line-height:1.85;font-family:'Sarabun','DM Sans',sans-serif;">
-      หลังจบ
-      <strong><a href="https://kaopanboonyuen.github.io/talk/ph.d.-thesis-defense/" target="_blank" rel="noopener" class="flt">ปริญญาเอกจากจุฬาลงกรณ์มหาวิทยาลัย</a></strong>
-      ดร.เก้าเริ่มเข้ามาทำงานที่ MARS ในช่วง <strong>มกราคม 2022</strong> เพื่อสานต่องานพัฒนา AI จากทีมรุ่นแรกในปี 2021
-      แต่แทนที่จะปรับแต่งแบบเดิม เขากลับตัดสินใจครั้งใหญ่ —
-      <strong>ลบระบบ AI เดิมทั้งหมด และสร้างระบบใหม่ตั้งแต่ศูนย์</strong>
-      เพื่อให้ทันสมัย แข็งแรง และรองรับงานระดับอุตสาหกรรม
-    </p>
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:clamp(9px,2vw,.9rem) 0;"/>
-
-    <p style="line-height:1.85;font-family:'Sarabun','DM Sans',sans-serif;">
-      โมเดลใหม่ที่เกิดจากการรีบูตนี้คือ
-      <strong><a href="https://link.springer.com/chapter/10.1007/978-3-031-51023-6_3" target="_blank" rel="noopener" class="flt">MARS</a></strong>
-      (Mask Attention Refinement with Sequential Quadtree Nodes) ซึ่งสอดคล้องกับชื่อบริษัท
-      และได้เป็นงานวิจัยลำดับแรกของห้องแลป MARSAIL ที่ถูกนำเสนอในเวทีนานาชาติ
-      <strong><a href="https://link.springer.com/conference/iciap" target="_blank" rel="noopener" class="flt">ICIAP 2023 ณ ประเทศอิตาลี</a></strong>
-    </p>
-    <hr style="border:none;border-top:1px solid #e5e5e5;margin:clamp(9px,2vw,.9rem) 0;"/>
-
-    <p style="line-height:1.85;font-family:'Sarabun','DM Sans',sans-serif;">
-      ตั้งแต่ปี 2022–2026 ดร.เก้า ได้พัฒนา MARSAIL ให้เติบโตเป็นห้องวิจัย AI ระดับแนวหน้า สร้างโมเดลเด่น เช่น
-      <strong><a href="https://arxiv.org/pdf/2506.10524v1" target="_blank" rel="noopener" class="flt">ALBERT</a></strong>
-      ที่เป็นหัวใจของงานด้านประกันภัยรถยนต์ การประเมินรอยความเสียหาย
-      การทำความเข้าใจเอกสารอัจฉริยะ และ
-      <strong>AI assistance สำหรับงานประเมินราคาความเสียหายของรถยนต์</strong>
-      <strong>ผลักดันอุตสาหกรรมยานยนต์ไทยให้ล้ำหน้าด้วยพลังของ AI</strong>
-    </p>
-  </div>
-</section>
+</div></section>
 
 <!-- ══════════════ FLOATING CHATBOT ══════════════ -->
-<div id="marsailChat">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <div style="width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite;"></div>
-      <strong style="font-size:.88rem;">🤖 MARSAIL AI</strong>
-    </div>
-    <button id="marsailClose" style="background:none;border:none;font-size:14px;color:var(--ink3);cursor:pointer;padding:4px;min-height:0;">✕</button>
+<div id="marsailChat" role="button" tabindex="0" aria-label="MARSAIL AI — scroll to top">
+  <div class="ch-h">
+    <div><span class="dot"></span>🤖 MARSAIL AI</div>
+    <button id="marsailClose" aria-label="Close">✕</button>
   </div>
-  <!-- ลบ <span class="cursor"> ออกจากข้างนอก -->
   <div id="marsailMsg"></div>
 </div>
 
 <!-- ══════════════ FOOTER ══════════════ -->
-<footer class="site-footer">
-  <p>
-    <span class="footer-brand">© 2026 MARSAIL</span>
-    <span class="footer-built"> Built with 🤍 by <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a></span>
-  </p>
-</footer>
+<footer><div class="wrap">
+  <div class="hand">© 2026 MARSAIL</div>
+  <p>Built with 🤍 by <a href="mailto:panboonyuen.kao@gmail.com">Kao Panboonyuen</a></p>
+</div></footer>
 
-<!-- ══════════════ SCRIPTS ══════════════ -->
 <script>
-/* ── HERO CONSTELLATION NETWORK (animated, text-safe) ── */
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const root = document.documentElement;
+
+/* copy buttons (BibTeX / quick start) */
+document.querySelectorAll('[data-c]').forEach(b => b.onclick = async () => {
+  try { await navigator.clipboard.writeText(b.nextElementSibling.textContent); b.textContent = 'copied ✓'; }
+  catch(e){ b.textContent = 'select & copy'; }
+  setTimeout(() => b.textContent = 'copy', 1600);
+});
+
+/* reveal on scroll */
+const io = new IntersectionObserver(es => es.forEach(x => { if(x.isIntersecting){ x.target.classList.add('on'); io.unobserve(x.target); } }), {threshold:.12});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* moments strip: clone the set for a seamless loop */
 (function(){
-  const svg = document.getElementById('hero-net');
-  if(!svg) return;
-
-  function build(){
-    const w = window.innerWidth, h = svg.parentElement.offsetHeight || window.innerHeight;
-    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    svg.setAttribute('preserveAspectRatio','none');
-    svg.innerHTML = '';
-
-    // ── text-safe exclusion zone ──
-    // Keeps every node/line/pulse clear of the headline column (eyebrow → wordmark →
-    // subtitle → mission → inference card → buttons), so nothing ever crosses the copy.
-    const cx = w / 2;
-    const cy = h / 2;
-    const zoneW = Math.min(w * 0.78, 860) / 2;   // half-width of the safe column
-    const zoneH = Math.min(h * 0.86, 940) / 2;   // half-height of the safe column
-    const pad = 10; // small buffer so lines don't kiss the edge of the zone
-
-    function inZone(x, y){
-      return Math.abs(x - cx) < zoneW + pad && Math.abs(y - cy) < zoneH + pad;
-    }
-    // reject a segment if it crosses the zone at any sampled point along its length
-    function segmentHitsZone(ax, ay, bx, by){
-      const steps = 10;
-      for(let s=0; s<=steps; s++){
-        const t = s/steps;
-        if(inZone(ax + (bx-ax)*t, ay + (by-ay)*t)) return true;
-      }
-      return false;
-    }
-
-    const density = Math.max(28, Math.min(48, Math.round((w*h)/30000)));
-    const pts = [];
-    let tries = 0;
-    while(pts.length < density && tries < density*16){
-      tries++;
-      const x = Math.random()*w, y = Math.random()*h;
-      if(inZone(x,y)) continue;
-      const roll = Math.random();
-      pts.push({
-        x, y,
-        r: Math.random()*1.7 + 1,
-        c: roll < 0.66 ? 'rgba(58,58,58,.32)'
-           : roll < 0.83 ? 'rgba(230,57,70,.50)'
-           : 'rgba(69,123,157,.50)',
-        pulse: Math.random() < 0.42
-      });
-    }
-
-    // connect nearby points — skip any edge that would cross the text column
-    const maxDist = Math.min(w,h) * 0.19;
-    const edges = [];
-    for(let i=0;i<pts.length;i++){
-      for(let j=i+1;j<pts.length;j++){
-        const dx = pts[i].x-pts[j].x, dy = pts[i].y-pts[j].y;
-        const d = Math.sqrt(dx*dx+dy*dy);
-        if(d < maxDist && Math.random() < 0.5 && !segmentHitsZone(pts[i].x,pts[i].y,pts[j].x,pts[j].y)){
-          edges.push({a:pts[i], b:pts[j], d});
-        }
-      }
-    }
-
-    let linesSvg = '';
-    edges.forEach(e => {
-      const op = (1 - e.d/maxDist) * 0.2;
-      linesSvg += `<line x1="${e.a.x.toFixed(1)}" y1="${e.a.y.toFixed(1)}" x2="${e.b.x.toFixed(1)}" y2="${e.b.y.toFixed(1)}" stroke="rgba(58,58,58,${op.toFixed(3)})" stroke-width="1"/>`;
-    });
-
-    // nodes — a portion gently pulse like firing neurons, with a soft outer glow ring
-    let dotsSvg = '';
-    pts.forEach(p => {
-      if(p.pulse){
-        const dur = (Math.random()*2.6+2.4).toFixed(2);
-        const delay = (Math.random()*3.2).toFixed(2);
-        const r2 = (p.r*2.6).toFixed(2);
-        const glowR = (p.r*4.2).toFixed(2);
-        dotsSvg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${glowR}" fill="${p.c}" opacity="0">
-            <animate attributeName="opacity" values="0;0.10;0" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(2)}" fill="${p.c}">
-            <animate attributeName="opacity" values="0.85;0.18;0.85" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="${p.r.toFixed(2)};${r2};${p.r.toFixed(2)}" dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
-          </circle>`;
-      } else {
-        dotsSvg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(2)}" fill="${p.c}"/>`;
-      }
-    });
-
-    // traveling signal pulses along a handful of edges — reads as "data flowing"
-    const pulseCount = Math.min(9, edges.length);
-    const chosen = [];
-    while(chosen.length < pulseCount && edges.length){
-      const idx = Math.floor(Math.random()*edges.length);
-      if(!chosen.includes(idx)) chosen.push(idx);
-    }
-    let pulseSvg = '';
-    chosen.forEach(idx => {
-      const e = edges[idx];
-      const dur = (Math.random()*2.6+2.8).toFixed(2);
-      const delay = (Math.random()*4.5).toFixed(2);
-      const color = Math.random() < 0.5 ? '#e63946' : '#457b9d';
-      pulseSvg += `<circle r="2.3" fill="${color}" opacity="0">
-        <animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite"
-          path="M${e.a.x.toFixed(1)},${e.a.y.toFixed(1)} L${e.b.x.toFixed(1)},${e.b.y.toFixed(1)}"/>
-        <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.15;0.85;1"
-          dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
-      </circle>`;
-    });
-
-    svg.innerHTML = linesSvg + dotsSvg + pulseSvg;
-  }
-
-  build();
-  let resizeT;
-  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(build, 250); });
+  const t = document.getElementById('track'); if(!t) return;
+  [...t.children].forEach(c => { const k = c.cloneNode(true); k.setAttribute('aria-hidden','true'); t.append(k); });
 })();
 
-/* ── HERO LLM STREAM ── */
+/* hero particle network (follows the pointer) */
+const hero = document.getElementById('hero'), cv = document.getElementById('cv'), cx = cv.getContext('2d');
+let W, H, P = [], m = {x:-999, y:-999}, vis = true, pen = '#e63946', mut = '#666', alt = '#457b9d', fr = 0;
+function readColors(){ const cs = getComputedStyle(root); pen = cs.getPropertyValue('--pen').trim(); mut = cs.getPropertyValue('--mut').trim(); alt = cs.getPropertyValue('--blue2').trim(); }
+function rs(){
+  const d = Math.min(devicePixelRatio || 1, 2);
+  W = hero.clientWidth; H = hero.clientHeight;
+  cv.width = W*d; cv.height = H*d; cx.setTransform(d,0,0,d,0,0);
+  P = Array.from({length: Math.min(80, W/14|0)}, () => ({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.45, vy:(Math.random()-.5)*.45, r:Math.random()*2+1, b:Math.random()<.22}));
+}
+readColors(); rs(); addEventListener('resize', rs);
+hero.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); m.x = e.clientX - r.left; m.y = e.clientY - r.top; });
+hero.addEventListener('pointerleave', () => m.x = -999);
+new IntersectionObserver(e => vis = e[0].isIntersecting).observe(hero);
+function draw(){
+  if(vis){
+    if(fr++ % 40 === 0) readColors();
+    cx.clearRect(0,0,W,H);
+    for(const p of P){
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0 || p.x > W) p.vx *= -1;
+      if(p.y < 0 || p.y > H) p.vy *= -1;
+      const dx = m.x - p.x, dy = m.y - p.y, d = Math.hypot(dx,dy);
+      if(d < 170){ p.x += dx*.012; p.y += dy*.012; cx.globalAlpha = 1 - d/170; cx.strokeStyle = pen; cx.lineWidth = 1.4; cx.beginPath(); cx.moveTo(p.x,p.y); cx.lineTo(m.x,m.y); cx.stroke(); }
+    }
+    for(let i = 0; i < P.length; i++) for(let j = i+1; j < P.length; j++){
+      const a = P[i], b = P[j], d = Math.hypot(a.x-b.x, a.y-b.y);
+      if(d < 120){ cx.globalAlpha = (1 - d/120)*.35; cx.strokeStyle = mut; cx.lineWidth = 1; cx.beginPath(); cx.moveTo(a.x,a.y); cx.lineTo(b.x,b.y); cx.stroke(); }
+    }
+    cx.globalAlpha = .9;
+    for(const p of P){ cx.fillStyle = p.b ? alt : pen; cx.beginPath(); cx.arc(p.x,p.y,p.r,0,6.3); cx.fill(); }
+  }
+  requestAnimationFrame(draw);
+}
+if(!RM) requestAnimationFrame(draw);
+
+/* scroll: progress bar + word-by-word reveal of .mission */
+const msn = [...document.querySelectorAll('.mission')].map(el => {
+  const ws = [];
+  (function sp(n){ [...n.childNodes].forEach(c => {
+    if(c.nodeType === 3){
+      const f = document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(t => {
+        if(!t.trim()){ f.append(t); return; }
+        const s = document.createElement('span'); s.className = 'w'; s.textContent = t; f.append(s); ws.push(s);
+      });
+      c.replaceWith(f);
+    } else sp(c);
+  }); })(el);
+  return {el, ws};
+});
+const pg = document.getElementById('pg');
+function sc(){
+  pg.style.width = scrollY / (root.scrollHeight - innerHeight) * 100 + '%';
+  msn.forEach(({el, ws}) => {
+    const r = el.getBoundingClientRect(), p = Math.min(1, Math.max(0, (innerHeight*.85 - r.top) / (innerHeight*.55)));
+    ws.forEach((s,i) => s.classList.toggle('on', i < p*ws.length));
+  });
+}
+addEventListener('scroll', sc, {passive:true}); sc();
+
+/* count-up stats */
+new IntersectionObserver((e,o) => e.forEach(x => {
+  if(!x.isIntersecting) return; o.unobserve(x.target);
+  x.target.querySelectorAll('[data-n]').forEach(el => {
+    const n = +el.dataset.n, dg = +el.dataset.d || 0, t0 = performance.now();
+    if(RM){ el.textContent = n.toFixed(dg); return; }
+    (function f(t){ const k = Math.min(1,(t-t0)/1500); el.textContent = (n*(1-Math.pow(1-k,3))).toFixed(dg); if(k<1) requestAnimationFrame(f); })(t0);
+  });
+}), {threshold:.4}).observe(document.querySelector('.sts'));
+
+/* 3D tilt on framed photos (mouse only) */
+if(matchMedia('(pointer:fine)').matches && !RM){
+  document.querySelectorAll('.fr').forEach(el => {
+    const base = parseFloat(getComputedStyle(el).getPropertyValue('--r')) || 0;
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect(), x = (e.clientX-r.left)/r.width - .5, y = (e.clientY-r.top)/r.height - .5;
+      el.style.transform = 'rotate(' + base + 'deg) perspective(700px) rotateY(' + x*12 + 'deg) rotateX(' + -y*12 + 'deg)';
+    });
+    el.addEventListener('pointerleave', () => el.style.transform = '');
+  });
+}
+
+/* ink cursor */
+if(matchMedia('(pointer:fine)').matches){
+  const k = document.getElementById('ink'); let x = 0, y = 0, tx = 0, ty = 0;
+  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; k.style.opacity = 1; });
+  (function f(){ x += (tx-x)*.18; y += (ty-y)*.18; k.style.transform = 'translate(' + (x-12) + 'px,' + (y-12) + 'px)'; requestAnimationFrame(f); })();
+  document.addEventListener('pointerover', e => k.classList.toggle('big', !!e.target.closest('a,button,.pj,#marsailChat')));
+}
+
+/* theme toggle */
+document.getElementById('th').onclick = () => {
+  const d = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  root.dataset.theme = d ? 'light' : 'dark'; readColors();
+};
+
+/* hero: model-inference typing stream */
 (function(){
   const msgs = [
     "Initializing MARSAIL inference engine...",
@@ -2075,23 +1180,22 @@ pip install -r requirements.txt</pre>
     "Output ready for insurance claim processing."
   ];
   const el = document.getElementById('llm-text');
-  let mi=0, ci=0, del=false, paused=false;
-  const SPEED=36, ERASE=14, PAUSE=2400;
+  if(RM){ el.textContent = msgs[msgs.length-1]; return; }
+  let mi = 0, ci = 0, del = false, paused = false;
+  const SPEED = 36, ERASE = 14, PAUSE = 2400;
   function tick(){
     if(paused) return;
-    const m = msgs[mi];
-    if(!del){ el.textContent=m.slice(0,++ci); if(ci===m.length){del=true;paused=true;setTimeout(()=>{paused=false;tick();},PAUSE);return;} }
-    else { el.textContent=m.slice(0,--ci); if(ci===0){del=false;mi=(mi+1)%msgs.length;} }
-    setTimeout(tick, del?ERASE:SPEED);
+    const s = msgs[mi];
+    if(!del){ el.textContent = s.slice(0, ++ci); if(ci === s.length){ del = true; paused = true; setTimeout(() => { paused = false; tick(); }, PAUSE); return; } }
+    else { el.textContent = s.slice(0, --ci); if(ci === 0){ del = false; mi = (mi+1) % msgs.length; } }
+    setTimeout(tick, del ? ERASE : SPEED);
   }
   tick();
 })();
 
-/* ── CHATBOT LLM LOOP ── */
+/* floating chatbot */
 (function(){
-  const chat     = document.getElementById('marsailChat');
-  const closeBtn = document.getElementById('marsailClose');
-  const msgDiv   = document.getElementById('marsailMsg');
+  const chat = document.getElementById('marsailChat'), closeBtn = document.getElementById('marsailClose'), msgDiv = document.getElementById('marsailMsg');
   const msgs = [
     "🚙 We build AI that understands the entire automotive insurance ecosystem.",
     "🚓 MARSAIL's MARS model leads in car damage segmentation accuracy.",
@@ -2099,35 +1203,21 @@ pip install -r requirements.txt</pre>
     "🚗 ALBERT transformer enables precise vehicle damage evaluation.",
     "🤖 DOTA combines OCR + RAG for robust automotive document understanding."
   ];
-  let mi=0, ci=0, del=false, paused=false;
-
-  // cursor จะอยู่ใน msgDiv เสมอ ติดกับตัวอักษรตัวสุดท้าย
-  function render(text) {
-    msgDiv.innerHTML = text + '<span class="cursor" style="display:inline-block;width:2px;height:1.05em;background:currentColor;vertical-align:middle;margin-left:2px;animation:blink 1s step-end infinite;"></span>';
+  const toTop = () => scrollTo({top:0, behavior: RM ? 'auto' : 'smooth'});
+  closeBtn.addEventListener('click', e => { e.stopPropagation(); chat.style.display = 'none'; });
+  chat.addEventListener('click', e => { if(e.target !== closeBtn) toTop(); });
+  chat.addEventListener('keydown', e => { if((e.key === 'Enter' || e.key === ' ') && e.target === chat){ e.preventDefault(); toTop(); } });
+  if(RM){ msgDiv.textContent = msgs[0]; return; }
+  let mi = 0, ci = 0, del = false, paused = false;
+  function t(){
+    if(paused) return;
+    const s = [...msgs[mi]];
+    if(!del){ msgDiv.textContent = s.slice(0, ++ci).join(''); if(ci === s.length){ del = true; paused = true; setTimeout(() => { paused = false; t(); }, 3400); return; } }
+    else { msgDiv.textContent = s.slice(0, --ci).join(''); if(ci === 0){ del = false; mi = (mi+1) % msgs.length; } }
+    setTimeout(t, del ? 16 : 42);
   }
-
-  function chatTick(){
-    if(!chat || paused) return;
-    const m = msgs[mi];
-    if(!del){
-      ci++;
-      render(m.slice(0, ci));
-      if(ci === m.length){ del=true; paused=true; setTimeout(()=>{paused=false; chatTick();}, 3400); return; }
-    } else {
-      ci--;
-      render(m.slice(0, ci));
-      if(ci === 0){ del=false; mi=(mi+1)%msgs.length; }
-    }
-    setTimeout(chatTick, del ? 16 : 42);
-  }
-
-  render(''); // init cursor
-  chatTick();
-
-  closeBtn.addEventListener('click',(e)=>{ e.stopPropagation(); chat.style.display='none'; });
-  chat.addEventListener('click',(e)=>{ if(e.target!==closeBtn) window.scrollTo({top:0,behavior:'smooth'}); });
+  t();
 })();
 </script>
-
 </body>
 </html>
